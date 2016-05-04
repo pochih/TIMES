@@ -4,16 +4,21 @@ var cool = require('cool-ascii-faces');
 var http = require('http');
 var request = require("request");
 var child_process = require('child_process');
-var Firebase = require("firebase");
+
 var config = require("./config.js");
+var parser = require('./parser.js');
+
+var Firebase = require("firebase");
 var DB = new Firebase(config.FIREBASE_URL);
 var USER = DB.child("users");
 var LAND = DB.child("lands");
 var CENTER = DB.child("center");
-var CONFIG = DB.child("configs");
+var CONFIGS = DB.child("configs");
 var BOARD = DB.child("boards");
 var KINECT = DB.child("kinect");
 var ARDUINO = DB.child("arduino");
+
+var boardOccupy = [[],[],[],[],[]];
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -23,69 +28,115 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.get('/get/user/:uid', function(req, res) {
-  var user = require('./db.js');
-  res.send(user.a);
-  USER.child(req.params.uid).set(user.a);
-});
-
-app.get('/get/land/:lid', function(req, res) {
-  var user = require('./db.js');
-  res.send(user.b);
-  LAND.child(req.params.lid).set(user.b);
-});
-
-app.get('/get/center/:target', function(req, res) {
-  var user = require('./db.js');
-  res.send(user.c);
-  CENTER.set(user.c);
-});
-
-app.get('/get/config', function(req, res) {
-  var user = require('./db.js');
-  res.send(user.d);
-  CONFIG.set(user.d);
-});
-
 app.get('/init', function(req, res) {
   
 });
 
-app.get('/init/board/:boardID/:landID', function(req, res) {
-  var board = req.params.boardID;
-  var land = req.params.landID;
+// get user's data
+app.get('/user/data', function(req, res) {
+  var db = require('./db.js');
+  res.send(db.a);
+  USER.child(req.query.user).set(db.a);
+});
+
+// get land's data
+app.get('/land/data', function(req, res) {
+  var db = require('./db.js');
+  res.send(db.b);
+  LAND.child(req.query.land).set(db.b);
+});
+
+// get data center
+app.get('/center', function(req, res) {
+  var db = require('./db.js');
+  res.send(db.c);
+  CENTER.set(db.c);
+});
+
+// get configs
+app.get('/configs', function(req, res) {
+  var db = require('./db.js');
+  res.send(db.d);
+  CONFIGS.set(db.d);
+});
+
+// initial board
+// http://localhost:5000/board/init?board=2&land=a10,b9,c3,c1,c4,a5,e3,e4,d3,d18,d4,c2,b5,b6,b4,b3,b1,b2,b17,a11
+app.get('/board/init', function(req, res) {
+  var boardNum = req.query.board;
+  var landArr = parser.parseLands(req.query.land);
+
   // save land into board
-  BOARD.child(board).once("value", function(snapshot) {
+  BOARD.child(boardNum).once("value", function(snapshot) {
     var landIDs = [];
     if (snapshot.val() != null) {
       landIDs = snapshot.val();
     }
-    if (landIDs.indexOf(land) < 0) {
-      landIDs.push(land);
-      BOARD.child(board).set(landIDs);
+    for (var i = 0; i < landArr.length; i++) {
+      if (landIDs.indexOf(landArr[i]) < 0) {
+        landIDs.push(landArr[i]);
+        boardOccupy[boardNum][landIDs.length-1] = 0;
+      }
     }
+    //console.log("Occupy " + boardNum + '\n' + boardOccupy[boardNum]);
+    BOARD.child(boardNum).child("lands").set(landIDs);
+    BOARD.child(boardNum).child("occupy").set(boardOccupy[boardNum]);
   });
 
-  var result = '<h1 style="color:blue;">Board:</h1>' + board + '<h1 style="color:blue;">land:</h1>' + land;
+  var result = '<h1 style="color:blue;">Add lands:</h1>' + landArr + '<h1 style="color:blue;">to Board:</h1>' + boardNum;
   res.send(result);
 });
 
-app.get('/occupy/board/:boardID', function(req, res) {
-  var board = req.params.boardID;
+// get occupy info. of board
+app.get('/board/occupy', function(req, res) {
+  var boardNum = req.query.board;
+
   // get board info
-  BOARD.child(board).once("value", function(snapshot) {
-    var landIDs = snapshot.val();
-    var occupy = [];
-    // get land info
-    res.send(occupy);
+  BOARD.child(boardNum).child("occupy").once("value", function(snapshot) {
+    res.send(snapshot.val());
   });
 });
 
-app.get('/stand/:userID/:landID', function(req, res) {
-  var user = req.params.userID;
-  var land = req.params.landID;
+// user stand on a land
+app.get('/land/stand', function(req, res) {
+  var user = req.query.user;
+  var land = parser.parseLandType(req.query.land);
+
   // user stand on land
-  var result = '<h1 style="color:red;">User:</h1>' + user + '<h1 style="color:blue;">stands on land:</h1>' + land;
+
+
+  var result = '<h1 style="color:red;">User:</h1>' + user + '<h1 style="color:blue;">stands on land:</h1>' + land.type + land.num;
+  res.send(result);
+});
+
+// user buy a land
+app.get('/land/buy', function(req, res) {
+  var user = req.query.user;
+  var land = parser.parseLandType(req.query.land);
+
+  // user buy a land
+  // if succeed
+  var fbRef = USER.child(user).child("lands").child(land.longType);
+  fbRef.once("value", function(snapshot) {
+    var landIDs = [];
+    if (snapshot.val() != null)
+      landIDs = snapshot.val();
+    if (landIDs.indexOf(land.num) < 0)
+      landIDs.push(land.num);
+    fbRef.set(landIDs);
+  });
+
+  var result = '<h1 style="color:red;">User:</h1>' + user + '<h1 style="color:blue;">buy land:</h1>' + land.longType + land.num;
+  res.send(result);
+});
+
+app.get('/land/importance', function(req, res) {
+  var land = req.query.land;
+
+  // count land's importance
+
+
+  var result = '<h1 style="color:blue;">land:</h1>' + land;
   res.send(result);
 });
 
