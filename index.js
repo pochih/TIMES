@@ -29,6 +29,8 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+////////// connect with Kinect //////////
+
 // get dead user's data
 app.get('/user/dead', function(req, res) {
   var db = require('./db.js');
@@ -36,33 +38,9 @@ app.get('/user/dead', function(req, res) {
   USER.child(req.query.user).set(db.a);
 });
 
-// get user's data
-app.get('/user/data', function(req, res) {
-  var db = require('./db.js');
-  res.send(db.a);
-  USER.child(req.query.user).set(db.a);
-});
+//*************************************//
 
-// get land's data
-app.get('/land/data', function(req, res) {
-  var db = require('./db.js');
-  res.send(db.b);
-  LAND.child(req.query.land).set(db.b);
-});
-
-// get data center
-app.get('/center', function(req, res) {
-  var db = require('./db.js');
-  res.send(db.c);
-  CENTER.set(db.c);
-});
-
-// get configs
-app.get('/configs', function(req, res) {
-  var db = require('./db.js');
-  res.send(db.d);
-  CONFIGS.set(db.d);
-});
+////////// connect with Arduino /////////
 
 // initial board
 // http://localhost:5000/board/init?board=2&land=a10,b9,c3,c1,c4,a5,e3,e4,d3,d18,d4,c2,b5,b6,b4,b3,b1,b2,b17,a11
@@ -113,6 +91,10 @@ app.get('/land/stand', function(req, res) {
   res.send(result);
 });
 
+//*************************************//
+
+///////// connect with front-end ////////
+
 // user buy a land
 app.get('/land/buy', function(req, res) {
   var user = req.query.user;
@@ -144,6 +126,49 @@ app.get('/land/importance', function(req, res) {
   res.send(result);
 });
 
+// get user's data
+app.get('/user/data', function(req, res) {
+  var db = require('./db.js');
+  res.send(db.a);
+  USER.child(req.query.user).set(db.a);
+});
+
+//*************************************//
+
+////////////// global data //////////////
+
+// get land's data
+app.get('/land/data', function(req, res) {
+  var db = require('./db.js');
+  res.send(db.b);
+  LAND.child(req.query.land).set(db.b);
+});
+
+// get data center
+app.get('/center', function(req, res) {
+  var db = require('./db.js');
+  res.send(db.c);
+  CENTER.set(db.c);
+});
+
+// get configs
+app.get('/configs', function(req, res) {
+  var db = require('./db.js');
+  res.send(db.d);
+  CONFIGS.set(db.d);
+});
+
+// root
+app.get('/', function(req, res) {
+  var result = '<h1 style="color:green;">Welcome to Art Festival</h1>';
+  var times = config.TIMES || 5;
+  for (i = 0; i < times; i++)
+    result += ('<p>' + cool() + '</p>');
+  res.send(result);
+});
+
+//*************************************//
+
 app.get('/readFile', function(req, res) {
   var user = req.query.user;
   console.log("Dead User: " + req.query.user);
@@ -171,14 +196,6 @@ app.get('/readFile', function(req, res) {
       console.log(error);
     }
   });
-});
-
-app.get('/', function(req, res) {
-  var result = '<h1 style="color:green;">Welcome to Art Festival</h1>';
-  var times = config.TIMES || 5;
-  for (i = 0; i < times; i++)
-    result += ('<p>' + cool() + '</p>');
-  res.send(result);
 });
 
 app.listen(app.get('port'), function() {
