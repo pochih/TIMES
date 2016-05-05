@@ -29,41 +29,11 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.get('/readFile', function(req, res) {
-  var user = req.query.user;
-  console.log("Dead User: " + req.query.user);
-  
-  // HTTP GET
-  var pathname = "https://art-festival.herokuapp.com/user/dead?user=" + user;
-  request({
-    url: pathname,
-    json: true
-  }, function (error, response, body) {
-    if (!error && response.statusCode === 200) {
-      res.send(body);
-      // create file
-      fs.writeFile('result.txt', JSON.stringify(body, null, 4), function(err) {
-        if (err)
-          console.log(err);
-        else {
-          console.log("Create file succeed.");
-          // execute kinect
-          // var child = child_process.fork('./lifewall.exe');
-        }
-      })
-    }
-    else {
-      console.log(error);
-    }
-  });
-});
-
 // get dead user's data
 app.get('/user/dead', function(req, res) {
-  //console.log("dead user: " + req.query.user);
   var db = require('./db.js');
   res.send(db.a);
-  //USER.child(req.query.user).set(db.a);
+  USER.child(req.query.user).set(db.a);
 });
 
 // get user's data
@@ -172,6 +142,35 @@ app.get('/land/importance', function(req, res) {
 
   var result = '<h1 style="color:blue;">land:</h1>' + land;
   res.send(result);
+});
+
+app.get('/readFile', function(req, res) {
+  var user = req.query.user;
+  console.log("Dead User: " + req.query.user);
+  
+  // HTTP GET
+  var pathname = "https://art-festival.herokuapp.com/user/dead?user=" + user;
+  request({
+    url: pathname,
+    json: true
+  }, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      res.send(body);
+      // create file
+      fs.writeFile('result.txt', JSON.stringify(body, null, 4), function(err) {
+        if (err)
+          console.log(err);
+        else {
+          console.log("Create file succeed.");
+          // execute kinect
+          //var childProcess = require('child_process').fork('./lifewall.exe');
+        }
+      })
+    }
+    else {
+      console.log(error);
+    }
+  });
 });
 
 app.get('/', function(req, res) {
