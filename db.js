@@ -104,9 +104,9 @@ module.exports = {
 		}
 	},
 	defaultUser: {
-		_id: default,
+		_id: 'default',
 		name: "BrianHuang",
-		deviceId: default,
+		deviceId: 'default',
 		talent: {
 			position: -2,
 			appearance: 3,
