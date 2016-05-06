@@ -25,11 +25,23 @@ app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
 
-// views is directory for all template files
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
 
-////////// connect with Kinect //////////
+
+////////// User //////////
+
+// get user's data
+app.get('/user/data', function(req, res) {
+  USER.child(req.query.user).once("value", function(snapshot) {
+    var user = snapshot.val();
+    if (user != null) {
+      res.send(user);
+    }
+    else {
+      var db = require('./db.js');
+      res.send(db.a);
+    }
+  });
+});
 
 // get dead user's data
 app.get('/user/dead', function(req, res) {
@@ -45,9 +57,116 @@ app.get('/user/dead', function(req, res) {
   });
 });
 
-//*************************************//
+// init users
+app.get('/user/init', function(req, res) {
+  var db = require('./db.js');
+  var user = db.user;
+  var appearance = req.query.a;
+  var position = req.query.p;
+  var IQ = req.query.i;
 
-////////// connect with Arduino /////////
+  user = parser.decideCategory(user, appearance, position, IQ);
+  user._id = req.query.id;
+  user.name = req.query.name;
+  user.deviceId = req.query.device;
+
+  USER.child(user._id).set(user);
+  res.send('<h1 style="color:blue;">Add User:</h1><h3 style="color:purple;">' + user._id + ' (' + user.name + ')' + '</h3><h1 style="color:blue;">Succeed!!</h1>')
+});
+
+// delete users
+app.get('/user/delete', function(req, res) {
+  var user = req.query.user;
+
+  USER.child(user).remove();
+  res.send('<h1 style="color:red;">Delete User:</h1><h3 style="color:purple;">' + user + '</h3><h1 style="color:red;">Succeed!!</h1>')
+});
+
+
+
+////////// Land /////////
+
+// get land's data
+app.get('/land/data', function(req, res) {
+  var land = req.query.land;
+  if (land == 'all') {
+    LAND.once("value", function(snapshot) {
+      res.send(snapshot.val());
+    });
+  }
+  else {
+    LAND.child(req.query.land).once("value", function(snapshot) {
+      if (snapshot.val() == null)
+        res.send('<h1 style="color:red;">Land:</h1>' + req.query.land + '<h1 style="color:red;">doesn\'t exist!</h1>');
+      else
+        res.send(snapshot.val());
+    });
+  }
+});
+
+// user buy a land
+app.get('/land/buy', function(req, res) {
+  var user = req.query.user;
+  var land = parser.parseLandType(req.query.land);
+
+  // user buy a land
+  // if succeed
+  var fbRef = USER.child(user).child("lands").child(land.longType);
+  fbRef.once("value", function(snapshot) {
+    var landIDs = [];
+    if (snapshot.val() != null)
+      landIDs = snapshot.val();
+    if (landIDs.indexOf(land.num) < 0)
+      landIDs.push(land.num);
+    fbRef.set(landIDs);
+  });
+
+  var result = '<h1 style="color:red;">User:</h1>' + user + '<h1 style="color:blue;">buy land:</h1>' + land.longType + land.num;
+  res.send(result);
+});
+
+// user stand on a land
+app.get('/land/stand', function(req, res) {
+  var user = req.query.user;
+  var land = parser.parseLandType(req.query.land);
+
+  // user stand on land
+
+
+  var result = '<h1 style="color:red;">User:</h1>' + user + '<h1 style="color:blue;">stands on land:</h1>' + land.type + land.num;
+  res.send(result);
+});
+
+app.get('/land/importance', function(req, res) {
+  var land = req.query.land;
+
+  // count land's importance
+
+
+  var result = '<h1 style="color:blue;">land:</h1>' + land;
+  res.send(result);
+});
+
+// init lands
+app.get('/land/init', function(req, res) {
+  var db = require('./db.js');
+  for (var i = 0; i < db.lands.entertainment.length; i++)
+    LAND.child(db.lands.entertainment[i]._id).set(db.lands.entertainment[i]);
+  for (var i = 0; i < db.lands.health.length; i++)
+    LAND.child(db.lands.health[i]._id).set(db.lands.health[i]);
+  for (var i = 0; i < db.lands.affection.length; i++)
+    LAND.child(db.lands.affection[i]._id).set(db.lands.affection[i]);
+  for (var i = 0; i < db.lands.career.length; i++)
+    LAND.child(db.lands.career[i]._id).set(db.lands.career[i]);
+  for (var i = 0; i < db.lands.learning.length; i++)
+    LAND.child(db.lands.learning[i]._id).set(db.lands.learning[i]);
+  var result = '<h1 style="color:pink;">Init lands succeed!</h1>';
+  res.send(result);
+});
+
+
+
+///////// board ////////
 
 // initial board
 // http://localhost:5000/board/init?board=2&land=a10,b9,c3,c1,c4,a5,e3,e4,d3,d18,d4,c2,b5,b6,b4,b3,b1,b2,b17,a11
@@ -86,86 +205,9 @@ app.get('/board/occupy', function(req, res) {
   });
 });
 
-// user stand on a land
-app.get('/land/stand', function(req, res) {
-  var user = req.query.user;
-  var land = parser.parseLandType(req.query.land);
-
-  // user stand on land
 
 
-  var result = '<h1 style="color:red;">User:</h1>' + user + '<h1 style="color:blue;">stands on land:</h1>' + land.type + land.num;
-  res.send(result);
-});
-
-//*************************************//
-
-///////// connect with front-end ////////
-
-// get land's data
-app.get('/land/data', function(req, res) {
-  var land = req.query.land;
-  if (land == 'all') {
-    LAND.once("value", function(snapshot) {
-      console.log(snapshot.val());
-      res.send(snapshot.val());
-    });
-  }
-  else {
-    var db = require('./db.js');
-    res.send(db.b);
-    //LAND.child(req.query.land).set(db.b);
-  }
-});
-
-// user buy a land
-app.get('/land/buy', function(req, res) {
-  var user = req.query.user;
-  var land = parser.parseLandType(req.query.land);
-
-  // user buy a land
-  // if succeed
-  var fbRef = USER.child(user).child("lands").child(land.longType);
-  fbRef.once("value", function(snapshot) {
-    var landIDs = [];
-    if (snapshot.val() != null)
-      landIDs = snapshot.val();
-    if (landIDs.indexOf(land.num) < 0)
-      landIDs.push(land.num);
-    fbRef.set(landIDs);
-  });
-
-  var result = '<h1 style="color:red;">User:</h1>' + user + '<h1 style="color:blue;">buy land:</h1>' + land.longType + land.num;
-  res.send(result);
-});
-
-app.get('/land/importance', function(req, res) {
-  var land = req.query.land;
-
-  // count land's importance
-
-
-  var result = '<h1 style="color:blue;">land:</h1>' + land;
-  res.send(result);
-});
-
-// get user's data
-app.get('/user/data', function(req, res) {
-  USER.child(req.query.user).once("value", function(snapshot) {
-    var user = snapshot.val();
-    if (user != null) {
-      res.send(user);
-    }
-    else {
-      var db = require('./db.js');
-      res.send(db.a);
-    }
-  });
-});
-
-//*************************************//
-
-////////////// global data //////////////
+//////// global data /////////
 
 // get data center
 app.get('/center', function(req, res) {
@@ -190,36 +232,6 @@ app.get('/', function(req, res) {
   res.send(result);
 });
 
-//*************************************//
-
-app.get('/readFile', function(req, res) {
-  var user = req.query.user;
-  console.log("Dead User: " + req.query.user);
-  
-  // HTTP GET
-  var pathname = "https://art-festival.herokuapp.com/user/dead?user=" + user;
-  request({
-    url: pathname,
-    json: true
-  }, function (error, response, body) {
-    if (!error && response.statusCode === 200) {
-      res.send(body);
-      // create file
-      fs.writeFile('result.txt', JSON.stringify(body, null, 4), function(err) {
-        if (err)
-          console.log(err);
-        else {
-          console.log("Create file succeed.");
-          // execute kinect
-          //var childProcess = require('child_process').fork('./lifewall.exe');
-        }
-      })
-    }
-    else {
-      console.log(error);
-    }
-  });
-});
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
