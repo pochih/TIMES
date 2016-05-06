@@ -40,7 +40,7 @@ app.get('/user/dead', function(req, res) {
     }
     else {
       var db = require('./db.js');
-      res.send(db.a);
+      res.send(db.a.dead);
     }
   });
 });
@@ -151,9 +151,16 @@ app.get('/land/importance', function(req, res) {
 
 // get user's data
 app.get('/user/data', function(req, res) {
-  var db = require('./db.js');
-  res.send(db.a);
-  //USER.child(req.query.user).set(db.a);
+  USER.child(req.query.user).once("value", function(snapshot) {
+    var user = snapshot.val();
+    if (user != null) {
+      res.send(user);
+    }
+    else {
+      var db = require('./db.js');
+      res.send(db.a);
+    }
+  });
 });
 
 //*************************************//
