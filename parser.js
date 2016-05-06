@@ -11,11 +11,11 @@ function countCategory(category, a, p, i) {
 	var position = db.bonus.talentBonus.position;
 	var appearance = db.bonus.talentBonus.appearance;
 	var IQ = db.bonus.talentBonus.IQ;
-	category.affection += p*position.affection + a*appearance.affection + i*IQ.affection;
-	category.career += p*position.career + a*appearance.career + i*IQ.career;
-	category.entertainment += p*position.entertainment + a*appearance.entertainment + i*IQ.entertainment;
-	category.health += p*position.health + a*appearance.health + i*IQ.health;
-	category.learning += p*position.learning + a*appearance.learning + i*IQ.learning;
+	category.affection += (p*position.affection + a*appearance.affection + i*IQ.affection);
+	category.career += (p*position.career + a*appearance.career + i*IQ.career);
+	category.entertainment += (p*position.entertainment + a*appearance.entertainment + i*IQ.entertainment);
+	category.health += (p*position.health + a*appearance.health + i*IQ.health);
+	category.learning += (p*position.learning + a*appearance.learning + i*IQ.learning);
 	return category;
 }
 
