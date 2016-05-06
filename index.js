@@ -33,9 +33,16 @@ app.set('view engine', 'ejs');
 
 // get dead user's data
 app.get('/user/dead', function(req, res) {
-  var db = require('./db.js');
-  res.send(db.a);
-  USER.child(req.query.user).set(db.a);
+  USER.child(req.query.user).once("value", function(snapshot) {
+    var user = snapshot.val();
+    if (user != null) {
+      res.send(user.dead);
+    }
+    else {
+      var db = require('./db.js');
+      res.send(db.a);
+    }
+  });
 });
 
 //*************************************//

@@ -1,8 +1,8 @@
 module.exports = {
 	a: {
-		_id: 100001,
+		_id: 100003,
 		name: "BrianHuang",
-		deviceId: 100001,
+		deviceId: 100003,
 		talent: {
 			position: -2,
 			appearance: 3,
@@ -29,6 +29,36 @@ module.exports = {
 			career: [],
 			learning: [], 
 			entertainment: [1, 6]
+		},
+		dead: {
+    		firstStage:{
+				affection: false,
+				health: false,
+				career: false,
+				learning: false,
+				entertainment: false
+    		},
+			secondStage:{
+				affection: true,
+				health: true,
+				career: true,
+				learning: true,
+				entertainment: true
+    		},
+    		thirdStage: {
+				affection: true,
+				health: true,
+				career: true,
+				learning: true,
+				entertainment: true
+    		},
+    		fourthStage: {
+				affection: false,
+				health: false,
+				career: false,
+				learning: false,
+				entertainment: false
+    		}
 		}
 	},
 	b: {
@@ -185,4 +215,35 @@ var d =
 	}
 }
 
-console.log(a, b, c, d);
+var dead = {
+    firstStage:{
+		affection: false,
+		health: false,
+		career: false,
+		learning: false,
+		entertainment: false
+    },
+	secondStage:{
+		affection: true,
+		health: true,
+		career: true,
+		learning: true,
+		entertainment: true
+    },
+    thirdStage: {
+		affection: true,
+		health: true,
+		career: true,
+		learning: true,
+		entertainment: true
+    },
+    fourthStage: {
+		affection: false,
+		health: false,
+		career: false,
+		learning: false,
+		entertainment: false
+    }
+}
+
+console.log(a, b, c, d, dead);
