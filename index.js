@@ -218,7 +218,7 @@ app.get('/bonus', function(req, res) {
 
 // root
 app.get('/', function(req, res) {
-  var result = '<h1 style="color:green;">Welcome to Art Festival</h1>';
+  var result = '<title>Art Festival</title><h1 style="color:green;">Welcome to Art Festival</h1>';
   var times = config.TIMES || 5;
   for (i = 0; i < times; i++)
     result += ('<p>' + cool() + '</p>');
