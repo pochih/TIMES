@@ -95,6 +95,22 @@ app.get('/land/stand', function(req, res) {
 
 ///////// connect with front-end ////////
 
+// get land's data
+app.get('/land/data', function(req, res) {
+  var land = req.query.land;
+  if (land == 'all') {
+    LAND.once("value", function(snapshot) {
+      console.log(snapshot.val());
+      res.send(snapshot.val());
+    });
+  }
+  else {
+    var db = require('./db.js');
+    res.send(db.b);
+    //LAND.child(req.query.land).set(db.b);
+  }
+});
+
 // user buy a land
 app.get('/land/buy', function(req, res) {
   var user = req.query.user;
@@ -130,32 +146,25 @@ app.get('/land/importance', function(req, res) {
 app.get('/user/data', function(req, res) {
   var db = require('./db.js');
   res.send(db.a);
-  USER.child(req.query.user).set(db.a);
+  //USER.child(req.query.user).set(db.a);
 });
 
 //*************************************//
 
 ////////////// global data //////////////
 
-// get land's data
-app.get('/land/data', function(req, res) {
-  var db = require('./db.js');
-  res.send(db.b);
-  LAND.child(req.query.land).set(db.b);
-});
-
 // get data center
 app.get('/center', function(req, res) {
   var db = require('./db.js');
   res.send(db.c);
-  CENTER.set(db.c);
+  //CENTER.set(db.c);
 });
 
 // get configs
 app.get('/configs', function(req, res) {
   var db = require('./db.js');
   res.send(db.d);
-  CONFIGS.set(db.d);
+  //CONFIGS.set(db.d);
 });
 
 // root

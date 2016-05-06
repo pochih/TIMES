@@ -32,17 +32,17 @@ module.exports = {
 		}
 	},
 	b: {
-		_id: "A100",
+		_id: "l7",
 		price: 60,
 		probability: 20,
-		category: "affection",
+		category: "learning",
 		level: 4,
 		owner: {
-			name: "Lulala",
-			_id: 100002
+			name: "Art-festival",
+			_id: 100003
 		},
 		reward: 2,
-		content: "含飴弄孫",
+		content: "考100分",
 		specialties: false
 	},
 	c: {
