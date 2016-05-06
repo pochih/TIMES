@@ -8,6 +8,7 @@ var fs = require('fs');
 
 var config = require("./config.js");
 var parser = require('./parser.js');
+var db = require('./db.js');
 
 var Firebase = require("firebase");
 var DB = new Firebase(config.FIREBASE_URL);
@@ -59,16 +60,8 @@ app.get('/user/dead', function(req, res) {
 
 // init users
 app.get('/user/init', function(req, res) {
-  var db = require('./db.js');
-  var user = db.user;
-  var appearance = req.query.a;
-  var position = req.query.p;
-  var IQ = req.query.i;
-
-  user = parser.decideCategory(user, appearance, position, IQ);
-  user._id = req.query.id;
-  user.name = req.query.name;
-  user.deviceId = req.query.device;
+  var userdb = db.user;
+  var user = parser.initUser(userdb, req.query);
 
   USER.child(user._id).set(user);
   res.send('<h1 style="color:blue;">Add User:</h1><h3 style="color:purple;">' + user._id + ' (' + user.name + ')' + '</h3><h1 style="color:blue;">Succeed!!</h1>')

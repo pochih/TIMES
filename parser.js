@@ -11,11 +11,11 @@ function countCategory(category, a, p, i) {
 	var position = db.bonus.talentBonus.position;
 	var appearance = db.bonus.talentBonus.appearance;
 	var IQ = db.bonus.talentBonus.IQ;
-	category.affection += (p*position.affection + a*appearance.affection + i*IQ.affection);
-	category.career += (p*position.career + a*appearance.career + i*IQ.career);
-	category.entertainment += (p*position.entertainment + a*appearance.entertainment + i*IQ.entertainment);
-	category.health += (p*position.health + a*appearance.health + i*IQ.health);
-	category.learning += (p*position.learning + a*appearance.learning + i*IQ.learning);
+	category.affection = 0 + (p*position.affection + a*appearance.affection + i*IQ.affection);
+	category.career = 0 + (p*position.career + a*appearance.career + i*IQ.career);
+	category.entertainment = 0 + (p*position.entertainment + a*appearance.entertainment + i*IQ.entertainment);
+	category.health = 0 + (p*position.health + a*appearance.health + i*IQ.health);
+	category.learning = 0 + (p*position.learning + a*appearance.learning + i*IQ.learning);
 	return category;
 }
 
@@ -30,13 +30,19 @@ module.exports = {
 		obj['num'] = landStr.match(/\d+/)[0] - 0;
 		return obj;
 	},
-	decideCategory: function(user, a, p, i) {
+	initUser: function(user, query) {
+		var appearance = query.a;
+  		var position = query.p;
+  		var IQ = query.i;
+		user._id = query.id;
+  		user.name = query.name;
+  		user.deviceId = query.device;
 		user.talent = {
-			position: p,
-			appearance: a,
-			IQ: i
-		};
-		user.category = countCategory(user.category, a, p, i);
+			position: position,
+			appearance: appearance,
+			IQ: IQ
+		};		
+		user.category = countCategory(user.category, appearance, position, IQ);
 		return user;
 	}
 }
