@@ -21,6 +21,7 @@ var KINECT = DB.child("kinect");
 var ARDUINO = DB.child("arduino");
 
 var boardOccupy = [[],[],[],[],[]];
+var land2board = {};
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -112,6 +113,16 @@ app.get('/land/buy', function(req, res) {
     if (landIDs.indexOf(land.num) < 0)
       landIDs.push(land.num);
     fbRef.set(landIDs);
+
+    // renew occupy
+    var board = land2board.land.board;
+    var position = land2board.land.position;
+    boardOccupy[board][position] = 1;
+    BOARD.child(board).child("occupy").once("value", function(snapshot) {
+      var occupy = snapshot.val();
+      occupy[position] = 1;
+      BOARD.child(board).child("occupy").set(occupy);
+    });
   });
 
   var result = '<h1 style="color:red;">User:</h1>' + user + '<h1 style="color:blue;">buy land:</h1>' + land.longType + land.num;
@@ -177,6 +188,8 @@ app.get('/board/init', function(req, res) {
       if (landIDs.indexOf(landArr[i]) < 0) {
         landIDs.push(landArr[i]);
         boardOccupy[boardNum][landIDs.length-1] = 0;
+        land2board.landArr[i].board = boardNum;
+        land2board.landArr[i].position = i;
       }
     }
     //console.log("Occupy " + boardNum + '\n' + boardOccupy[boardNum]);
