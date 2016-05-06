@@ -1,89 +1,13 @@
 module.exports = {
-	a: {
-		_id: 100003,
-		name: "BrianHuang",
-		deviceId: 100003,
-		talent: {
-			position: -2,
-			appearance: 3,
-			IQ: -1
-		},
-		category: {
-			affection: 6,
-			health: 16,
-			career: 6,
-			learning: -24,
-			entertainment: 6
-		},
-		isAlive: true,
+	center: {
+		players: [100001, 100003, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 		timeLeft: {
 			hours: 0,
-			mins: 38,
-			secs: 55,
-			milliseconds: 933
+			mins: 45,
+			secs: 0,
+			milliseconds: 0
 		},
-		interest: 12.5,
-		lands: {
-			affection: [4, 5],
-			health: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-			career: [],
-			learning: [], 
-			entertainment: [1, 6]
-		},
-		dead: {
-    		firstStage:{
-				affection: false,
-				health: false,
-				career: false,
-				learning: false,
-				entertainment: false
-    		},
-			secondStage:{
-				affection: true,
-				health: true,
-				career: true,
-				learning: true,
-				entertainment: true
-    		},
-    		thirdStage: {
-				affection: true,
-				health: true,
-				career: true,
-				learning: true,
-				entertainment: true
-    		},
-    		fourthStage: {
-				affection: false,
-				health: false,
-				career: false,
-				learning: false,
-				entertainment: false
-    		}
-		}
-	},
-	b: {
-		_id: "l7",
-		price: 60,
-		probability: 20,
-		category: "learning",
-		level: 4,
-		owner: {
-			name: "Art-festival",
-			_id: 100003
-		},
-		interest: 2,
-		content: "考100分",
-		specialties: false
-	},
-	c: {
-		players: [100001, 100003, 1],
-		timeLeft: {
-			hours: 0,
-			mins: 22,
-			secs: 10,
-			milliseconds: 567
-		},
-		speed: 2,
+		speed: 1,
 		status: "pause"
 	},
 	bonus: {
@@ -178,6 +102,82 @@ module.exports = {
 				entertainment: false
     		}
 		}
+	},
+	defaultUser: {
+		_id: 'default',
+		name: "BrianHuang",
+		deviceId: 'default',
+		talent: {
+			position: -2,
+			appearance: 3,
+			IQ: -1
+		},
+		category: {
+			affection: 6,
+			health: 16,
+			career: 6,
+			learning: -24,
+			entertainment: 6
+		},
+		isAlive: true,
+		timeLeft: {
+			hours: 0,
+			mins: 38,
+			secs: 55,
+			milliseconds: 933
+		},
+		interest: 12.5,
+		lands: {
+			affection: [4, 5, 6],
+			health: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+			career: [],
+			learning: [20], 
+			entertainment: [1, 6, 11, 16]
+		},
+		dead: {
+    		firstStage:{
+				affection: false,
+				health: true,
+				career: false,
+				learning: false,
+				entertainment: false
+    		},
+			secondStage:{
+				affection: false,
+				health: false,
+				career: true,
+				learning: true,
+				entertainment: true
+    		},
+    		thirdStage: {
+				affection: true,
+				health: true,
+				career: true,
+				learning: true,
+				entertainment: true
+    		},
+    		fourthStage: {
+				affection: true,
+				health: false,
+				career: true,
+				learning: false,
+				entertainment: false
+    		}
+		}
+	},
+	defaultLand: {
+		_id: "l7",
+		price: 60,
+		probability: 20,
+		category: "learning",
+		level: 4,
+		owner: {
+			name: "Art-festival",
+			_id: 100003
+		},
+		interest: 2,
+		content: "考100分",
+		specialties: false
 	},
 	lands: {
 		entertainment: [

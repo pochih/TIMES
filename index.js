@@ -15,7 +15,7 @@ var DB = new Firebase(config.FIREBASE_URL);
 var USER = DB.child("users");
 var LAND = DB.child("lands");
 var CENTER = DB.child("center");
-var CONFIGS = DB.child("configs");
+var BONUS = DB.child("bonus");
 var BOARD = DB.child("boards");
 var KINECT = DB.child("kinect");
 var ARDUINO = DB.child("arduino");
@@ -39,7 +39,7 @@ app.get('/user/data', function(req, res) {
     }
     else {
       var db = require('./db.js');
-      res.send(db.a);
+      res.send(db.defaultUser);
     }
   });
 });
@@ -53,7 +53,7 @@ app.get('/user/dead', function(req, res) {
     }
     else {
       var db = require('./db.js');
-      res.send(db.a.dead);
+      res.send(db.defaultUser.dead);
     }
   });
 });
@@ -205,15 +205,15 @@ app.get('/board/occupy', function(req, res) {
 // get data center
 app.get('/center', function(req, res) {
   var db = require('./db.js');
-  res.send(db.c);
-  //CENTER.set(db.c);
+  res.send(db.center);
+  CENTER.set(db.center);
 });
 
 // get configs
-app.get('/configs', function(req, res) {
+app.get('/bonus', function(req, res) {
   var db = require('./db.js');
-  res.send(db.d);
-  //CONFIGS.set(db.d);
+  res.send(db.bonus);
+  BONUS.set(db.bonus);
 });
 
 // root
