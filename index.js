@@ -17,8 +17,9 @@ var LAND = DB.child("lands");
 var CENTER = DB.child("center");
 var BONUS = DB.child("bonus");
 var BOARD = DB.child("boards");
-var KINECT = DB.child("kinect");
-var ARDUINO = DB.child("arduino");
+var LAND2BOARD = DB.child("land2board");
+//var KINECT = DB.child("kinect");
+//var ARDUINO = DB.child("arduino");
 
 var boardOccupy = [[],[],[],[],[]];
 var land2board = {};
@@ -115,13 +116,15 @@ app.get('/land/buy', function(req, res) {
     fbRef.set(landIDs);
 
     // renew occupy
-    var board = land2board.land.board;
-    var position = land2board.land.position;
-    boardOccupy[board][position] = 1;
-    BOARD.child(board).child("occupy").once("value", function(snapshot) {
-      var occupy = snapshot.val();
-      occupy[position] = 1;
-      BOARD.child(board).child("occupy").set(occupy);
+    LAND2BOARD.once("value", function(snapshot) {
+      var board = snapshot.val()[req.query.land].board;
+      var position = snapshot.val()[req.query.land].position;
+      boardOccupy[board][position] = 1;
+      BOARD.child(board).child("occupy").once("value", function(snapshot) {
+        var occupy = snapshot.val();
+        occupy[position] = 1;
+        BOARD.child(board).child("occupy").set(occupy);
+      });
     });
   });
 
@@ -176,29 +179,56 @@ app.get('/land/init', function(req, res) {
 // http://localhost:5000/board/init?board=2&land=a10,b9,c3,c1,c4,a5,e3,e4,d3,d18,d4,c2,b5,b6,b4,b3,b1,b2,b17,a11
 app.get('/board/init', function(req, res) {
   var boardNum = req.query.board;
-  var landArr = parser.parseLands(req.query.land);
 
-  // save land into board
-  BOARD.child(boardNum).once("value", function(snapshot) {
-    var landIDs = [];
-    if (snapshot.val() != null) {
-      landIDs = snapshot.val();
-    }
-    for (var i = 0; i < landArr.length; i++) {
-      if (landIDs.indexOf(landArr[i]) < 0) {
+  if (boardNum == 'all') {
+    var boards = db.boards;
+
+    // save land into board
+    for (var index = 0; index < boards.length; index++) {
+      var landArr = boards[index];
+      var landIDs = [];
+      for (var i = 0; i < landArr.length; i++) {
         landIDs.push(landArr[i]);
-        boardOccupy[boardNum][landIDs.length-1] = 0;
-        land2board.landArr[i].board = boardNum;
-        land2board.landArr[i].position = i;
+        boardOccupy[index][i] = 0;
+  
+        // set land2board dictionary
+        var key = landArr[i];
+        land2board[key] = {};
+        land2board[key].board = index;
+        land2board[key].position = i;
       }
+      //console.log("Occupy " + index + '\n' + boardOccupy[index]);
+      LAND2BOARD.set(land2board);
+      BOARD.child(index).child("lands").set(landIDs);
+      BOARD.child(index).child("occupy").set(boardOccupy[index]);
+    }
+
+    var result = '<h1 style="color:blue;">Add all lands to boards</h1>';
+    res.send(result);
+  }
+  else {
+    var landArr = parser.parseLands(req.query.land);
+
+    // save land into board
+    var landIDs = [];
+    for (var i = 0; i < landArr.length; i++) {
+      landIDs.push(landArr[i]);
+      boardOccupy[boardNum][i] = 0;
+
+      // set land2board dictionary
+      var key = landArr[i];
+      land2board[key] = {};
+      land2board[key].board = (boardNum-0);
+      land2board[key].position = i;
     }
     //console.log("Occupy " + boardNum + '\n' + boardOccupy[boardNum]);
+    LAND2BOARD.set(land2board);
     BOARD.child(boardNum).child("lands").set(landIDs);
     BOARD.child(boardNum).child("occupy").set(boardOccupy[boardNum]);
-  });
-
-  var result = '<h1 style="color:blue;">Add lands:</h1>' + landArr + '<h1 style="color:blue;">to Board:</h1>' + boardNum;
-  res.send(result);
+  
+    var result = '<h1 style="color:blue;">Add lands:</h1>' + landArr + '<h1 style="color:blue;">to Board:</h1>' + boardNum;
+    res.send(result);
+  }
 });
 
 // get occupy info. of board
