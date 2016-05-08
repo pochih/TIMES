@@ -37,6 +37,7 @@ app.get('/user/data', function(req, res) {
   USER.child(req.query.user).once("value", function(snapshot) {
     var user = snapshot.val();
     if (user != null) {
+      user.lands = parser.parseEmptyArr(user.lands);
       res.send(user);
     }
     else {

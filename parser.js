@@ -44,5 +44,18 @@ module.exports = {
 		};		
 		user.category = countCategory(user.category, appearance, position, IQ);
 		return user;
+	},
+	parseEmptyArr: function(lands) {
+		if (lands.affection.length == 1 && lands.affection[0] == -1)
+			lands.affection = [];
+		if (lands.career.length == 1 && lands.career[0] == -1)
+			lands.career = [];
+		if (lands.entertainment.length == 1 && lands.entertainment[0] == -1)
+			lands.entertainment = [];
+		if (lands.health.length == 1 && lands.health[0] == -1)
+			lands.health = [];
+		if (lands.learning.length == 1 && lands.learning[0] == -1)
+			lands.learning = [];
+		return lands;
 	}
 }
