@@ -73,11 +73,11 @@ module.exports = {
 		},
 		interest: 0,
 		lands: {
-			affection: [],
-			health: [],
-			career: [],
-			learning: [], 
-			entertainment: []
+			affection: [-1],
+			health: [-1],
+			career: [-1],
+			learning: [-1], 
+			entertainment: [-1]
 		},
 		dead: {
     		firstStage:{

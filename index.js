@@ -105,12 +105,19 @@ app.get('/land/buy', function(req, res) {
   var land = parser.parseLandType(req.query.land);
 
   // user buy a land
+
+  // if fail
+  //res.send({success: false});
+
   // if succeed
+    //扣錢
   var fbRef = USER.child(user).child("lands").child(land.longType);
   fbRef.once("value", function(snapshot) {
     var landIDs = [];
     if (snapshot.val() != null)
       landIDs = snapshot.val();
+    if (landIDs.length == 1 && landIDs[0] == -1)
+      landIDs = [];
     if (landIDs.indexOf(land.num) < 0)
       landIDs.push(land.num);
     fbRef.set(landIDs);
@@ -266,6 +273,35 @@ app.get('/', function(req, res) {
   for (i = 0; i < times; i++)
     result += ('<p>' + cool() + '</p>');
   res.send(result);
+});
+
+app.get('/readFile', function(req, res) {
+  var user = req.query.user;
+  console.log("Dead User: " + req.query.user);
+  
+  // HTTP GET
+  var pathname = "https://art-festival.herokuapp.com/user/dead?user=" + user;
+  request({
+    url: pathname,
+    json: true
+  }, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      res.send(body);
+      // create file
+      fs.writeFile('result.txt', JSON.stringify(body, null, 4), function(err) {
+        if (err)
+          console.log(err);
+        else {
+          console.log("Create file succeed.");
+          // execute kinect
+          //var childProcess = require('child_process').fork('./lifewall.exe');
+        }
+      })
+    }
+    else {
+      console.log(error);
+    }
+  });
 });
 
 
