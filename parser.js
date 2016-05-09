@@ -6,6 +6,16 @@ var landTypes = {
 	l: "learning"
 };
 
+var specialtiesTable = {
+	a: 10,
+	b: 19,
+	c: 16,
+	d: 16,
+	e: 12
+}
+
+var ownedParameter = 1.5;
+
 function countCategory(category, a, p, i) {
 	var db = require('./db.js');
 	var position = db.bonus.talentBonus.position;
@@ -19,11 +29,75 @@ function countCategory(category, a, p, i) {
 	return category;
 }
 
+function isillegal(landQuery) {
+	var type = landQuery.type;
+	var num = landQuery.num;
+	if (type != 'a' && type != 'c' && type != 'e' && type != 'h' && type != 'l')
+		return true;
+	if (num <= 0 || num > 20)
+		return true;
+	return false;
+}
+
 function userHasLand(user, land) {
 	if (user.lands[land.longType].indexOf(land.num) > -1)
 		return true;
 	else
 		return false;
+}
+
+function isOwned(user, land) {
+	if (land.owner._id == -1)
+		return false;
+	if (land.owner._id != user._id)
+		return true;
+	return false;
+}
+
+function ifSpecialties(user, landQuery) {
+	var lands = user.lands[landQuery.longType];
+	var specialNum = specialtiesTable[landQuery.type];
+	if (lands.indexOf(specialNum) > -1)
+		return true;
+	else
+		return false;
+}
+
+function countProbability(user, land, money, landQuery, landOwned) {
+	var price = land.price;
+	if (landOwned)
+		price *= ownedParameter;
+	var probability = land.probability;
+
+	// if user has specialties
+	var specialties = ifSpecialties(user, landQuery);
+	if (specialties && land.level == 4)
+		price /= 2;
+	probability = probability * (money/price) + user.category[landQuery.longType];
+	return probability;
+}
+
+// generate a int between low to high
+function randomInt (low, high) {
+    return Math.floor(Math.random() * (high - low + 1) + low);
+}
+
+// decide win or lose
+function gamble(probability) {
+	var random = randomInt(0, 100);
+	if (random <= probability)
+		return true;
+	else
+		return false;
+}
+
+function tryToBuy(user, land, money, landQuery, landOwned) {
+	var probability = countProbability(user, land, money, landQuery, landOwned);
+	var success = gamble(probability);
+	if (success)
+		return true;
+	else 
+		return false
 }
 
 module.exports = {
@@ -66,18 +140,38 @@ module.exports = {
 		return lands;
 	},
 	buyLand: function(user, land, money, landQuery) {
+		// if illegal land
+		if (isillegal(landQuery))
+			return {
+				success: false,
+				message: "Illegal land"
+			};
+
+		// if already owned
 		if (userHasLand(user, landQuery))
 			return {
 				success: false,
 				message: "Already Owned"
 			};
-		return {
+
+		// 判斷是否收購
+		var landOwned = isOwned(user, land);
+
+		// 判斷機率
+		if (tryToBuy(user, land, money, landQuery, landOwned))
+			return {
 				success: true,
-				message: "Succeed"
+				message: "Buy Succeed"
 			};
+		else 
+			return {
+				success: false,
+				message: "Buy Failed."
+			}
 	},
 	countInterest: function(lands) {
 		var interest = 0;
+		//判斷是否有特殊加成
 		return interest;
 	},
 	countTime: function(timeLeft) {
