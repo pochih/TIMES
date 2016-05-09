@@ -19,6 +19,13 @@ function countCategory(category, a, p, i) {
 	return category;
 }
 
+function userHasLand(user, land) {
+	if (user.lands[land.longType].indexOf(land.num) > -1)
+		return true;
+	else
+		return false;
+}
+
 module.exports = {
 	parseLands: function(landStr) {
 		return landStr.split(",");
@@ -57,5 +64,24 @@ module.exports = {
 		if (lands.learning.length == 1 && lands.learning[0] == -1)
 			lands.learning = [];
 		return lands;
+	},
+	buyLand: function(user, land, money, landQuery) {
+		if (userHasLand(user, landQuery))
+			return {
+				success: false,
+				message: "Already Owned"
+			};
+		return {
+				success: true,
+				message: "Succeed"
+			};
+	},
+	countInterest: function(lands) {
+		var interest = 0;
+		return interest;
+	},
+	countTime: function(timeLeft) {
+		var timeObj = timeLeft;
+		return timeObj;
 	}
 }

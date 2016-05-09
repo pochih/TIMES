@@ -104,40 +104,67 @@ app.get('/land/data', function(req, res) {
 app.get('/land/buy', function(req, res) {
   var user = req.query.user;
   var land = parser.parseLandType(req.query.land);
+  var money = req.query.money;
 
   // user buy a land
 
-  // if fail
-  //res.send({success: false});
+  USER.child(user).once("value", function(userdata){
+    var userData = userdata.val();
+    LAND.child(req.query.land).once("value", function(landdata) {
+      var landData = landdata.val();
+      var buyMsg = parser.buyLand(userData, landData, money, land);
+      if (buyMsg.success) {
+        // if succeed
 
-  // if succeed
-    //扣錢
-  var fbRef = USER.child(user).child("lands").child(land.longType);
-  fbRef.once("value", function(snapshot) {
-    var landIDs = [];
-    if (snapshot.val() != null)
-      landIDs = snapshot.val();
-    if (landIDs.length == 1 && landIDs[0] == -1)
-      landIDs = [];
-    if (landIDs.indexOf(land.num) < 0)
-      landIDs.push(land.num);
-    fbRef.set(landIDs);
+        // 土地要新增owner
+        var ownerObj = {
+          _id: userData['_id'],
+          name: userData['name']
+        };
+        LAND.child(req.query.land).child("owner").set(ownerObj);
 
-    // renew occupy
-    LAND2BOARD.once("value", function(snapshot) {
-      var board = snapshot.val()[req.query.land].board;
-      var position = snapshot.val()[req.query.land].position;
-      boardOccupy[board][position] = 1;
-      BOARD.child(board).child("occupy").once("value", function(snapshot) {
-        var occupy = snapshot.val();
-        occupy[position] = 1;
-        BOARD.child(board).child("occupy").set(occupy);
-      });
-    });
-  });
+        // user 下新增土地, 加利息, 扣錢
+        // user 新增土地
+        var userLand = userData.lands[land.longType];
+        var landIDs = [];
+        if (userLand != null)
+          landIDs = userLand;
+        if (landIDs.length == 1 && landIDs[0] == -1)
+          landIDs = [];
+        if (landIDs.indexOf(land.num) < 0)
+          landIDs.push(land.num);
+        userData.lands[land.longType] = landIDs;
 
-  var result = '<h1 style="color:red;">User:</h1>' + user + '<h1 style="color:blue;">buy land:</h1>' + land.longType + land.num;
-  res.send(result);
+        // user 加利息
+        userData.interest = parser.countInterest(userData.lands);
+
+        // user 扣錢
+        userData.timeLeft = parser.countTime(userData.timeLeft);
+
+        USER.child(user).set(userData);
+    
+        // renew BOARD's occupy
+        LAND2BOARD.once("value", function(snapshot) {
+          var board = snapshot.val()[req.query.land].board;
+          var position = snapshot.val()[req.query.land].position;
+          boardOccupy[board][position] = 1;
+          BOARD.child(board).child("occupy").once("value", function(snapshot) {
+            var occupy = snapshot.val();
+            occupy[position] = 1;
+            BOARD.child(board).child("occupy").set(occupy);
+            res.send(buyMsg);
+          });
+        });
+      }
+      else {
+        // if failed
+        res.send(buyMsg);
+      }
+    })
+  })
+
+  // var result = '<h1 style="color:red;">User:</h1>' + user + '<h1 style="color:blue;">buy land:</h1>' + land.longType + land.num;
+  // res.send(result);
 });
 
 // user stand on a land
