@@ -104,7 +104,7 @@ app.get('/land/data', function(req, res) {
 app.get('/land/buy', function(req, res) {
   var user = req.query.user;
   var land = parser.parseLandType(req.query.land);
-  var money = req.query.money;
+  var money = parseInt(req.query.money);
 
   // user buy a land
 
@@ -139,7 +139,7 @@ app.get('/land/buy', function(req, res) {
         userData.interest = parser.countInterest(userData.lands);
 
         // user 扣錢
-        userData.timeLeft = parser.countTime(userData.timeLeft);
+        userData.timeLeft = parser.countTime(userData.timeLeft, money);
 
         USER.child(user).set(userData);
     
@@ -158,6 +158,14 @@ app.get('/land/buy', function(req, res) {
       }
       else {
         // if failed
+
+        // 買失敗 扣錢
+        if (buyMsg.message == 'Buy Failed') {
+          // user 扣錢
+          userData.timeLeft = parser.countTime(userData.timeLeft, money);
+          USER.child(user).set(userData);
+        }
+
         res.send(buyMsg);
       }
     })

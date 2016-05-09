@@ -39,6 +39,16 @@ function isillegal(landQuery) {
 	return false;
 }
 
+function enoughMoney(user, money) {
+	var timeLeft = user.timeLeft;
+	if (timeLeft.mins >= money)
+		return true;
+	if ((timeLeft.hours*60 + timeLeft.mins) >= money)
+		return true;
+	else 
+		return false;
+}
+
 function userHasLand(user, land) {
 	if (user.lands[land.longType].indexOf(land.num) > -1)
 		return true;
@@ -147,6 +157,13 @@ module.exports = {
 				message: "Illegal land"
 			};
 
+		// if enough money
+		if (!enoughMoney(user, money))
+			return {
+				success: false,
+				message: "No Enough Money"
+			};
+
 		// if already owned
 		if (userHasLand(user, landQuery))
 			return {
@@ -166,16 +183,26 @@ module.exports = {
 		else 
 			return {
 				success: false,
-				message: "Buy Failed."
+				message: "Buy Failed"
 			}
 	},
 	countInterest: function(lands) {
 		var interest = 0;
+
 		//判斷是否有特殊加成
+
 		return interest;
 	},
-	countTime: function(timeLeft) {
+	countTime: function(timeLeft, money) {
 		var timeObj = timeLeft;
+		if (timeLeft.mins >= money) {
+			timeLeft.mins -= money;
+		}
+		else if (timeLeft.hours >= 1) {
+			timeLeft.hours -= 1;
+			timeLeft.mins += 60;
+			timeLeft.mins -= money;
+		}
 		return timeObj;
 	}
 }
