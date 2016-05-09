@@ -111,9 +111,9 @@ module.exports = {
 		}
 	},
 	defaultUser: {
-		_id: null,
-		name: null,
-		deviceId: null,
+		_id: 'default',
+		name: 'default',
+		deviceId: 'default',
 		talent: {
 			position: -2,
 			appearance: 3,
@@ -128,7 +128,7 @@ module.exports = {
 		},
 		isAlive: true,
 		timeLeft: {
-			hours: 0,
+			hours: 1,
 			mins: 38,
 			secs: 55,
 			milliseconds: 933

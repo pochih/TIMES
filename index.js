@@ -41,17 +41,25 @@ app.use(function(req, res, next) {
 
 // get user's data
 app.get('/user/data', function(req, res) {
-  USER.child(req.query.user).once("value", function(snapshot) {
-    var user = snapshot.val();
-    if (user != null) {
-      user.lands = parser.parseEmptyArr(user.lands);
-      res.send(user);
-    }
-    else {
-      var db = require('./db.js');
-      res.send(db.defaultUser);
-    }
-  });
+  if (req.query.user == 'all') {
+    USER.once("value", function(snapshot) {
+      console.log(" [O] /user/data?user=all");
+      res.send(snapshot.val());
+    });
+  }
+  else {
+    USER.child(req.query.user).once("value", function(snapshot) {
+      var user = snapshot.val();
+      if (user != null) {
+        user.lands = parser.parseEmptyArr(user.lands);
+        res.send(user);
+      }
+      else {
+        var db = require('./db.js');
+        res.send(db.defaultUser);
+      }
+    });
+  }
 });
 
 // get dead user's data
