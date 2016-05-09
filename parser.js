@@ -50,6 +50,8 @@ function enoughMoney(user, money) {
 }
 
 function userHasLand(user, land) {
+	if (user.lands[land.longType] == null)
+		return false;
 	if (user.lands[land.longType].indexOf(land.num) > -1)
 		return true;
 	else
@@ -67,6 +69,8 @@ function isOwned(user, land) {
 function ifSpecialties(user, landQuery) {
 	var lands = user.lands[landQuery.longType];
 	var specialNum = specialtiesTable[landQuery.type];
+	if (lands == null)
+		return false;
 	if (lands.indexOf(specialNum) > -1)
 		return true;
 	else
@@ -154,21 +158,21 @@ module.exports = {
 		if (isillegal(landQuery))
 			return {
 				success: false,
-				message: "這個土地不存在!!"
+				message: "這個土地不存在喔 ༼;´༎ຶ ۝ ༎ຶˋ༽"
 			};
 
 		// if enough money
 		if (!enoughMoney(user, money))
 			return {
 				success: false,
-				message: "您的時間不夠用!"
+				message: "您的時間不夠啦 (づ｡◕‿‿◕｡)づ"
 			};
 
 		// if already owned
 		if (userHasLand(user, landQuery))
 			return {
 				success: false,
-				message: "您已擁有此成就"
+				message: "您已擁有此成就囉 ヾ(๑╹◡╹)ﾉ'"
 			};
 
 		// 判斷是否收購
@@ -178,7 +182,7 @@ module.exports = {
 		if (tryToBuy(user, land, money, landQuery, landOwned)) {
 			var obj = {
 				success: true,
-				message: "Buy Succeed",
+				message: "獲得成就啦 ✌(-‿-)✌",
 				targetID: null
 			};
 			if (landOwned)
@@ -188,7 +192,7 @@ module.exports = {
 		else 
 			return {
 				success: false,
-				message: "Buy Failed"
+				message: "沒拿到成就，怒！ ヽ(`Д´)ﾉ ヽ(`Д´)ﾉ ヽ(`Д´)ﾉ"
 			}
 	},
 	countInterest: function(lands) {

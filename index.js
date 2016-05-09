@@ -26,7 +26,7 @@ var land2board = {};
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static(__dirname + '/hour'));
+app.use(express.static(__dirname + '/public'));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -329,7 +329,7 @@ app.get('/', function(req, res) {
   var times = config.TIMES || 5;
   for (i = 0; i < times; i++)
     result += ('<p>' + cool() + '</p>');
-  res.render(index);
+  res.send(result);
 });
 
 app.get('/readFile', function(req, res) {
