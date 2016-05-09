@@ -87,6 +87,7 @@ app.get('/land/data', function(req, res) {
   var land = req.query.land;
   if (land == 'all') {
     LAND.once("value", function(snapshot) {
+      console.log(" [O] /land/data?land=all");
       res.send(snapshot.val());
     });
   }
