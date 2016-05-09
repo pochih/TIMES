@@ -1,0 +1,240 @@
+<html ng-app="homeApp">
+  <head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="lib/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/dist/components/reset.css">
+    <link rel="stylesheet" type="text/css" href="lib/dist/components/site.css">
+
+    <link rel="stylesheet" type="text/css" href="lib/dist/components/container.css">
+    <link rel="stylesheet" type="text/css" href="lib/dist/components/grid.css">
+    <link rel="stylesheet" type="text/css" href="lib/dist/components/header.css">
+    <link rel="stylesheet" type="text/css" href="lib/dist/components/image.css">
+    <link rel="stylesheet" type="text/css" href="lib/dist/components/menu.css">
+
+    <link rel="stylesheet" type="text/css" href="lib/dist/components/divider.css">
+    <link rel="stylesheet" type="text/css" href="lib/dist/components/dropdown.css">
+    <link rel="stylesheet" type="text/css" href="lib/dist/components/segment.css">
+    <link rel="stylesheet" type="text/css" href="lib/dist/components/button.css">
+    <link rel="stylesheet" type="text/css" href="lib/dist/components/list.css">
+    <link rel="stylesheet" type="text/css" href="lib/dist/components/icon.css">
+    <link rel="stylesheet" type="text/css" href="lib/dist/components/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="lib/dist/components/transition.css">
+    <link rel="stylesheet" type="text/css" href="src/main.css">
+    <style type="text/css">
+
+      .hidden.menu {
+        display: none;
+      }
+
+      .masthead.segment {
+        min-height: 700px;
+        padding: 1em 0em;
+      }
+      .masthead .logo.item img {
+        margin-right: 1em;
+      }
+      .masthead .ui.menu .ui.button {
+        margin-left: 0.5em;
+      }
+      .masthead h1.ui.header {
+        margin-top: 3em;
+        margin-bottom: 0em;
+        font-size: 4em;
+        font-weight: normal;
+      }
+      .masthead h2 {
+        font-size: 1.7em;
+        font-weight: normal;
+      }
+
+      .ui.vertical.stripe {
+        padding: 8em 0em;
+      }
+      .ui.vertical.stripe h3 {
+        font-size: 2em;
+      }
+      .ui.vertical.stripe .button + h3,
+      .ui.vertical.stripe p + h3 {
+        margin-top: 3em;
+      }
+      .ui.vertical.stripe .floated.image {
+        clear: both;
+      }
+      .ui.vertical.stripe p {
+        font-size: 1.33em;
+      }
+      .ui.vertical.stripe .horizontal.divider {
+        margin: 3em 0em;
+      }
+
+      .quote.stripe.segment {
+        padding: 0em;
+      }
+      .quote.stripe.segment .grid .column {
+        padding-top: 5em;
+        padding-bottom: 5em;
+      }
+
+      .footer.segment {
+        padding: 5em 0em;
+      }
+
+      .secondary.pointing.menu .toc.item {
+        display: none;
+      }
+
+      @media only screen and (max-width: 700px) {
+        .ui.fixed.menu {
+          display: none !important;
+        }
+        .secondary.pointing.menu .item,
+        .secondary.pointing.menu .menu {
+          display: none;
+        }
+        .secondary.pointing.menu .toc.item {
+          display: block;
+        }
+        .masthead.segment {
+          min-height: 350px;
+        }
+        .masthead h1.ui.header {
+          font-size: 2em;
+          margin-top: 1.5em;
+        }
+        .masthead h2 {
+          margin-top: 0.5em;
+          font-size: 1.5em;
+        }
+      }
+    </style>
+  </head>
+  <body ng-controller="homeCtrl">
+    <!-- Following Menu -->
+    <!-- div class="ui large top fixed hidden menu">
+      <div class="ui container">
+        <a class="item" ng-class="{active: isActive('/')}" href="#/">Home</a>
+        <a class="item" ng-class="{active: isActive('/landmap')}" href="#/landmap">LandMap</a>
+        <div class="right menu">
+          <div class="item">
+            <a class="ui button" ng-class="{active: isActive('/login')}" href="#/login">Log in</a>
+          </div>
+          <div class="item">
+            <a class="ui primary button">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- Sidebar Menu -->
+    <div class="ui vertical inverted sidebar menu">
+      <a class="item" ng-class="{active: isActive('/')}" href="#/">Home</a>
+      <a class="item" ng-class="{active: isActive('/landmap')}" href="#/landmap">LandMap</a>
+      <a class="item" ng-class="{active: isActive('/holdings')}" href="#/holdings">Holdings</a>
+      <a class="item" ng-class="{active: isActive('/login')}" href="#/login"  ng-hide="checkLogin()">Login</a>
+      <a class="item" href="#/login" ng-show="checkLogin()" ng-click="logout()">Logout</a>
+    </div>
+
+    <!-- Page Contents -->
+    <div class="pusher">
+      <div class="ui large secondary pointing menu">
+        <div class="ui container">
+          <div class="left item">
+            <a class="toc item">
+              <svg id="logo" height="20" width="60" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+                <image x="0" y="0" height="20" width="60"  xlink:href="src/badges/logo.svg" />
+              </svg>
+            </a>
+          </div>
+          <a class="item" ng-class="{active: isActive('/')}" href="#/">Home</a>
+          <a class="item" ng-class="{active: isActive('/landmap')}" href="#/landmap">LandMap</a>
+          <a class="item" ng-class="{active: isActive('/holdings')}" href="#/holdings">Holdings</a>
+          <div class="right item">
+            <a
+              class="ui button teal"
+              href="#/login"
+              ng-hide="checkLogin()"
+            >
+              Log in
+            </a>
+            <a class="toc item" id="toggleSidebar"><i class="sidebar icon"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div ng-view></div>
+
+      <!-- <div class="ui inverted vertical footer segment">
+        <div class="ui container">
+          <div class="ui stackable inverted divided equal height stackable grid">
+            <div class="three wide column">
+              <h4 class="ui inverted header">About</h4>
+              <div class="ui inverted link list">
+                <a href="#" class="item">Sitemap</a>
+                <a href="#" class="item">Contact Us</a>
+                <a href="#" class="item">Religious Ceremonies</a>
+                <a href="#" class="item">Gazebo Plans</a>
+              </div>
+            </div>
+            <div class="three wide column">
+              <h4 class="ui inverted header">Services</h4>
+              <div class="ui inverted link list">
+                <a href="#" class="item">Banana Pre-Order</a>
+                <a href="#" class="item">DNA FAQ</a>
+                <a href="#" class="item">How To Access</a>
+                <a href="#" class="item">Favorite X-Men</a>
+              </div>
+            </div>
+            <div class="seven wide column">
+              <h4 class="ui inverted header">Footer Header</h4>
+              <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+    <script src="lib/dist/semantic.min.js"></script>
+    <script src="lib/angular.min.js"></script>
+    <script src="http://code.angularjs.org/1.2.0-rc.2/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+    <script src="src/index.js"></script>
+    <script src="src/controller.js"></script>
+    <script src="lib/dist/components/visibility.js"></script>
+    <script src="lib/dist/components/sidebar.js"></script>
+    <script src="lib/dist/components/transition.js"></script>
+    <script>
+    $(document)
+      .ready(function() {
+
+        // fix menu when passed
+        $('.secondary')
+          .visibility({
+            once: false,
+            onBottomPassed: function() {
+              $('.fixed.menu').transition('fade in');
+            },
+            onBottomPassedReverse: function() {
+              $('.fixed.menu').transition('fade out');
+            }
+          })
+        ;
+
+        // create sidebar and attach to menu open
+        $('.ui.sidebar')
+          .sidebar('attach events', '#toggleSidebar')
+        ;
+
+        $('.sidebar.menu').click(function() {
+          $('.ui.sidebar')
+            .sidebar('toggle')
+          ;
+        })
+      })
+    ;
+    </script>
+  </body>
+</html>
