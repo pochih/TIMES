@@ -142,7 +142,20 @@ app.get('/land/buy', function(req, res) {
         userData.timeLeft = parser.countTime(userData.timeLeft, money);
 
         USER.child(user).set(userData);
-    
+
+        // 被搶者失去土地
+        if (buyMsg.targetID != null) {
+          var targetRef = USER.child(buyMsg.targetID).child('lands').child(land.longType);
+          targetRef.once("value", function(targetdata){
+            var tmpLand = targetdata.val();
+            var index = tmpLand.indexOf(land.num);
+            if (index > -1) {
+              tmpLand.splice(index, 1);
+            }
+            targetRef.set(tmpLand);
+          });
+        }
+
         // renew BOARD's occupy
         LAND2BOARD.once("value", function(snapshot) {
           var board = snapshot.val()[req.query.land].board;
@@ -152,7 +165,7 @@ app.get('/land/buy', function(req, res) {
             var occupy = snapshot.val();
             occupy[position] = 1;
             BOARD.child(board).child("occupy").set(occupy);
-            res.send(buyMsg);
+            res.status(200).send(buyMsg);
           });
         });
       }
@@ -166,7 +179,7 @@ app.get('/land/buy', function(req, res) {
           USER.child(user).set(userData);
         }
 
-        res.send(buyMsg);
+        res.status(400).send(buyMsg);
       }
     })
   })
@@ -310,6 +323,12 @@ app.get('/', function(req, res) {
     result += ('<p>' + cool() + '</p>');
   res.send(result);
 });
+
+// app.all('/', function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "127.0.0.1:8080");
+//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//   next();
+//  });
 
 app.get('/readFile', function(req, res) {
   var user = req.query.user;

@@ -154,32 +154,37 @@ module.exports = {
 		if (isillegal(landQuery))
 			return {
 				success: false,
-				message: "Illegal land"
+				message: "這個土地不存在!!"
 			};
 
 		// if enough money
 		if (!enoughMoney(user, money))
 			return {
 				success: false,
-				message: "No Enough Money"
+				message: "您的時間不夠用!"
 			};
 
 		// if already owned
 		if (userHasLand(user, landQuery))
 			return {
 				success: false,
-				message: "Already Owned"
+				message: "您已擁有此成就"
 			};
 
 		// 判斷是否收購
 		var landOwned = isOwned(user, land);
 
 		// 判斷機率
-		if (tryToBuy(user, land, money, landQuery, landOwned))
-			return {
+		if (tryToBuy(user, land, money, landQuery, landOwned)) {
+			var obj = {
 				success: true,
-				message: "Buy Succeed"
+				message: "Buy Succeed",
+				targetID: null
 			};
+			if (landOwned)
+				obj.targetID = land.owner._id;
+			return obj;
+		}
 		else 
 			return {
 				success: false,
