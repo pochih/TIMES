@@ -39,11 +39,24 @@ function isillegal(landQuery) {
 	return false;
 }
 
+function timeTranslate(timeLeft) {
+	var time = timeLeft.hours*3600 + timeLeft.mins*60 + timeLeft.secs;
+	return time;
+}
+
+function timeObjTranslate(time) {
+	var obj = {};
+	obj.hours = Math.floor(time / 3600);
+	obj.mins = Math.floor((time % 3600) / 60);
+	obj.secs = Math.floor((time % 3600) % 60);
+	obj.milliseconds = 0;
+	return obj;
+}
+
 function enoughMoney(user, money) {
 	var timeLeft = user.timeLeft;
-	if (timeLeft.mins >= money)
-		return true;
-	if ((timeLeft.hours*60 + timeLeft.mins) >= money)
+	var time = timeTranslate(timeLeft);
+	if (time >= money)
 		return true;
 	else 
 		return false;
@@ -203,15 +216,9 @@ module.exports = {
 		return interest;
 	},
 	countTime: function(timeLeft, money) {
-		var timeObj = timeLeft;
-		if (timeLeft.mins >= money) {
-			timeLeft.mins -= money;
-		}
-		else if (timeLeft.hours >= 1) {
-			timeLeft.hours -= 1;
-			timeLeft.mins += 60;
-			timeLeft.mins -= money;
-		}
+		var time = timeTranslate(timeLeft);
+		time -= money;
+		var timeObj = timeObjTranslate(time);
 		return timeObj;
 	}
 }

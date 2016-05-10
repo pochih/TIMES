@@ -189,7 +189,7 @@ app.get('/land/buy', function(req, res) {
         // if failed
 
         // 買失敗 扣錢
-        if (buyMsg.message == 'Buy Failed') {
+        if (buyMsg.message == '沒拿到成就，怒！ ヽ(`Д´)ﾉ ヽ(`Д´)ﾉ ヽ(`Д´)ﾉ') {
           // user 扣錢
           userData.timeLeft = parser.countTime(userData.timeLeft, money);
           USER.child(user).set(userData);
