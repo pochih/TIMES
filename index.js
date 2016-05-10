@@ -353,7 +353,7 @@ app.get('/readFile', function(req, res) {
     if (!error && response.statusCode === 200) {
       res.send(body);
       // create file
-      fs.writeFile('result.txt', JSON.stringify(body, null, 4), function(err) {
+      fs.writeFile('public/result.txt', JSON.stringify(body, null, 4), function(err) {
         if (err)
           console.log(err);
         else {
