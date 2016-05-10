@@ -206,7 +206,7 @@ function makeHTML(tag, msg, color) {
 module.exports = {
 	welcomeMsg: function() {
 		var result = '<title>Manual</title><h1 style="color:#6f502c;">Manual';
-		result += makeHTML('h3', '(red = high frequency)', '#dfb100');
+		result += makeHTML('h3', '(red = high frequency)', '#dfb102');
 		result += makeHTML('h4', '/user/dead?user=');
 		result += makeHTML('h4', '/user/data?user=', 'red');
 		result += makeHTML('h4', '/user/time?user=', 'red');
