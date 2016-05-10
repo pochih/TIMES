@@ -190,7 +190,7 @@ module.exports = {
 		entertainment: [
 			{
 				_id: "e1",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "entertainment",
 				level: 1,
@@ -204,7 +204,7 @@ module.exports = {
 			},
 			{
 				_id: "e2",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "entertainment",
 				level: 1,
@@ -218,7 +218,7 @@ module.exports = {
 			},
 			{
 				_id: "e3",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "entertainment",
 				level: 1,
@@ -232,7 +232,7 @@ module.exports = {
 			},
 			{
 				_id: "e4",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "entertainment",
 				level: 1,
@@ -246,7 +246,7 @@ module.exports = {
 			},
 			{
 				_id: "e5",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "entertainment",
 				level: 1,
@@ -260,7 +260,7 @@ module.exports = {
 			},
 			{
 				_id: "e6",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "entertainment",
 				level: 1,
@@ -274,7 +274,7 @@ module.exports = {
 			},
 			{
 				_id: "e7",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "entertainment",
 				level: 1,
@@ -288,7 +288,7 @@ module.exports = {
 			},
 			{
 				_id: "e8",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "entertainment",
 				level: 1,
@@ -302,7 +302,7 @@ module.exports = {
 			},
 			{
 				_id: "e9",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "entertainment",
 				level: 2,
@@ -316,7 +316,7 @@ module.exports = {
 			},
 			{
 				_id: "e10",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "entertainment",
 				level: 2,
@@ -330,7 +330,7 @@ module.exports = {
 			},
 			{
 				_id: "e11",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "entertainment",
 				level: 2,
@@ -344,7 +344,7 @@ module.exports = {
 			},
 			{
 				_id: "e12",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "entertainment",
 				level: 2,
@@ -358,7 +358,7 @@ module.exports = {
 			},
 			{
 				_id: "e13",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "entertainment",
 				level: 2,
@@ -372,7 +372,7 @@ module.exports = {
 			},
 			{
 				_id: "e14",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "entertainment",
 				level: 2,
@@ -386,7 +386,7 @@ module.exports = {
 			},
 			{
 				_id: "e15",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "entertainment",
 				level: 3,
@@ -400,7 +400,7 @@ module.exports = {
 			},
 			{
 				_id: "e16",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "entertainment",
 				level: 3,
@@ -414,7 +414,7 @@ module.exports = {
 			},
 			{
 				_id: "e17",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "entertainment",
 				level: 3,
@@ -428,7 +428,7 @@ module.exports = {
 			},
 			{
 				_id: "e18",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "entertainment",
 				level: 3,
@@ -442,7 +442,7 @@ module.exports = {
 			},
 			{
 				_id: "e19",
-				price: 30,
+				price: 1800,
 				probability: 15,
 				category: "entertainment",
 				level: 4,
@@ -456,7 +456,7 @@ module.exports = {
 			},
 			{
 				_id: "e20",
-				price: 30,
+				price: 1800,
 				probability: 15,
 				category: "entertainment",
 				level: 4,
@@ -472,7 +472,7 @@ module.exports = {
 		health: [
 			{
 				_id: "h1",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "health",
 				level: 1,
@@ -486,7 +486,7 @@ module.exports = {
 			},
 			{
 				_id: "h2",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "health",
 				level: 1,
@@ -500,7 +500,7 @@ module.exports = {
 			},
 			{
 				_id: "h3",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "health",
 				level: 1,
@@ -514,7 +514,7 @@ module.exports = {
 			},
 			{
 				_id: "h4",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "health",
 				level: 1,
@@ -528,7 +528,7 @@ module.exports = {
 			},
 			{
 				_id: "h5",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "health",
 				level: 1,
@@ -542,7 +542,7 @@ module.exports = {
 			},
 			{
 				_id: "h6",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "health",
 				level: 1,
@@ -556,7 +556,7 @@ module.exports = {
 			},
 			{
 				_id: "h7",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "health",
 				level: 1,
@@ -570,7 +570,7 @@ module.exports = {
 			},
 			{
 				_id: "h8",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "health",
 				level: 1,
@@ -584,7 +584,7 @@ module.exports = {
 			},
 			{
 				_id: "h9",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "health",
 				level: 2,
@@ -598,7 +598,7 @@ module.exports = {
 			},
 			{
 				_id: "h10",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "health",
 				level: 2,
@@ -612,7 +612,7 @@ module.exports = {
 			},
 			{
 				_id: "h11",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "health",
 				level: 2,
@@ -626,7 +626,7 @@ module.exports = {
 			},
 			{
 				_id: "h12",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "health",
 				level: 2,
@@ -640,7 +640,7 @@ module.exports = {
 			},
 			{
 				_id: "h13",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "health",
 				level: 2,
@@ -654,7 +654,7 @@ module.exports = {
 			},
 			{
 				_id: "h14",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "health",
 				level: 2,
@@ -668,7 +668,7 @@ module.exports = {
 			},
 			{
 				_id: "h15",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "health",
 				level: 3,
@@ -682,7 +682,7 @@ module.exports = {
 			},
 			{
 				_id: "h16",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "health",
 				level: 3,
@@ -696,7 +696,7 @@ module.exports = {
 			},
 			{
 				_id: "h17",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "health",
 				level: 3,
@@ -710,7 +710,7 @@ module.exports = {
 			},
 			{
 				_id: "h18",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "health",
 				level: 3,
@@ -724,7 +724,7 @@ module.exports = {
 			},
 			{
 				_id: "h19",
-				price: 30,
+				price: 1800,
 				probability: 15,
 				category: "health",
 				level: 4,
@@ -738,7 +738,7 @@ module.exports = {
 			},
 			{
 				_id: "h20",
-				price: 30,
+				price: 1800,
 				probability: 15,
 				category: "health",
 				level: 4,
@@ -754,7 +754,7 @@ module.exports = {
 		affection: [
 			{
 				_id: "a1",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "affection",
 				level: 1,
@@ -768,7 +768,7 @@ module.exports = {
 			},
 			{
 				_id: "a2",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "affection",
 				level: 1,
@@ -782,7 +782,7 @@ module.exports = {
 			},
 			{
 				_id: "a3",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "affection",
 				level: 1,
@@ -796,7 +796,7 @@ module.exports = {
 			},
 			{
 				_id: "a4",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "affection",
 				level: 1,
@@ -810,7 +810,7 @@ module.exports = {
 			},
 			{
 				_id: "a5",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "affection",
 				level: 1,
@@ -824,7 +824,7 @@ module.exports = {
 			},
 			{
 				_id: "a6",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "affection",
 				level: 1,
@@ -838,7 +838,7 @@ module.exports = {
 			},
 			{
 				_id: "a7",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "affection",
 				level: 1,
@@ -852,7 +852,7 @@ module.exports = {
 			},
 			{
 				_id: "a8",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "affection",
 				level: 1,
@@ -866,7 +866,7 @@ module.exports = {
 			},
 			{
 				_id: "a9",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "affection",
 				level: 2,
@@ -880,7 +880,7 @@ module.exports = {
 			},
 			{
 				_id: "a10",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "affection",
 				level: 2,
@@ -894,7 +894,7 @@ module.exports = {
 			},
 			{
 				_id: "a11",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "affection",
 				level: 2,
@@ -908,7 +908,7 @@ module.exports = {
 			},
 			{
 				_id: "a12",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "affection",
 				level: 2,
@@ -922,7 +922,7 @@ module.exports = {
 			},
 			{
 				_id: "a13",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "affection",
 				level: 2,
@@ -936,7 +936,7 @@ module.exports = {
 			},
 			{
 				_id: "a14",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "affection",
 				level: 2,
@@ -950,7 +950,7 @@ module.exports = {
 			},
 			{
 				_id: "a15",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "affection",
 				level: 3,
@@ -964,7 +964,7 @@ module.exports = {
 			},
 			{
 				_id: "a16",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "affection",
 				level: 3,
@@ -978,7 +978,7 @@ module.exports = {
 			},
 			{
 				_id: "a17",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "affection",
 				level: 3,
@@ -992,7 +992,7 @@ module.exports = {
 			},
 			{
 				_id: "a18",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "affection",
 				level: 3,
@@ -1006,7 +1006,7 @@ module.exports = {
 			},
 			{
 				_id: "a19",
-				price: 30,
+				price: 1800,
 				probability: 15,
 				category: "affection",
 				level: 4,
@@ -1020,7 +1020,7 @@ module.exports = {
 			},
 			{
 				_id: "a20",
-				price: 30,
+				price: 1800,
 				probability: 15,
 				category: "affection",
 				level: 4,
@@ -1036,7 +1036,7 @@ module.exports = {
 		career: [
 			{
 				_id: "c1",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "career",
 				level: 1,
@@ -1050,7 +1050,7 @@ module.exports = {
 			},
 			{
 				_id: "c2",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "career",
 				level: 1,
@@ -1064,7 +1064,7 @@ module.exports = {
 			},
 			{
 				_id: "c3",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "career",
 				level: 1,
@@ -1078,7 +1078,7 @@ module.exports = {
 			},
 			{
 				_id: "c4",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "career",
 				level: 1,
@@ -1092,7 +1092,7 @@ module.exports = {
 			},
 			{
 				_id: "c5",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "career",
 				level: 1,
@@ -1106,7 +1106,7 @@ module.exports = {
 			},
 			{
 				_id: "c6",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "career",
 				level: 1,
@@ -1120,7 +1120,7 @@ module.exports = {
 			},
 			{
 				_id: "c7",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "career",
 				level: 1,
@@ -1134,7 +1134,7 @@ module.exports = {
 			},
 			{
 				_id: "c8",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "career",
 				level: 1,
@@ -1148,7 +1148,7 @@ module.exports = {
 			},
 			{
 				_id: "c9",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "career",
 				level: 2,
@@ -1162,7 +1162,7 @@ module.exports = {
 			},
 			{
 				_id: "c10",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "career",
 				level: 2,
@@ -1176,7 +1176,7 @@ module.exports = {
 			},
 			{
 				_id: "c11",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "career",
 				level: 2,
@@ -1190,7 +1190,7 @@ module.exports = {
 			},
 			{
 				_id: "c12",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "career",
 				level: 2,
@@ -1204,7 +1204,7 @@ module.exports = {
 			},
 			{
 				_id: "c13",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "career",
 				level: 2,
@@ -1218,7 +1218,7 @@ module.exports = {
 			},
 			{
 				_id: "c14",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "career",
 				level: 2,
@@ -1232,7 +1232,7 @@ module.exports = {
 			},
 			{
 				_id: "c15",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "career",
 				level: 3,
@@ -1246,7 +1246,7 @@ module.exports = {
 			},
 			{
 				_id: "c16",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "career",
 				level: 3,
@@ -1260,7 +1260,7 @@ module.exports = {
 			},
 			{
 				_id: "c17",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "career",
 				level: 3,
@@ -1274,7 +1274,7 @@ module.exports = {
 			},
 			{
 				_id: "c18",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "career",
 				level: 3,
@@ -1288,7 +1288,7 @@ module.exports = {
 			},
 			{
 				_id: "c19",
-				price: 30,
+				price: 1800,
 				probability: 15,
 				category: "career",
 				level: 4,
@@ -1302,7 +1302,7 @@ module.exports = {
 			},
 			{
 				_id: "c20",
-				price: 30,
+				price: 1800,
 				probability: 15,
 				category: "career",
 				level: 4,
@@ -1318,7 +1318,7 @@ module.exports = {
 		learning: [
 			{
 				_id: "l1",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "learning",
 				level: 1,
@@ -1332,7 +1332,7 @@ module.exports = {
 			},
 			{
 				_id: "l2",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "learning",
 				level: 1,
@@ -1346,7 +1346,7 @@ module.exports = {
 			},
 			{
 				_id: "l3",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "learning",
 				level: 1,
@@ -1360,7 +1360,7 @@ module.exports = {
 			},
 			{
 				_id: "l4",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "learning",
 				level: 1,
@@ -1374,7 +1374,7 @@ module.exports = {
 			},
 			{
 				_id: "l5",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "learning",
 				level: 1,
@@ -1388,7 +1388,7 @@ module.exports = {
 			},
 			{
 				_id: "l6",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "learning",
 				level: 1,
@@ -1402,7 +1402,7 @@ module.exports = {
 			},
 			{
 				_id: "l7",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "learning",
 				level: 1,
@@ -1416,7 +1416,7 @@ module.exports = {
 			},
 			{
 				_id: "l8",
-				price: 1,
+				price: 60,
 				probability: 70,
 				category: "learning",
 				level: 1,
@@ -1430,7 +1430,7 @@ module.exports = {
 			},
 			{
 				_id: "l9",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "learning",
 				level: 2,
@@ -1444,7 +1444,7 @@ module.exports = {
 			},
 			{
 				_id: "l10",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "learning",
 				level: 2,
@@ -1458,7 +1458,7 @@ module.exports = {
 			},
 			{
 				_id: "l11",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "learning",
 				level: 2,
@@ -1472,7 +1472,7 @@ module.exports = {
 			},
 			{
 				_id: "l12",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "learning",
 				level: 2,
@@ -1486,7 +1486,7 @@ module.exports = {
 			},
 			{
 				_id: "l13",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "learning",
 				level: 2,
@@ -1500,7 +1500,7 @@ module.exports = {
 			},
 			{
 				_id: "l14",
-				price: 5,
+				price: 300,
 				probability: 50,
 				category: "learning",
 				level: 2,
@@ -1514,7 +1514,7 @@ module.exports = {
 			},
 			{
 				_id: "l15",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "learning",
 				level: 3,
@@ -1528,7 +1528,7 @@ module.exports = {
 			},
 			{
 				_id: "l16",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "learning",
 				level: 3,
@@ -1542,7 +1542,7 @@ module.exports = {
 			},
 			{
 				_id: "l17",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "learning",
 				level: 3,
@@ -1556,7 +1556,7 @@ module.exports = {
 			},
 			{
 				_id: "l18",
-				price: 15,
+				price: 900,
 				probability: 30,
 				category: "learning",
 				level: 3,
@@ -1570,7 +1570,7 @@ module.exports = {
 			},
 			{
 				_id: "l19",
-				price: 30,
+				price: 1800,
 				probability: 15,
 				category: "learning",
 				level: 4,
@@ -1584,7 +1584,7 @@ module.exports = {
 			},
 			{
 				_id: "l20",
-				price: 30,
+				price: 1800,
 				probability: 15,
 				category: "learning",
 				level: 4,

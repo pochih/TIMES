@@ -153,22 +153,27 @@ app.get('/land/buy', function(req, res) {
 
         // user 加利息
         userData.interest = parser.countInterest(userData.lands);
+        console.log("user: %s, interest: %s", userData._id, userData.interest);
 
         // user 扣錢
         userData.timeLeft = parser.countTime(userData.timeLeft, money);
 
         USER.child(user).set(userData);
 
-        // 被搶者失去土地
+        // 被搶者失去土地, 扣利息
         if (buyMsg.targetID != null) {
-          var targetRef = USER.child(buyMsg.targetID).child('lands').child(land.longType);
+          var targetRef = USER.child(buyMsg.targetID);
           targetRef.once("value", function(targetdata){
-            var tmpLand = targetdata.val();
+            var target = targetdata.val();
+            var tmpLand = target.lands[land.longType];
             var index = tmpLand.indexOf(land.num);
             if (index > -1) {
               tmpLand.splice(index, 1);
             }
-            targetRef.set(tmpLand);
+            target.lands[land.longType] = tmpLand;
+            target.interest = parser.countInterest(target.lands);
+            console.log("target: %s, interest: %s", target._id, target.interest);
+            targetRef.set(target);
           });
         }
 

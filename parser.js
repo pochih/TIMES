@@ -14,7 +14,15 @@ var specialtiesTable = {
 	e: 12
 }
 
+var all_lands = require('./db.js').lands;
+var land_a = all_lands[landTypes.a];
+var land_c = all_lands[landTypes.c];
+var land_e = all_lands[landTypes.e];
+var land_h = all_lands[landTypes.h];
+var land_l = all_lands[landTypes.l];
+
 var ownedParameter = 1.5;
+var threeLandsBonus = 1.5;
 
 function countCategory(category, a, p, i) {
 	var db = require('./db.js');
@@ -127,6 +135,52 @@ function tryToBuy(user, land, money, landQuery, landOwned) {
 		return false
 }
 
+function addInterest(a, c, e, h, l) {
+	var interest = 0;
+	var tmp;
+	if (a[0] != -1) {
+		tmp = 0;
+		for (var i = 0; i < a.length; i++)
+			tmp += land_a[a[i]-1].interest;
+		if (a.length >= 3)
+			tmp *= threeLandsBonus;
+		interest += tmp;
+	}
+	if (c[0] != -1) {
+		tmp = 0;
+		for (var i = 0; i < c.length; i++)
+			tmp += land_c[c[i]-1].interest;
+		if (c.length >= 3)
+			tmp *= threeLandsBonus;
+		interest += tmp;
+	}
+	if (e[0] != -1) {
+		tmp = 0;
+		for (var i = 0; i < e.length; i++)
+			tmp += land_e[e[i]-1].interest;
+		if (e.length >= 3)
+			tmp *= threeLandsBonus;
+		interest += tmp;
+	}
+	if (h[0] != -1) {
+		tmp = 0;
+		for (var i = 0; i < h.length; i++)
+			tmp += land_h[h[i]-1].interest;
+		if (h.length >= 3)
+			tmp *= threeLandsBonus;
+		interest += tmp;
+	}
+	if (l[0] != -1) {
+		tmp = 0;
+		for (var i = 0; i < l.length; i++)
+			tmp += land_l[l[i]-1].interest;
+		if (l.length >= 3)
+			tmp *= threeLandsBonus;
+		interest += tmp;
+	}
+	return interest;
+}
+
 function makeHTML(tag, msg, color) {
 	var colour = 'black';
 	if (color)
@@ -136,8 +190,8 @@ function makeHTML(tag, msg, color) {
 
 module.exports = {
 	welcomeMsg: function() {
-		var result = '<h1 style="color:blue;">Manual';
-		result += makeHTML('h5', '(red = high frequency)', '#999');
+		var result = '<h1 style="color:#6f502c;">Manual';
+		result += makeHTML('h5', '(red = high frequency)', 'green');
 		result += makeHTML('h4', '/user/data?user=', 'red');
 		result += makeHTML('h4', '/user/dead?user=');
 		result += makeHTML('h4', '/user/init?id=&deviceId=&name=&a=&p=&i=');
@@ -234,9 +288,14 @@ module.exports = {
 			}
 	},
 	countInterest: function(lands) {
-		var interest = 0;
-
 		//判斷是否有特殊加成
+		var a = lands[landTypes.a];
+		var c = lands[landTypes.c];
+		var e = lands[landTypes.e];
+		var h = lands[landTypes.h];
+		var l = lands[landTypes.l];
+
+		var interest = addInterest(a, c, e, h, l);
 
 		return interest;
 	},
