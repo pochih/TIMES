@@ -147,7 +147,7 @@ function tryToBuy(user, land, money, landQuery, landOwned) {
 function addInterest(a, c, e, h, l) {
 	var interest = 0;
 	var tmp;
-	if (a[0] != -1) {
+	if (a != null && a[0] != -1) {
 		tmp = 0;
 		for (var i = 0; i < a.length; i++)
 			tmp += land_a[a[i]-1].interest;
@@ -155,7 +155,7 @@ function addInterest(a, c, e, h, l) {
 			tmp *= threeLandsBonus;
 		interest += tmp;
 	}
-	if (c[0] != -1) {
+	if (c != null && c[0] != -1) {
 		tmp = 0;
 		for (var i = 0; i < c.length; i++)
 			tmp += land_c[c[i]-1].interest;
@@ -163,7 +163,7 @@ function addInterest(a, c, e, h, l) {
 			tmp *= threeLandsBonus;
 		interest += tmp;
 	}
-	if (e[0] != -1) {
+	if (e != null && e[0] != -1) {
 		tmp = 0;
 		for (var i = 0; i < e.length; i++)
 			tmp += land_e[e[i]-1].interest;
@@ -171,7 +171,7 @@ function addInterest(a, c, e, h, l) {
 			tmp *= threeLandsBonus;
 		interest += tmp;
 	}
-	if (h[0] != -1) {
+	if (h != null && h[0] != -1) {
 		tmp = 0;
 		for (var i = 0; i < h.length; i++)
 			tmp += land_h[h[i]-1].interest;
@@ -179,7 +179,7 @@ function addInterest(a, c, e, h, l) {
 			tmp *= threeLandsBonus;
 		interest += tmp;
 	}
-	if (l[0] != -1) {
+	if (l != null && l[0] != -1) {
 		tmp = 0;
 		for (var i = 0; i < l.length; i++)
 			tmp += land_l[l[i]-1].interest;
@@ -213,7 +213,10 @@ module.exports = {
 		result += makeHTML('h4', '/land/init');
 		result += makeHTML('h4', '/board/init?board=&land=');
 		result += makeHTML('h4', '/board/occupy?board=');
+		result += makeHTML('h4', '/time/start', '#cea300');
+		result += makeHTML('h4', '/time/stop', '#cea300');
 		result += makeHTML('h4', '/center');
+		result += makeHTML('h4', '/center/speed?speed=');
 		result += makeHTML('h4', '/bonus');
 		result += '</h1>';
 		return result;
@@ -321,6 +324,8 @@ module.exports = {
 		var time = timeTranslate(timeLeft);
 		time -= money;
 		var timeObj = timeObjTranslate(time);
+		if (timeLeft.interest != null)
+			timeObj.interest = timeLeft.interest;
 		return timeObj;
 	}
 }

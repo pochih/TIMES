@@ -13,6 +13,7 @@ var db = require('./db.js');
 var Firebase = require("firebase");
 var DB = new Firebase(config.FIREBASE_URL);
 var USER = DB.child("users");
+var USERTIME = DB.child("usertimes");
 var LAND = DB.child("lands");
 var CENTER = DB.child("center");
 var BONUS = DB.child("bonus");
@@ -23,6 +24,7 @@ var LAND2BOARD = DB.child("land2board");
 
 var boardOccupy = [[],[],[],[],[]];
 var land2board = {};
+var childProcess;
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -48,23 +50,29 @@ app.get('/user/data', function(req, res) {
     });
   }
   else {
-    USER.child(req.query.user).once("value", function(snapshot) {
-      var user = snapshot.val();
-      if (user != null) {
-        user.lands = parser.parseEmptyArr(user.lands);
-        res.send(user);
-      }
-      else {
-        var db = require('./db.js');
-        res.send(db.defaultUser);
-      }
+    USERTIME.child(req.query.user).once("value", function(timeLeft) {
+      var time = timeLeft.val();
+      USER.child(req.query.user).once("value", function(snapshot) {
+        var user = snapshot.val();
+        if (user != null) {
+          user.timeLeft.hours = time.hours;
+          user.timeLeft.mins = time.mins;
+          user.timeLeft.secs = time.secs;
+          user.lands = parser.parseEmptyArr(user.lands);
+          res.send(user);
+        }
+        else {
+          var db = require('./db.js');
+          res.send(db.defaultUser);
+        }
+      });
     });
   }
 });
 
 // get dead user's time
 app.get('/user/time', function(req, res) {
-  USER.child(req.query.user).child('timeLeft').once("value", function(snapshot) {
+  USERTIME.child(req.query.user).once("value", function(snapshot) {
     var time = snapshot.val();
     if (time != null) {
       res.send(time);
@@ -93,8 +101,12 @@ app.get('/user/dead', function(req, res) {
 app.get('/user/init', function(req, res) {
   var userdb = db.user;
   var user = parser.initUser(userdb, req.query);
-
   USER.child(user._id).set(user);
+
+  var tmp = user.timeLeft;
+  tmp.interest = user.interest;
+  console.log(JSON.stringify(tmp));
+  USERTIME.child(user._id).set(tmp);
   res.send('<h1 style="color:blue;">Add User:</h1><h3 style="color:purple;">' + user._id + ' (' + user.name + ')' + '</h3><h1 style="color:#bb4477;">Succeed!!</h1>')
 });
 
@@ -185,10 +197,20 @@ app.get('/land/buy', function(req, res) {
         userData.interest = parser.countInterest(userData.lands);
         console.log("   user: %s, interest: %s", userData._id, userData.interest);
 
-        // user 扣錢
-        userData.timeLeft = parser.countTime(userData.timeLeft, money);
+        USERTIME.child(user).once("value", function(usertimeData) {
+          var usertime = usertimeData.val();
 
-        USER.child(user).set(userData);
+          // user 扣錢
+          usertime = parser.countTime(usertime, money);
+          usertime.interest = userData.interest;
+          userData.timeLeft.hours = usertime.hours;
+          userData.timeLeft.mins = usertime.mins;
+          userData.timeLeft.secs = usertime.secs;
+
+          // 更新 Firebase 資料
+          USER.child(user).set(userData);
+          USERTIME.child(user).set(usertime);
+        })
 
         // 被搶者失去土地, 扣利息
         if (buyMsg.targetID != null) {
@@ -199,9 +221,12 @@ app.get('/land/buy', function(req, res) {
             var index = tmpLand.indexOf(land.num);
             if (index > -1) {
               tmpLand.splice(index, 1);
+              if (tmpLand.length == 0)
+                tmpLand = [-1];
             }
             target.lands[land.longType] = tmpLand;
             target.interest = parser.countInterest(target.lands);
+            USERTIME.child(buyMsg.targetID).child('interest').set(target.interest);
             console.log("   target: %s, interest: %s", target._id, target.interest);
             targetRef.set(target);
           });
@@ -227,6 +252,9 @@ app.get('/land/buy', function(req, res) {
         if (buyMsg.message == '沒拿到成就，怒！ ヽ(`Д´)ﾉ ヽ(`Д´)ﾉ ヽ(`Д´)ﾉ') {
           // user 扣錢
           userData.timeLeft = parser.countTime(userData.timeLeft, money);
+          var timeObj = userData.timeLeft;
+          timeObj.interest = userData.interest;
+          USERTIME.child(user).set(timeObj);
           USER.child(user).set(userData);
         }
 
@@ -352,11 +380,39 @@ app.get('/board/occupy', function(req, res) {
 
 //////// global data /////////
 
+// start counting time
+app.get('/time/start', function(req, res) {
+  var userTimes = {};
+  USER.once("value", function(snapshot) {
+    var allUsers = snapshot.val();
+    for (var user in allUsers) {
+      userTimes[user] = allUsers[user].timeLeft;
+      userTimes[user].interest = 0;
+    }
+    USERTIME.set(userTimes);
+    childProcess = child_process.fork('./counter.js');
+    res.send(userTimes);
+  });
+});
+
+// stop counting time
+app.get('/time/stop', function(req, res) {
+  childProcess.kill();
+  res.send('<h1 style="color:green;">Time Stopped!</h1>');
+});
+
 // get data center
 app.get('/center', function(req, res) {
   var db = require('./db.js');
-  res.send(db.center);
   CENTER.set(db.center);
+  res.send(db.center);
+});
+
+// set speed
+app.get('/center/speed', function(req, res) {
+  var speed = req.query.speed;
+  CENTER.child('speed').set(speed);
+  res.send({speed: 10});
 });
 
 // get configs
