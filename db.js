@@ -110,6 +110,21 @@ module.exports = {
     		}
 		}
 	},
+	allUserURL: [
+		'https://art-festival.herokuapp.com/user/init?a=3&p=-2&i=-1&name=Brian Huang&id=0&device=1019',
+  		'https://art-festival.herokuapp.com/user/init?a=3&p=-3&i=0&name=Barack Obama&id=1&device=100001',
+  		'https://art-festival.herokuapp.com/user/init?a=-6&p=3&i=3&name=Angela Merkle&id=2&device=100002',
+  		'https://art-festival.herokuapp.com/user/init?a=-4&p=2&i=2&name=Влади́мир Влади́мирович Пу́тин(VladimirPutin)&id=3&device=100003',
+  		'https://art-festival.herokuapp.com/user/init?a=5&p=-7&i=2&name=Che Guevara&id=4&device=100004',
+  		'https://art-festival.herokuapp.com/user/init?a=-2&p=-8&i=10&name=Albert Einstein&id=5&device=100005',
+  		'https://art-festival.herokuapp.com/user/init?a=-5&p=10&i=-5&name=Donald John Trump&id=6&device=100006',
+  		'https://art-festival.herokuapp.com/user/init?a=-1&p=-3&i=4&name=Neil Alden Armstrong&id=7&device=100007',
+  		'https://art-festival.herokuapp.com/user/init?a=-2&p=-6&i=8&name=%E5%AD%94%E4%B8%98&id=8&device=100008',
+  		'https://art-festival.herokuapp.com/user/init?a=-2&p=1&i=1&name=%E5%A7%9A%E6%98%8E&id=9&device=100009',
+  		'https://art-festival.herokuapp.com/user/init?a=1&p=-3&i=2&name=むらかみはるき　%E6%9D%91%E4%B8%8A%E6%98%A5%E6%A8%B9&id=10&device=100010',
+  		'https://art-festival.herokuapp.com/user/init?a=10&p=10&i=10&name=root&id=100001&device=777',
+  		'https://art-festival.herokuapp.com/user/init?a=3&p=3&i=3&name=How Do You Turn This On&id=100003&device=3333'
+	],
 	defaultUser: {
 		_id: 'default',
 		name: 'default',

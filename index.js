@@ -62,6 +62,19 @@ app.get('/user/data', function(req, res) {
   }
 });
 
+// get dead user's time
+app.get('/user/time', function(req, res) {
+  USER.child(req.query.user).child('timeLeft').once("value", function(snapshot) {
+    var time = snapshot.val();
+    if (time != null) {
+      res.send(time);
+    }
+    else {
+      res.send('<h1 style="color:#12bbf0;">No such User:</h1><h2 style="color:#f87373;">' + req.query.user + '</h2>');
+    }
+  });
+});
+
 // get dead user's data
 app.get('/user/dead', function(req, res) {
   USER.child(req.query.user).once("value", function(snapshot) {
@@ -82,7 +95,23 @@ app.get('/user/init', function(req, res) {
   var user = parser.initUser(userdb, req.query);
 
   USER.child(user._id).set(user);
-  res.send('<h1 style="color:blue;">Add User:</h1><h3 style="color:purple;">' + user._id + ' (' + user.name + ')' + '</h3><h1 style="color:blue;">Succeed!!</h1>')
+  res.send('<h1 style="color:blue;">Add User:</h1><h3 style="color:purple;">' + user._id + ' (' + user.name + ')' + '</h3><h1 style="color:#bb4477;">Succeed!!</h1>')
+});
+
+// init users
+app.get('/user/init/all', function(req, res) {
+  var users = db.allUserURL;
+  for (var i = 0; i < users.length; i++) {
+    var pathname = users[i];
+    request({
+      url: pathname,
+      json: true
+    }, function (error, response, body) {
+      if (!error && response.statusCode === 200) {}
+    });
+  }
+
+  res.send('<h1 style="color:#42b48e;">Init all users:</h1><h1 style="color:#d4ac0d;">Succeed!!</h1>')
 });
 
 // delete users
@@ -131,6 +160,7 @@ app.get('/land/buy', function(req, res) {
       var buyMsg = parser.buyLand(userData, landData, money, land);
       if (buyMsg.success) {
         // if succeed
+        console.log(" [O] /land/buy?user=" + user + '&target=' + buyMsg.targetID);
 
         // 土地要新增owner
         var ownerObj = {
@@ -153,7 +183,7 @@ app.get('/land/buy', function(req, res) {
 
         // user 加利息
         userData.interest = parser.countInterest(userData.lands);
-        console.log("user: %s, interest: %s", userData._id, userData.interest);
+        console.log("   user: %s, interest: %s", userData._id, userData.interest);
 
         // user 扣錢
         userData.timeLeft = parser.countTime(userData.timeLeft, money);
@@ -172,7 +202,7 @@ app.get('/land/buy', function(req, res) {
             }
             target.lands[land.longType] = tmpLand;
             target.interest = parser.countInterest(target.lands);
-            console.log("target: %s, interest: %s", target._id, target.interest);
+            console.log("   target: %s, interest: %s", target._id, target.interest);
             targetRef.set(target);
           });
         }
