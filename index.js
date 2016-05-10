@@ -337,6 +337,13 @@ app.get('/', function(req, res) {
   var times = config.TIMES || 5;
   for (i = 0; i < times; i++)
     result += ('<p>' + cool() + '</p>');
+  result += ('<br /><br /><h3 style="color:#6f502c;"> Need help? see <a href="http://art-festival.herokuapp.com/help">User Manual<a> </h3>');
+  res.send(result);
+});
+
+// help
+app.get('/help', function(req, res) {
+  var result = parser.welcomeMsg();
   res.send(result);
 });
 

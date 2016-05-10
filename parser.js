@@ -127,7 +127,32 @@ function tryToBuy(user, land, money, landQuery, landOwned) {
 		return false
 }
 
+function makeHTML(tag, msg, color) {
+	var colour = 'black';
+	if (color)
+		colour = color;
+	return '<' + tag + ' style="color:' + colour + ';">' + msg + '</' + tag + '>';
+}
+
 module.exports = {
+	welcomeMsg: function() {
+		var result = '<br /><h1 style="color:blue;">Manual';
+		result += makeHTML('h5', '(red = high frequency)', '#999');
+		result += makeHTML('h4', '/user/data?user=', 'red');
+		result += makeHTML('h4', '/user/dead?user=');
+		result += makeHTML('h4', '/user/init?id=&deviceId=&name=&a=&p=&i=');
+		result += makeHTML('h4', '/land/stand?land=&user=');
+		result += makeHTML('h4', '/land/importance?land=');
+		result += makeHTML('h4', '/land/data?land=', 'red');
+		result += makeHTML('h4', '/land/buy?land=&user=&money=', 'red');
+		result += makeHTML('h4', '/land/init');
+		result += makeHTML('h4', '/board/init?board=&land=');
+		result += makeHTML('h4', '/board/occupy?board=');
+		result += makeHTML('h4', '/center');
+		result += makeHTML('h4', '/bonus');
+		result += '</h1>';
+		return result;
+	},
 	parseLands: function(landStr) {
 		return landStr.split(",");
 	},
