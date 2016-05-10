@@ -116,7 +116,7 @@ app.get('/user/dead', function(req, res) {
 app.get('/user/init', function(req, res) {
   var userdb = db.user;
   var user = parser.initUser(userdb, req.query);
-  if ((req.query.id-0) == 0)
+  if ((req.query.id) == '0')
     user.timeLeft.hours = 40000;
   USER.child(user._id).set(user);
 
