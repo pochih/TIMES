@@ -192,8 +192,10 @@ module.exports = {
 	welcomeMsg: function() {
 		var result = '<h1 style="color:#6f502c;">Manual';
 		result += makeHTML('h5', '(red = high frequency)', 'green');
-		result += makeHTML('h4', '/user/data?user=', 'red');
 		result += makeHTML('h4', '/user/dead?user=');
+		result += makeHTML('h4', '/user/data?user=', 'red');
+		result += makeHTML('h4', '/user/time?user=', 'red');
+		result += makeHTML('h4', '/user/init/all');
 		result += makeHTML('h4', '/user/init?id=&deviceId=&name=&a=&p=&i=');
 		result += makeHTML('h4', '/land/stand?land=&user=');
 		result += makeHTML('h4', '/land/importance?land=');
