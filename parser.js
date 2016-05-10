@@ -1,3 +1,7 @@
+var ownedParameter = 1.5;
+var threeLandsBonus = 1.5;
+var moneyUpperBound = 2;
+
 var landTypes = {
 	a: "affection",
 	c: "career",
@@ -20,9 +24,6 @@ var land_c = all_lands[landTypes.c];
 var land_e = all_lands[landTypes.e];
 var land_h = all_lands[landTypes.h];
 var land_l = all_lands[landTypes.l];
-
-var ownedParameter = 1.5;
-var threeLandsBonus = 1.5;
 
 function countCategory(category, a, p, i) {
 	var db = require('./db.js');
@@ -68,6 +69,14 @@ function enoughMoney(user, money) {
 		return true;
 	else 
 		return false;
+}
+
+function illegalMoney(land, money) {
+	var price = land.price;
+	if (money >= 1 && money <= (price*moneyUpperBound))
+		return false;
+	else
+		return true;
 }
 
 function userHasLand(user, land) {
@@ -259,7 +268,14 @@ module.exports = {
 		if (!enoughMoney(user, money))
 			return {
 				success: false,
-				message: "您的時間不夠啦 (づ｡◕‿‿◕｡)づ"
+				message: "您的時間不夠啦 ╚(ಠ_ಠ)=┐"
+			};
+
+		// if illegal money
+		if (illegalMoney(land, money))
+			return {
+				success: false,
+				message: "不能出這個價錢啦 (づ｡◕‿‿◕｡)づ"
 			};
 
 		// if already owned
