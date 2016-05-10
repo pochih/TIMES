@@ -109,6 +109,7 @@ function ifSpecialties(user, landQuery) {
 
 function countProbability(user, land, money, landQuery, landOwned) {
 	var price = land.price;
+	var category = land.category;
 	if (landOwned)
 		price *= ownedParameter;
 	var probability = land.probability;
@@ -117,6 +118,11 @@ function countProbability(user, land, money, landQuery, landOwned) {
 	var specialties = ifSpecialties(user, landQuery);
 	if (specialties && land.level == 4)
 		price /= 2;
+
+	// if user has >= 6 lands of specific type
+	if (user.lands[category].length >= 6)
+		probability = 80;
+
 	probability = probability * (money/price) + user.category[landQuery.longType];
 	return probability;
 }
@@ -304,6 +310,7 @@ module.exports = {
 		}
 		else 
 			return {
+				probability: countProbability(user, land, money, landQuery, landOwned),
 				success: false,
 				message: "沒拿到成就，怒！ ヽ(`Д´)ﾉ ヽ(`Д´)ﾉ ヽ(`Д´)ﾉ"
 			}

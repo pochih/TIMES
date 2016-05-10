@@ -44,9 +44,23 @@ app.use(function(req, res, next) {
 // get user's data
 app.get('/user/data', function(req, res) {
   if (req.query.user == 'all') {
-    USER.once("value", function(snapshot) {
-      console.log(" [O] /user/data?user=all");
-      res.send(snapshot.val());
+    USERTIME.once("value", function(usertimeData) {
+      USER.once("value", function(snapshot) {
+        var usertime = usertimeData.val();
+        var users = snapshot.val();
+        for (var user in users) {
+          var timeObj = {
+            hours: usertime[user].hours,
+            mins: usertime[user].mins,
+            secs: usertime[user].secs,
+            milliseconds: 0
+          }
+          users[user].timeLeft.hours = timeObj;
+          USER.child(user).child('timeLeft').set(timeObj);
+        }
+        console.log(" [O] /user/data?user=all");
+        res.send(users);
+      });
     });
   }
   else {
@@ -59,6 +73,7 @@ app.get('/user/data', function(req, res) {
           user.timeLeft.mins = time.mins;
           user.timeLeft.secs = time.secs;
           user.lands = parser.parseEmptyArr(user.lands);
+          USER.child(req.query.user).child('timeLeft').set(user.timeLeft);
           res.send(user);
         }
         else {
@@ -101,7 +116,7 @@ app.get('/user/dead', function(req, res) {
 app.get('/user/init', function(req, res) {
   var userdb = db.user;
   var user = parser.initUser(userdb, req.query);
-  if (req.query.id == '0')
+  if ((req.query.id-0) == 0)
     user.timeLeft.hours = 40000;
   USER.child(user._id).set(user);
 
@@ -389,7 +404,7 @@ app.get('/time/start', function(req, res) {
     var allUsers = snapshot.val();
     for (var user in allUsers) {
       userTimes[user] = allUsers[user].timeLeft;
-      userTimes[user].interest = 0;
+      userTimes[user].interest = allUsers[user].interest;
     }
     USERTIME.set(userTimes);
     childProcess = child_process.fork('./counter.js');
