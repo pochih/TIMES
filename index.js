@@ -25,6 +25,7 @@ var LAND2BOARD = DB.child("land2board");
 var boardOccupy = [[],[],[],[],[]];
 var land2board = {};
 var childProcess;
+var childNum = 0;
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -408,7 +409,10 @@ app.get('/time/start', function(req, res) {
       userTimes[user].interest = allUsers[user].interest;
     }
     USERTIME.set(userTimes);
-    childProcess = child_process.fork('./counter.js');
+    if (childNum == 0) {
+      childProcess = child_process.fork('./counter.js');
+      childNum = 1;
+    }
     res.send(userTimes);
   });
 });
@@ -416,6 +420,7 @@ app.get('/time/start', function(req, res) {
 // stop counting time
 app.get('/time/stop', function(req, res) {
   //childProcess.kill();
+  childNum = 0;
   CENTER.child('status').set('pause');
   res.send('<h1 style="color:green;">Time Stopped!</h1>');
 });
