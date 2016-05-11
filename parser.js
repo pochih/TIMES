@@ -219,6 +219,7 @@ module.exports = {
 		result += makeHTML('h4', '/land/init');
 		result += makeHTML('h4', '/board/init?board=&land=');
 		result += makeHTML('h4', '/board/occupy?board=');
+		result += makeHTML('h4', '/time/sync/:dir', '#cea300');
 		result += makeHTML('h4', '/time/start', '#cea300');
 		result += makeHTML('h4', '/time/stop', '#cea300');
 		result += makeHTML('h4', '/center');

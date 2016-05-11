@@ -399,16 +399,39 @@ app.get('/board/occupy', function(req, res) {
 //////// global data /////////
 
 // start counting time
-app.get('/time/start', function(req, res) {
-  var userTimes = {};
-  CENTER.child('status').set('active');
+app.get('/time/sync/:dir', function(req, res) {
+  var direction = req.params.dir;
   USER.once("value", function(snapshot) {
     var allUsers = snapshot.val();
-    for (var user in allUsers) {
-      userTimes[user] = allUsers[user].timeLeft;
-      userTimes[user].interest = allUsers[user].interest;
-    }
-    USERTIME.set(userTimes);
+    USERTIME.once("value", function(snapshot) {
+      var userTimes = snapshot.val();
+      if (direction == 'touser') {
+        for (var user in userTimes) {
+          allUsers[user].timeLeft.hours = userTimes[user].hours;
+          allUsers[user].timeLeft.mins = userTimes[user].mins;
+          allUsers[user].timeLeft.secs = userTimes[user].secs;
+          allUsers[user].interest = userTimes[user].interest;
+        }
+        USER.set(allUsers);
+        res.send(allUsers);
+      }
+      else if (direction == 'tousertime') {
+        for (var user in allUsers) {
+          userTimes[user] = allUsers[user].timeLeft;
+          userTimes[user].interest = allUsers[user].interest;
+        }
+        USERTIME.set(userTimes);
+        res.send(userTimes);
+      }
+    });
+  });
+});
+
+// start counting time
+app.get('/time/start', function(req, res) {
+  CENTER.child('status').set('active');
+  USERTIME.once("value", function(snapshot) {
+    var userTimes = snapshot.val();
     if (childNum == 0) {
       childProcess = child_process.fork('./counter.js');
       childNum = 1;
