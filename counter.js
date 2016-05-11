@@ -33,7 +33,7 @@ function updateTime() {
 				for (var user in userTimes) {
 					userTimes[user] = addInterest(userTimes[user], speed);
 					if (dead(userTimes[user]))
-						USER.child(user).isAlive = false;
+						USER.child(user).child('isAlive').set(false);
 				}
 				USERTIME.set(userTimes);
 			});
