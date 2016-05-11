@@ -115,6 +115,7 @@ app.get('/user/dead', function(req, res) {
 
 // init users
 app.get('/user/init', function(req, res) {
+  var db = require('./db.js');
   var userdb = db.user;
   var user = parser.initUser(userdb, req.query);
   // if ((req.query.id) == '0')
@@ -291,9 +292,9 @@ app.get('/land/stand', function(req, res) {
   var land = parser.parseLandType(req.query.land);
 
   // user stand on land
+  USER.child(user).child('stand').set(req.query.land);
 
-
-  var result = '<h1 style="color:red;">User:</h1>' + user + '<h1 style="color:blue;">stands on land:</h1>' + land.type + land.num;
+  var result = '<h1 style="color:red;">User:</h1>' + user + '<h1 style="color:blue;">stands on land:</h1>' + land.longType + land.num;
   res.send(result);
 });
 

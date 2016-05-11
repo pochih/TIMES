@@ -25,7 +25,7 @@ app.get('/readFile', function(req, res) {
         else {
           console.log("Create file succeed.");
           // execute kinect
-          //var childProcess = require('child_process').fork('./lifewall.exe');
+          var childProcess = require('child_process').fork('./lifewall.exe');
         }
       })
     }

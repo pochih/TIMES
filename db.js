@@ -72,6 +72,7 @@ module.exports = {
 			milliseconds: 0
 		},
 		interest: 0,
+		stand: -1,
 		lands: {
 			affection: [-1],
 			health: [-1],
