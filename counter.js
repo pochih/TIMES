@@ -11,33 +11,32 @@ var counter = 0;
 var interval = 3;
 
 // start counter
+console.log(" [O] Counter start.");
 setInterval(updateTime, 994*interval);
 
 function updateTime() {
-	CENTER.child('status').once("value", function(centerData) {
+	CENTER.once("value", function(centerData) {
 		var center = centerData.val();
 		if (center.status == 'pause') {
-			console.log("Counter Exit.");
+			console.log(" [O] Counter Exit.");
 			process.exit(0);
 		}
 		else if (center.status == 'active') {
 			counter += 1;
 
-   			CENTER.child('speed').once("value", function(snapshot) {
-   				var speed = snapshot.val();
-   				USERTIME.once("value", function(snapshot) {
-		
-					var userTimes = snapshot.val();
-		
-					// count every user's time
-					for (var user in userTimes) {
-						userTimes[user] = addInterest(userTimes[user], speed);
-						if (dead(userTimes[user]))
-							USER.child(user).isAlive = false;
-					}
-					USERTIME.set(userTimes);
-				})
-   			});
+   			var speed = center.speed;
+   			USERTIME.once("value", function(snapshot) {
+	
+				var userTimes = snapshot.val();
+	
+				// count every user's time
+				for (var user in userTimes) {
+					userTimes[user] = addInterest(userTimes[user], speed);
+					if (dead(userTimes[user]))
+						USER.child(user).isAlive = false;
+				}
+				USERTIME.set(userTimes);
+			});
    			console.log("Game Time: %s(sec), count: %s", (Date.now()-startTime)/1000, counter*interval);
 		}
 	});
