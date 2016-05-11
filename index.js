@@ -291,6 +291,10 @@ app.get('/land/stand', function(req, res) {
   var user = req.query.user;
   var land = parser.parseLandType(req.query.land);
 
+  // if illegal land
+  if (parser.illegalLand(land))
+    res.send('這個土地不存在啦 ｡゜(｀Д´)゜｡');
+
   // user stand on land
   USER.child(user).child('stand').set(req.query.land);
 

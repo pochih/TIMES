@@ -38,7 +38,7 @@ function countCategory(category, a, p, i) {
 	return category;
 }
 
-function isillegal(landQuery) {
+function illegalLand(landQuery) {
 	var type = landQuery.type;
 	var num = landQuery.num;
 	if (type != 'a' && type != 'c' && type != 'e' && type != 'h' && type != 'l')
@@ -268,7 +268,7 @@ module.exports = {
 	},
 	buyLand: function(user, land, money, landQuery) {
 		// if illegal land
-		if (isillegal(landQuery))
+		if (illegalLand(landQuery))
 			return {
 				success: false,
 				message: "這個土地不存在喔 ༼;´༎ຶ ۝ ༎ຶˋ༽"
@@ -285,7 +285,7 @@ module.exports = {
 		if (illegalMoney(land, money))
 			return {
 				success: false,
-				message: "不能出這個價錢啦 (づ｡◕‿‿◕｡)づ"
+				message: "不能出這個價錢啦 (づ｡◕‿‿◕｡)づ ᄽὁȍ ̪őὀᄿ"
 			};
 
 		// if already owned
@@ -335,5 +335,14 @@ module.exports = {
 		if (timeLeft.interest != null)
 			timeObj.interest = timeLeft.interest;
 		return timeObj;
-	}
+	},
+	illegalLand: function(landQuery) {
+	var type = landQuery.type;
+	var num = landQuery.num;
+	if (type != 'a' && type != 'c' && type != 'e' && type != 'h' && type != 'l')
+		return true;
+	if (num <= 0 || num > 20)
+		return true;
+	return false;
+}
 }
