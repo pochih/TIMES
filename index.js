@@ -408,6 +408,7 @@ app.get('/time/start', function(req, res) {
     }
     USERTIME.set(userTimes);
     childProcess = child_process.fork('./counter.js');
+    CENTER.child('status').set('active');
     res.send(userTimes);
   });
 });
@@ -415,6 +416,7 @@ app.get('/time/start', function(req, res) {
 // stop counting time
 app.get('/time/stop', function(req, res) {
   childProcess.kill();
+  CENTER.child('status').set('pause');
   res.send('<h1 style="color:green;">Time Stopped!</h1>');
 });
 
