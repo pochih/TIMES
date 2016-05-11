@@ -400,6 +400,7 @@ app.get('/board/occupy', function(req, res) {
 // start counting time
 app.get('/time/start', function(req, res) {
   var userTimes = {};
+  CENTER.child('status').set('active');
   USER.once("value", function(snapshot) {
     var allUsers = snapshot.val();
     for (var user in allUsers) {
@@ -408,14 +409,13 @@ app.get('/time/start', function(req, res) {
     }
     USERTIME.set(userTimes);
     childProcess = child_process.fork('./counter.js');
-    CENTER.child('status').set('active');
     res.send(userTimes);
   });
 });
 
 // stop counting time
 app.get('/time/stop', function(req, res) {
-  childProcess.kill();
+  //childProcess.kill();
   CENTER.child('status').set('pause');
   res.send('<h1 style="color:green;">Time Stopped!</h1>');
 });
