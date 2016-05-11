@@ -47,6 +47,8 @@ function addInterest(timeLeft, speed) {
 	timeLeft.secs -= (speed*interval);
 
 	var time = timeLeft.hours*3600 + timeLeft.mins*60 + timeLeft.secs;
+	if (time < 0)
+		return timeLeft;
 	timeLeft.hours = Math.floor(time / 3600);
 	timeLeft.mins = Math.floor((time % 3600) / 60);
 	timeLeft.secs = Math.floor((time % 3600) % 60);
