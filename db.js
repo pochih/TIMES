@@ -42,11 +42,11 @@ module.exports = {
 		}
 	},
 	boards: [
-		['a1', 'a2', 'a9', 'a20', 'c1', 'c2', 'c9', 'c20', 'e1', 'e2', 'e9', 'e20', 'h1', 'h2', 'h9', 'h20', 'l1', 'l2', 'l9', 'l20'],
-		['a3', 'a4', 'a10', 'a19', 'c3', 'c4', 'c10', 'c19', 'e3', 'e4', 'e10', 'e19', 'h3', 'h4', 'h10', 'h19', 'l3', 'l4', 'l10', 'l19'],
-		['a5', 'a6', 'a17', 'a18', 'c5', 'c6', 'c17', 'c18', 'e5', 'e6', 'e17', 'e18', 'h5', 'h6', 'h17', 'h18', 'l5', 'l6', 'l17', 'l18'],
-		['a7', 'a11', 'a12', 'a16', 'c7', 'c11', 'c12', 'c16', 'e7', 'e11', 'e12', 'e16', 'h7', 'h11', 'h12', 'h16', 'l7', 'l11', 'l12', 'l16'],
-		['a8', 'a13', 'a14', 'a15', 'c8', 'c13', 'c14', 'c15', 'e8', 'e13', 'e14', 'e15', 'h8', 'h13', 'h14', 'h15', 'l8', 'l13', 'l14', 'l15']
+		['a12', 'a13', 'e12', 'e13', 'd13', 'c15', 'e14', 'c16', 'e15', 'b13', 'd14', 'd15', 'e16', 'b14', 'b15', 'd16', 'c17', 'b16', 'a14', 'e17'],
+		['e18', 'b17', 'd17', 'c18', 'a15', 'a16', 'a17', 'd18', 'a18', 'e19', 'c19', 'b18', 'c20', 'd19', 'd20', 'b19', 'b20', 'a19', 'a20', 'e20'],
+		['c8', 'b8', 'b9', 'b10', 'e9', 'a9', 'b11', 'c9', 'd11', 'c10', 'c11', 'e10', 'c12', 'c13', 'a10', 'b12', 'c14', 'a11', 'e11', 'd12'],
+		['e1', 'e2', 'c1', 'a1', 'a2', 'c2', 'b1', 'b2', 'a3', 'a4', 'a5', 'd1', 'd2', 'e3', 'e4', 'b3', 'c3', 'b4', 'c4', 'b5'],
+		['c5', 'c6', 'a6', 'c7', 'd3', 'b6', 'd4', 'd5', 'd6', 'e5', 'e6', 'a7', 'd7', 'd8', 'a8', 'd9', 'b7', 'd10', 'e7', 'e8']
 	],
 	user: {
 		_id: -1,
@@ -189,7 +189,7 @@ module.exports = {
 		}
 	},
 	defaultLand: {
-		_id: "l7",
+		_id: "b7",
 		price: 60,
 		probability: 20,
 		category: "learning",
@@ -487,7 +487,7 @@ module.exports = {
 		],
 		health: [
 			{
-				_id: "h1",
+				_id: "d1",
 				price: 60,
 				probability: 70,
 				category: "health",
@@ -501,7 +501,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h2",
+				_id: "d2",
 				price: 60,
 				probability: 70,
 				category: "health",
@@ -515,7 +515,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h3",
+				_id: "d3",
 				price: 60,
 				probability: 70,
 				category: "health",
@@ -529,7 +529,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h4",
+				_id: "d4",
 				price: 60,
 				probability: 70,
 				category: "health",
@@ -543,7 +543,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h5",
+				_id: "d5",
 				price: 60,
 				probability: 70,
 				category: "health",
@@ -557,7 +557,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h6",
+				_id: "d6",
 				price: 60,
 				probability: 70,
 				category: "health",
@@ -571,7 +571,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h7",
+				_id: "d7",
 				price: 60,
 				probability: 70,
 				category: "health",
@@ -585,7 +585,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h8",
+				_id: "d8",
 				price: 60,
 				probability: 70,
 				category: "health",
@@ -599,7 +599,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h9",
+				_id: "d9",
 				price: 300,
 				probability: 50,
 				category: "health",
@@ -613,7 +613,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h10",
+				_id: "d10",
 				price: 300,
 				probability: 50,
 				category: "health",
@@ -627,7 +627,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h11",
+				_id: "d11",
 				price: 300,
 				probability: 50,
 				category: "health",
@@ -641,7 +641,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h12",
+				_id: "d12",
 				price: 300,
 				probability: 50,
 				category: "health",
@@ -655,7 +655,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h13",
+				_id: "d13",
 				price: 300,
 				probability: 50,
 				category: "health",
@@ -669,7 +669,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h14",
+				_id: "d14",
 				price: 300,
 				probability: 50,
 				category: "health",
@@ -683,7 +683,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h15",
+				_id: "d15",
 				price: 900,
 				probability: 30,
 				category: "health",
@@ -697,7 +697,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h16",
+				_id: "d16",
 				price: 900,
 				probability: 30,
 				category: "health",
@@ -711,7 +711,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h17",
+				_id: "d17",
 				price: 900,
 				probability: 30,
 				category: "health",
@@ -725,7 +725,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h18",
+				_id: "d18",
 				price: 900,
 				probability: 30,
 				category: "health",
@@ -739,7 +739,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h19",
+				_id: "d19",
 				price: 1800,
 				probability: 15,
 				category: "health",
@@ -753,7 +753,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "h20",
+				_id: "d20",
 				price: 1800,
 				probability: 15,
 				category: "health",
@@ -1333,7 +1333,7 @@ module.exports = {
 		],
 		learning: [
 			{
-				_id: "l1",
+				_id: "b1",
 				price: 60,
 				probability: 70,
 				category: "learning",
@@ -1347,7 +1347,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l2",
+				_id: "b2",
 				price: 60,
 				probability: 70,
 				category: "learning",
@@ -1361,7 +1361,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l3",
+				_id: "b3",
 				price: 60,
 				probability: 70,
 				category: "learning",
@@ -1375,7 +1375,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l4",
+				_id: "b4",
 				price: 60,
 				probability: 70,
 				category: "learning",
@@ -1389,7 +1389,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l5",
+				_id: "b5",
 				price: 60,
 				probability: 70,
 				category: "learning",
@@ -1403,7 +1403,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l6",
+				_id: "b6",
 				price: 60,
 				probability: 70,
 				category: "learning",
@@ -1417,7 +1417,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l7",
+				_id: "b7",
 				price: 60,
 				probability: 70,
 				category: "learning",
@@ -1431,7 +1431,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l8",
+				_id: "b8",
 				price: 60,
 				probability: 70,
 				category: "learning",
@@ -1445,7 +1445,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l9",
+				_id: "b9",
 				price: 300,
 				probability: 50,
 				category: "learning",
@@ -1459,7 +1459,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l10",
+				_id: "b10",
 				price: 300,
 				probability: 50,
 				category: "learning",
@@ -1473,7 +1473,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l11",
+				_id: "b11",
 				price: 300,
 				probability: 50,
 				category: "learning",
@@ -1487,7 +1487,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l12",
+				_id: "b12",
 				price: 300,
 				probability: 50,
 				category: "learning",
@@ -1501,7 +1501,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l13",
+				_id: "b13",
 				price: 300,
 				probability: 50,
 				category: "learning",
@@ -1515,7 +1515,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l14",
+				_id: "b14",
 				price: 300,
 				probability: 50,
 				category: "learning",
@@ -1529,7 +1529,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l15",
+				_id: "b15",
 				price: 900,
 				probability: 30,
 				category: "learning",
@@ -1543,7 +1543,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l16",
+				_id: "b16",
 				price: 900,
 				probability: 30,
 				category: "learning",
@@ -1557,7 +1557,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l17",
+				_id: "b17",
 				price: 900,
 				probability: 30,
 				category: "learning",
@@ -1571,7 +1571,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l18",
+				_id: "b18",
 				price: 900,
 				probability: 30,
 				category: "learning",
@@ -1585,7 +1585,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l19",
+				_id: "b19",
 				price: 1800,
 				probability: 15,
 				category: "learning",
@@ -1599,7 +1599,7 @@ module.exports = {
 				specialties: false
 			},
 			{
-				_id: "l20",
+				_id: "b20",
 				price: 1800,
 				probability: 15,
 				category: "learning",

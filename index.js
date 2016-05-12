@@ -464,7 +464,7 @@ app.get('/center', function(req, res) {
 app.get('/center/speed', function(req, res) {
   var speed = req.query.speed;
   CENTER.child('speed').set(speed);
-  res.send({speed: 10});
+  res.send({speed: req.query.speed});
 });
 
 // get configs

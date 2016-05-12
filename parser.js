@@ -6,8 +6,8 @@ var landTypes = {
 	a: "affection",
 	c: "career",
 	e: "entertainment",
-	h: "health",
-	l: "learning"
+	d: "health",
+	b: "learning"
 };
 
 var specialtiesTable = {
@@ -22,8 +22,8 @@ var all_lands = require('./db.js').lands;
 var land_a = all_lands[landTypes.a];
 var land_c = all_lands[landTypes.c];
 var land_e = all_lands[landTypes.e];
-var land_h = all_lands[landTypes.h];
-var land_l = all_lands[landTypes.l];
+var land_h = all_lands[landTypes.d];
+var land_l = all_lands[landTypes.b];
 
 function countCategory(category, a, p, i) {
 	var db = require('./db.js');
@@ -41,7 +41,7 @@ function countCategory(category, a, p, i) {
 function illegalLand(landQuery) {
 	var type = landQuery.type;
 	var num = landQuery.num;
-	if (type != 'a' && type != 'c' && type != 'e' && type != 'h' && type != 'l')
+	if (type != 'a' && type != 'c' && type != 'e' && type != 'b' && type != 'd')
 		return true;
 	if (num <= 0 || num > 20)
 		return true;
@@ -321,8 +321,8 @@ module.exports = {
 		var a = lands[landTypes.a];
 		var c = lands[landTypes.c];
 		var e = lands[landTypes.e];
-		var h = lands[landTypes.h];
-		var l = lands[landTypes.l];
+		var h = lands[landTypes.d];
+		var l = lands[landTypes.b];
 
 		var interest = addInterest(a, c, e, h, l);
 
