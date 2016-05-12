@@ -339,7 +339,7 @@ module.exports = {
 	illegalLand: function(landQuery) {
 	var type = landQuery.type;
 	var num = landQuery.num;
-	if (type != 'a' && type != 'c' && type != 'e' && type != 'h' && type != 'l')
+	if (type != 'a' && type != 'c' && type != 'e' && type != 'b' && type != 'd')
 		return true;
 	if (num <= 0 || num > 20)
 		return true;
