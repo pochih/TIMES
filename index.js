@@ -489,9 +489,10 @@ function updateTime() {
   
       // count every user's time
       for (var user in userTimes) {
-        userTimes[user] = addInterest(userTimes[user], speed);
         if (dead(userTimes[user]))
           USER.child(user).child('isAlive').set(false);
+        else
+          userTimes[user] = addInterest(userTimes[user], speed);
       }
       USERTIME.set(userTimes);
     });
