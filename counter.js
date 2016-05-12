@@ -12,7 +12,7 @@ var interval = 3;
 
 // start counter
 console.log(" [O] Counter start.");
-setInterval(updateTime, 994*interval);
+setInterval(updateTime, 997*interval);
 
 function updateTime() {
 	CENTER.once("value", function(centerData) {
