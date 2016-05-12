@@ -508,7 +508,7 @@ function addInterest(timeLeft, speed) {
     return timeLeft;
   timeLeft.hours = Math.floor(time / 3600);
   timeLeft.mins = Math.floor((time % 3600) / 60);
-  timeLeft.secs = Math.floor((time % 3600) % 60);
+  timeLeft.secs = (time % 3600) % 60;
   return timeLeft;
 }
 
