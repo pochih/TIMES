@@ -24,8 +24,17 @@ var LAND2BOARD = DB.child("land2board");
 
 var boardOccupy = [[],[],[],[],[]];
 var land2board = {};
+
+// for time
 var childProcess;
 var childNum = 0;
+var center = {
+  status: 'pause',
+  speed: 1
+};
+var startTime;
+var counter = 0;
+var interval = 3;
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -435,12 +444,24 @@ app.get('/time/sync/:dir', function(req, res) {
 // start counting time
 app.get('/time/start', function(req, res) {
   CENTER.child('status').set('active');
+  center.status = 'active';
+  
+  // start counter
+  if (childNum == 0) {
+    var timer = new Date();
+    startTime = timer.getTime();
+    counter = 0;
+    childNum = 1;
+    console.log(" [O] Counter start.");
+    setInterval(updateTime, 998*interval);
+  }
+
   USERTIME.once("value", function(snapshot) {
     var userTimes = snapshot.val();
-    if (childNum == 0) {
-      childProcess = child_process.fork('./counter.js');
-      childNum = 1;
-    }
+    // if (childNum == 0) {
+    //   childProcess = child_process.fork('./counter.js');
+    //   childNum = 1;
+    // }
     res.send(userTimes);
   });
 });
@@ -448,10 +469,56 @@ app.get('/time/start', function(req, res) {
 // stop counting time/
 app.get('/time/stop', function(req, res) {
   //childProcess.kill();
-  childNum = 0;
+  //childNum = 0;
+  center.status = 'pause';
   CENTER.child('status').set('pause');
   res.send('<h1 style="color:green;">Time Stopped!</h1>');
 });
+
+function updateTime() {
+  if (center.status == 'pause') {
+    // do nothing
+  }
+  else if (center.status == 'active') {
+    counter += 1;
+
+    var speed = center.speed;
+    USERTIME.once("value", function(snapshot) {
+  
+      var userTimes = snapshot.val();
+  
+      // count every user's time
+      for (var user in userTimes) {
+        userTimes[user] = addInterest(userTimes[user], speed);
+        if (dead(userTimes[user]))
+          USER.child(user).child('isAlive').set(false);
+      }
+      USERTIME.set(userTimes);
+    });
+    console.log("Game Time: %s(sec), count: %s", (Date.now()-startTime)/1000, counter*interval);
+  }
+}
+
+function addInterest(timeLeft, speed) {
+  timeLeft.secs += (timeLeft.interest*interval);
+  timeLeft.secs -= (speed*interval);
+
+  var time = timeLeft.hours*3600 + timeLeft.mins*60 + timeLeft.secs;
+  if (time < 0)
+    return timeLeft;
+  timeLeft.hours = Math.floor(time / 3600);
+  timeLeft.mins = Math.floor((time % 3600) / 60);
+  timeLeft.secs = Math.floor((time % 3600) % 60);
+  return timeLeft;
+}
+
+function dead(timeLeft) {
+  var time = timeLeft.hours*3600 + timeLeft.mins*60 + timeLeft.secs;
+  if (time < 0)
+    return true;
+  else
+    return false;
+}
 
 // get data center
 app.get('/center', function(req, res) {
