@@ -40,7 +40,7 @@ app.use(function(req, res, next) {
 
 
 
-////////// User //////////
+////////// User ///////////
 
 // get user's data
 app.get('/user/data', function(req, res) {
