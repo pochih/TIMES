@@ -1,12 +1,6 @@
 module.exports = {
 	center: {
 		players: [100001, 100003, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-		timeLeft: {
-			hours: 0,
-			mins: 45,
-			secs: 0,
-			milliseconds: 0
-		},
 		speed: 1,
 		status: "pause"
 	},
