@@ -455,9 +455,9 @@ app.get('/time/stop', function(req, res) {
 
 // get data center
 app.get('/center', function(req, res) {
-  var db = require('./db.js');
-  CENTER.set(db.center);
-  res.send(db.center);
+  CENTER.once("value", function(snapshot) {
+    res.send(snapshot.val());
+  });
 });
 
 // set speed
