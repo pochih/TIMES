@@ -445,7 +445,7 @@ app.get('/time/start', function(req, res) {
   });
 });
 
-// stop counting time
+// stop counting time/
 app.get('/time/stop', function(req, res) {
   //childProcess.kill();
   childNum = 0;
