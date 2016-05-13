@@ -365,7 +365,7 @@ app.get('/land/init', function(req, res) {
 
 
 
-///////// board /////////
+///////// board ////////
 
 // initial board
 // http://localhost:5000/board/init?board=2&land=a10,b9,c3,c1,c4,a5,e3,e4,d3,d18,d4,c2,b5,b6,b4,b3,b1,b2,b17,a11
