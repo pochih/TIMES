@@ -89,7 +89,7 @@ app.get('/user/data', function(req, res) {
         }
         else {
           //var db = require('./db.js');
-          res.send({message: '此使用者不存在ID'});
+          res.status(400).send({message: '此使用者不存在ID'});
         }
       });
     });
