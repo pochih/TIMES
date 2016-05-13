@@ -158,7 +158,7 @@ app.get('/user/dead', function(req, res) {
       // if (l.length >= 3)
       //   user.dead.secondStage.learning = true;
       // if (l.length >= 4)
-      //   user.dead.firstStage.learning = true;
+      //   user.dead.firstStage.learning = true;//
       res.send(user.dead);
     }
     else {
