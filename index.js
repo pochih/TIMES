@@ -28,6 +28,7 @@ var land2board = {};
 // for time
 var childProcess;
 var childNum = 0;
+CENTER.child('status').set('pause');
 var center = {
   status: 'pause',
   speed: 1
@@ -297,6 +298,9 @@ app.get('/land/buy', function(req, res) {
 
 var standings = ['d3', 'd6', 'b6', 'c7', 'd9', 'd8', 'a8', 'c6', 'd5', 'e5', 'e7', 'e8', 'd10', 'e6', 'a7', 'a6', 'c5'];
 var fs = require('fs');
+fs.appendFile('public/standing.json', standings, function (err) {
+
+});
 // user stand on a land
 app.get('/land/stand', function(req, res) {
   var user = req.query.user;
@@ -471,14 +475,14 @@ app.get('/time/sync/:dir', function(req, res) {
 });
 
 // start counter
-  if (childNum == 0) {
-    var timer = new Date();
-    startTime = timer.getTime();
-    counter = 0;
-    childNum = 1;
-    console.log(" [O] Counter start.");
-    setInterval(updateTime, 998*interval);
-  }
+if (childNum == 0) {
+  var timer = new Date();
+  startTime = timer.getTime();
+  counter = 0;
+  childNum = 1;
+  console.log(" [O] Counter start.");
+  setInterval(updateTime, 998*interval);
+}
 
 // start counting time
 app.get('/time/start', function(req, res) {
