@@ -60,14 +60,13 @@ app.get('/user/data', function(req, res) {
         var usertime = usertimeData.val();
         var users = snapshot.val();
         for (var user in users) {
-          // var timeObj = {
-          //   hours: usertime[user].hours,
-          //   mins: usertime[user].mins,
-          //   secs: usertime[user].secs,
-          //   milliseconds: 0
-          // }
-          // users[user].timeLeft = timeObj;
-          // USER.child(user).child('timeLeft').set(timeObj);
+          var timeObj = {};
+          timeObj.hours = usertime[user].hours;
+          timeObj.mins = usertime[user].mins;
+          timeObj.secs = usertime[user].secs;
+          timeObj.milliseconds: 0;
+          users[user].timeLeft = timeObj;
+          USER.child(user).child('timeLeft').set(timeObj);
         }
         console.log(" [O] /user/data?user=all");
         res.send(users);
