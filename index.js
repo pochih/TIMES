@@ -564,7 +564,7 @@ function dead(timeLeft) {
     return false;
 }
 
-// get data center
+// get data center/
 app.get('/center', function(req, res) {
   CENTER.once("value", function(snapshot) {
     res.send(snapshot.val());
