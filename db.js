@@ -61,7 +61,7 @@ module.exports = {
 		isAlive: true,
 		timeLeft: {
 			hours: 0,
-			mins: 45,
+			mins: 60,
 			secs: 0,
 			milliseconds: 0
 		},
