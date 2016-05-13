@@ -368,7 +368,7 @@ app.get('/board/init', function(req, res) {
       for (var i = 0; i < landArr.length; i++) {
         landIDs.push(landArr[i]);
         boardOccupy[index][i] = 0;
-        if (index == 5)
+        if (index == 2)
           boardOccupy[index][i] = 1;
 
         // set land2board dictionary
@@ -470,12 +470,7 @@ app.get('/time/sync/:dir', function(req, res) {
   });
 });
 
-// start counting time
-app.get('/time/start', function(req, res) {
-  CENTER.child('status').set('active');
-  center.status = 'active';
-  
-  // start counter
+// start counter
   if (childNum == 0) {
     var timer = new Date();
     startTime = timer.getTime();
@@ -484,6 +479,11 @@ app.get('/time/start', function(req, res) {
     console.log(" [O] Counter start.");
     setInterval(updateTime, 998*interval);
   }
+
+// start counting time
+app.get('/time/start', function(req, res) {
+  CENTER.child('status').set('active');
+  center.status = 'active';
 
   USERTIME.once("value", function(snapshot) {
     var userTimes = snapshot.val();
