@@ -59,7 +59,7 @@ app.get('/user/data', function(req, res) {
       USER.once("value", function(snapshot) {
         var usertime = usertimeData.val();
         var users = snapshot.val();
-        for (var user in users) {
+        for (var user in usertime) {
           var timeObj = {};
           timeObj.hours = usertime[user].hours;
           timeObj.mins = usertime[user].mins;
