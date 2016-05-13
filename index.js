@@ -298,9 +298,11 @@ app.get('/land/buy', function(req, res) {
 
 var standings = ['d3', 'd6', 'b6', 'c7', 'd9', 'd8', 'a8', 'c6', 'd5', 'e5', 'e7', 'e8', 'd10', 'e6', 'a7', 'a6', 'c5'];
 var fs = require('fs');
-fs.appendFile('public/standing.json', standings, function (err) {
+for (var i = 0; i < standings.length; i++)
+  fs.appendFile('public/standing.json', "'" + standings[i] + "', ", function (err) {
 
-});
+  });
+
 // user stand on a land
 app.get('/land/stand', function(req, res) {
   var user = req.query.user;
