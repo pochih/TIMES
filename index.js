@@ -295,7 +295,7 @@ app.get('/land/buy', function(req, res) {
   // res.send(result);
 });
 
-var standings = [];
+var standings = ['d3', 'd6', 'b6', 'c7', 'd9', 'd8', 'a8', 'c6', 'd5', 'e5', 'e7', 'e8', 'd10', 'e6', 'a7', 'a6', 'c5'];
 var fs = require('fs');
 // user stand on a land
 app.get('/land/stand', function(req, res) {
@@ -308,7 +308,7 @@ app.get('/land/stand', function(req, res) {
 
   if (standings.indexOf(req.query.land) < 0) {
     standings.push(req.query.land);
-    fs.appendFile('public/standing.json', req.query.land+', ', function (err) {
+    fs.appendFile('public/standing.json', "'" + req.query.land + "', ", function (err) {
 
     });
   }
@@ -368,7 +368,7 @@ app.get('/board/init', function(req, res) {
       for (var i = 0; i < landArr.length; i++) {
         landIDs.push(landArr[i]);
         boardOccupy[index][i] = 0;
-        if (index == 2)
+        if (index == 5)
           boardOccupy[index][i] = 1;
 
         // set land2board dictionary
