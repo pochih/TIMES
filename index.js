@@ -113,52 +113,8 @@ app.get('/user/dead', function(req, res) {
   USER.child(req.query.user).once("value", function(snapshot) {
     var user = snapshot.val();
     if (user != null) {
-      var a = user.lands.affection;
-      var c = user.lands.career;
-      var e = user.lands.entertainment;
-      var h = user.lands.health;
-      var l = user.lands.learning;
-      if (a.length >= 1)
-        user.dead.fourthStage.affection = true;
-      if (a.length >= 2)
-        user.dead.thirdStage.affection = true;
-      if (a.length >= 3)
-        user.dead.secondStage.affection = true;
-      if (a.length >= 4)
-        user.dead.firstStage.affection = true;
-      if (c.length >= 1)
-        user.dead.fourthStage.career = true;
-      if (c.length >= 2)
-        user.dead.thirdStage.career = true;
-      if (c.length >= 3)
-        user.dead.secondStage.career = true;
-      if (c.length >= 4)
-        user.dead.firstStage.career = true;
-      if (e.length >= 1)
-        user.dead.fourthStage.entertainment = true;
-      if (e.length >= 2)
-        user.dead.thirdStage.entertainment = true;
-      if (e.length >= 3)
-        user.dead.secondStage.entertainment = true;
-      if (e.length >= 4)
-        user.dead.firstStage.entertainment = true;
-      if (h.length >= 1)
-        user.dead.fourthStage.health = true;
-      if (h.length >= 2)
-        user.dead.thirdStage.health = true;
-      if (h.length >= 3)
-        user.dead.secondStage.health = true;
-      if (h.length >= 4)
-        user.dead.firstStage.health = true;
-      if (l.length >= 1)
-        user.dead.fourthStage.learning = true;
-      if (l.length >= 2)
-        user.dead.thirdStage.learning = true;
-      if (l.length >= 3)
-        user.dead.secondStage.learning = true;
-      if (l.length >= 4)
-        user.dead.firstStage.learning = true;//
-      res.send(user.dead);
+      var dead = parser.parseDead(user);
+      res.send(dead);
     }
     else {
       var db = require('./db.js');

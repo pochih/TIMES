@@ -337,12 +337,61 @@ module.exports = {
 		return timeObj;
 	},
 	illegalLand: function(landQuery) {
-	var type = landQuery.type;
-	var num = landQuery.num;
-	if (type != 'a' && type != 'c' && type != 'e' && type != 'b' && type != 'd')
-		return true;
-	if (num <= 0 || num > 20)
-		return true;
-	return false;
-}
+		var type = landQuery.type;
+		var num = landQuery.num;
+		if (type != 'a' && type != 'c' && type != 'e' && type != 'b' && type != 'd')
+			return true;
+		if (num <= 0 || num > 20)
+			return true;
+		return false;
+	},
+	parseDead: function(user) {
+		var dead = user.dead;
+		var a = user.lands.affection;
+      	var c = user.lands.career;
+      	var e = user.lands.entertainment;
+      	var h = user.lands.health;
+      	var l = user.lands.learning;
+      	if (a.length >= 1 && a[0] != -1)
+      	  dead.fourthStage.affection = true;
+      	if (a.length >= 2)
+      	  dead.thirdStage.affection = true;
+      	if (a.length >= 3)
+      	  dead.secondStage.affection = true;
+      	if (a.length >= 4)
+      	  dead.firstStage.affection = true;
+      	if (c.length >= 1 && c[0] != -1)
+      	  dead.fourthStage.career = true;
+      	if (c.length >= 2)
+      	  dead.thirdStage.career = true;
+      	if (c.length >= 3)
+      	  dead.secondStage.career = true;
+      	if (c.length >= 4)
+      	  dead.firstStage.career = true;
+      	if (e.length >= 1 && e[0] != -1)
+      	  dead.fourthStage.entertainment = true;
+      	if (e.length >= 2)
+      	  dead.thirdStage.entertainment = true;
+      	if (e.length >= 3)
+      	  dead.secondStage.entertainment = true;
+      	if (e.length >= 4)
+      	  dead.firstStage.entertainment = true;
+      	if (h.length >= 1 && h[0] != -1)
+      	  dead.fourthStage.health = true;
+      	if (h.length >= 2)
+      	  dead.thirdStage.health = true;
+      	if (h.length >= 3)
+      	  dead.secondStage.health = true;
+      	if (h.length >= 4)
+      	  dead.firstStage.health = true;
+      	if (l.length >= 1 && l[0] != -1)
+      	  dead.fourthStage.learning = true;
+      	if (l.length >= 2)
+      	  dead.thirdStage.learning = true;
+      	if (l.length >= 3)
+      	  dead.secondStage.learning = true;
+      	if (l.length >= 4)
+      	  dead.firstStage.learning = true;
+      	return dead;
+	}
 }
