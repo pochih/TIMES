@@ -295,6 +295,8 @@ app.get('/land/buy', function(req, res) {
   // res.send(result);
 });
 
+var standings = [];
+var fs = require('fs');
 // user stand on a land
 app.get('/land/stand', function(req, res) {
   var user = req.query.user;
@@ -303,6 +305,12 @@ app.get('/land/stand', function(req, res) {
   // if illegal land
   if (parser.illegalLand(land))
     res.send('這個土地不存在啦 ｡゜(｀Д´)゜｡ ');
+
+  if (standings.indexOf(req.query.land) < 0) {
+    standings.push(req.query.land);
+    fs.appendFile('../standings.json', req.query.land + ', ', function(err){});
+  }
+
 
   // user stand on land
   USER.child(user).child('stand').set(req.query.land);
