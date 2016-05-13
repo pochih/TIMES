@@ -66,7 +66,7 @@ app.get('/user/data', function(req, res) {
             secs: usertime[user].secs,
             milliseconds: 0
           }
-          users[user].timeLeft.hours = timeObj;
+          users[user].timeLeft = timeObj;
           USER.child(user).child('timeLeft').set(timeObj);
         }
         console.log(" [O] /user/data?user=all");
@@ -123,6 +123,14 @@ app.get('/user/dead', function(req, res) {
   });
 });
 
+// change user's name
+app.get('/user/modify', function(req, res) {
+  var name = req.query.name;
+  var user = req.query.user;
+  USER.child(user).child('name').set(name);
+  res.send('<h1 style="color:#089c7f;">Change User:</h1><h2 style="color:purple;">' + user + "'s</h2>" + '<h1 style="color:#089c7f;">name to:</h1>' + '<h2 style="color:#bb4477;font-family:Papyrus">' + name + '</h2>')
+});
+
 // init users
 app.get('/user/init', function(req, res) {
   var db = require('./db.js');
@@ -136,7 +144,7 @@ app.get('/user/init', function(req, res) {
   tmp.interest = user.interest;
   console.log(JSON.stringify(tmp));
   USERTIME.child(user._id).set(tmp);
-  res.send('<h1 style="color:blue;">Add User:</h1><h3 style="color:purple;">' + user._id + ' (' + user.name + ')' + '</h3><h1 style="color:#bb4477;">Succeed!!</h1>')
+  res.send('<h1 style="color:blue;">Add User:</h1><h3 style="color:purple;">' + user._id + ' (' + user.name + ')' + '</h3><h1 style="color:#bb4477;">Succeed!!</h1>');
 });
 
 // init users
@@ -296,7 +304,7 @@ app.get('/land/buy', function(req, res) {
   // res.send(result);
 });
 
-var standings = ['d3', 'd6', 'b6', 'c7', 'd9', 'd8', 'a8', 'c6', 'd5', 'e5', 'e7', 'e8', 'd10', 'e6', 'a7', 'a6', 'c5'];
+var standings = ['d3', 'd6', 'b6', 'c7', 'd9', 'd8', 'a8', 'c6', 'd5', 'e5', 'e7', 'e8', 'd10', 'e6', 'a7', 'a6', 'c5', 'b11', 'b12', 'c15', 'a9', 'd11', 'a16', 'b9', 'd2', 'c13', 'e11', 'a5', 'a3', 'c4', 'c3', 'b3', 'a4', 'd1', 'b5', 'e4', 'a1', 'b1', 'e1', 'c2', 'e2', 'c1', 'b2', 'e10', 'c10', 'b10', 'e9', 'a10', 'c14', 'c11', 'd12', 'c9', 'b8', 'c8', 'd16', 'd14', 'e12', 'e14', 'a14', 'b13', 'b14', 'e15', 'a13', 'a12', 'b15', 'e16', 'e17', 'c16', 'c17', 'b16', 'e13', 'c19', 'd18', 'd4', 'd7'];
 var fs = require('fs');
 for (var i = 0; i < standings.length; i++)
   fs.appendFile('public/standing.json', "'" + standings[i] + "', ", function (err) {
