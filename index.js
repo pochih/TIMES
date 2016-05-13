@@ -381,9 +381,9 @@ app.get('/board/init', function(req, res) {
       var landIDs = [];
       for (var i = 0; i < landArr.length; i++) {
         landIDs.push(landArr[i]);
-        boardOccupy[index][i] = 0;
-        if (index == 2)
-          boardOccupy[index][i] = 1;
+        boardOccupy[index][i] = 1;
+        if (index == 2 || index == 3)
+          boardOccupy[index][i] = 0;
 
         // set land2board dictionary
         var key = landArr[i];
