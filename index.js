@@ -308,7 +308,7 @@ app.get('/land/stand', function(req, res) {
 
   if (standings.indexOf(req.query.land) < 0) {
     standings.push(req.query.land);
-    fs.appendFile('../standing.txt', req.query.land+', ', function (err) {
+    fs.appendFile('public/standing.json', req.query.land+', ', function (err) {
 
     });
   }
