@@ -1,3 +1,16 @@
+var lv1_price = 60;
+var lv2_price = 300;
+var lv3_price = 900;
+var lv4_price = 1800;
+var lv1_prob = 70;
+var lv2_prob = 50;
+var lv3_prob = 30;
+var lv4_prob = 15;
+var lv1_interest = 0.1;
+var lv2_interest = 0.2;
+var lv3_interest = 0.5;
+var lv4_interest = 2;
+
 module.exports = {
 	center: {
 		players: [100001, 100003, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -184,15 +197,15 @@ module.exports = {
 	},
 	defaultLand: {
 		_id: "b7",
-		price: 60,
-		probability: 20,
+		price: lv1_price,
+		probability: lv1_prob,
 		category: "learning",
-		level: 4,
+		level: 1,
 		owner: {
 			name: "Art-festival",
 			_id: 100003
 		},
-		interest: 2,
+		interest: lv1_interest,
 		content: "考100分",
 		specialties: false
 	},
@@ -200,281 +213,281 @@ module.exports = {
 		entertainment: [
 			{
 				_id: "e1",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "entertainment",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "分享FB動態抽到iPhone一支",
 				specialties: false
 			},
 			{
 				_id: "e2",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "entertainment",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "每天晚上睡前打一場LOL",
 				specialties: false
 			},
 			{
 				_id: "e3",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "entertainment",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "一場說走就走的微旅行",
 				specialties: false
 			},
 			{
 				_id: "e4",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "entertainment",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "在漫畫店待上一整天",
 				specialties: false
 			},
 			{
 				_id: "e5",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "entertainment",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "幸運搶到偶像歌手的搖滾區門票",
 				specialties: false
 			},
 			{
 				_id: "e6",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "entertainment",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "晚上出門遛夠散步",
 				specialties: false
 			},
 			{
 				_id: "e7",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "entertainment",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "隨揪隨行，和朋友一起看場電影",
 				specialties: false
 			},
 			{
 				_id: "e8",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "entertainment",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "一個酒杯，一點音樂",
 				specialties: false
 			},
 			{
 				_id: "e9",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "entertainment",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "在賭場贏得吃角子老虎",
 				specialties: false
 			},
 			{
 				_id: "e10",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "entertainment",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "公司尾牙抽到一棟房子(車)",
 				specialties: false
 			},
 			{
 				_id: "e11",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "entertainment",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "和同好組成一個業餘樂團，工作之餘滿足興趣",
 				specialties: false
 			},
 			{
 				_id: "e12",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "entertainment",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "在現場觀看最喜歡的球隊贏得總冠軍",
 				specialties: false
 			},
 			{
 				_id: "e13",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "entertainment",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "挑戰自我，完成高空跳傘",
 				specialties: false
 			},
 			{
 				_id: "e14",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "entertainment",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "人生的GAP YEAR，獨自在歐洲旅居一年",
 				specialties: false
 			},
 			{
 				_id: "e15",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "entertainment",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "環遊世界一周",
 				specialties: false
 			},
 			{
 				_id: "e16",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "entertainment",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "下圍棋擊敗AlphaGo",
 				specialties: false
 			},
 			{
 				_id: "e17",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "entertainment",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "擁有一架私人飛機",
 				specialties: false
 			},
 			{
 				_id: "e18",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "entertainment",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "買下一座海上小島",
 				specialties: false
 			},
 			{
 				_id: "e19",
-				price: 1800,
-				probability: 15,
+				price: lv4_price,
+				probability: lv4_prob,
 				category: "entertainment",
 				level: 4,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 2,
+				interest: lv4_interest,
 				content: "買下一座動物園",
 				specialties: false
 			},
 			{
 				_id: "e20",
-				price: 1800,
-				probability: 15,
+				price: lv4_price,
+				probability: lv4_prob,
 				category: "entertainment",
 				level: 4,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 2,
+				interest: lv4_interest,
 				content: "在清幽的山上有一間自己的別墅",
 				specialties: false
 			}
@@ -482,281 +495,281 @@ module.exports = {
 		health: [
 			{
 				_id: "d1",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "health",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "一口氣做一百個仰臥起坐",
 				specialties: false
 			},
 			{
 				_id: "d2",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "health",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "施打流感疫苗",
 				specialties: false
 			},
 			{
 				_id: "d3",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "health",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "吃素2個月，但最後放棄了",
 				specialties: false
 			},
 			{
 				_id: "d4",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "health",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "期末考念不完了還是要九點準時上床睡覺",
 				specialties: false
 			},
 			{
 				_id: "d5",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "health",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "和朋友每週末一起跑步健身",
 				specialties: false
 			},
 			{
 				_id: "d6",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "health",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "朝會上司令台表演健康操",
 				specialties: false
 			},
 			{
 				_id: "d7",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "health",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "一個月不喝含糖飲料",
 				specialties: false
 			},
 			{
 				_id: "d8",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "health",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "一整年沒有生病、感冒",
 				specialties: false
 			},
 			{
 				_id: "d9",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "health",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "立志成為健康飲食的營養達人",
 				specialties: false
 			},
 			{
 				_id: "d10",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "health",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "13分鐘輕鬆跑完3000公尺",
 				specialties: false
 			},
 			{
 				_id: "d11",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "health",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "吃中藥調理身體，不再過敏",
 				specialties: false
 			},
 			{
 				_id: "d12",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "health",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "每天都喝3000c.c.的水",
 				specialties: false
 			},
 			{
 				_id: "d13",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "health",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "連續5年健康檢查沒有異狀",
 				specialties: false
 			},
 			{
 				_id: "d14",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "health",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "成為體育校隊選手，為校爭光",
 				specialties: false
 			},
 			{
 				_id: "d15",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "health",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "養成每天晨泳的習慣",
 				specialties: false
 			},
 			{
 				_id: "d16",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "health",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "成功挑戰42.195公里馬拉松",
 				specialties: false
 			},
 			{
 				_id: "d17",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "health",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "因運動傷害休養1年，並順利康復",
 				specialties: false
 			},
 			{
 				_id: "d18",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "health",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "成功挑戰泳渡日月潭",
 				specialties: false
 			},
 			{
 				_id: "d19",
-				price: 1800,
-				probability: 15,
+				price: lv4_price,
+				probability: lv4_prob,
 				category: "health",
 				level: 4,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 2,
+				interest: lv4_interest,
 				content: "騎腳踏車橫跨歐亞大陸",
 				specialties: false
 			},
 			{
 				_id: "d20",
-				price: 1800,
-				probability: 15,
+				price: lv4_price,
+				probability: lv4_prob,
 				category: "health",
 				level: 4,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 2,
+				interest: lv4_interest,
 				content: "63歲時，抗癌成功",
 				specialties: false
 			}
@@ -764,281 +777,281 @@ module.exports = {
 		affection: [
 			{
 				_id: "a1",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "affection",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "第一次小鹿亂撞地牽起那個人的手",
 				specialties: false
 			},
 			{
 				_id: "a2",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "affection",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "用拍立得記錄著與死黨們相處的記憶",
 				specialties: false
 			},
 			{
 				_id: "a3",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "affection",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "準備一些點心，與巷口那隻貓談談心",
 				specialties: false
 			},
 			{
 				_id: "a4",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "affection",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "帶著孩子在河濱公園渡過悠閒的週末",
 				specialties: false
 			},
 			{
 				_id: "a5",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "affection",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "和鄰居相處融洽，彼此敦親睦鄰",
 				specialties: false
 			},
 			{
 				_id: "a6",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "affection",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "在FB上找到小學時搬家轉學的同學",
 				specialties: false
 			},
 			{
 				_id: "a7",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "affection",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "和爸媽溝通取得他們的對你的理解",
 				specialties: false
 			},
 			{
 				_id: "a8",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "affection",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "交到一群開心打屁的的朋友",
 				specialties: false
 			},
 			{
 				_id: "a9",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "affection",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "和多年未見的好友相約一頓午茶",
 				specialties: false
 			},
 			{
 				_id: "a10",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "affection",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "在公司有一群相處融洽、相互支持的同事",
 				specialties: false
 			},
 			{
 				_id: "a11",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "affection",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "養一窩聽話的毛小孩",
 				specialties: false
 			},
 			{
 				_id: "a12",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "affection",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "擁有一個無話不談的知心好友",
 				specialties: false
 			},
 			{
 				_id: "a13",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "affection",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "找到一生的信仰，虔誠的相信著",
 				specialties: false
 			},
 			{
 				_id: "a14",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "affection",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "和心愛的人結婚",
 				specialties: false
 			},
 			{
 				_id: "a15",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "affection",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "子孫滿堂",
 				specialties: false
 			},
 			{
 				_id: "a16",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "affection",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "參加兒子的婚禮",
 				specialties: false
 			},
 			{
 				_id: "a17",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "affection",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "擁有一次回到過去道謝的機會",
 				specialties: false
 			},
 			{
 				_id: "a18",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "affection",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "在美麗的海島國家度蜜月",
 				specialties: false
 			},
 			{
 				_id: "a19",
-				price: 1800,
-				probability: 15,
+				price: lv4_price,
+				probability: lv4_prob,
 				category: "affection",
 				level: 4,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 2,
+				interest: lv4_interest,
 				content: "拍攝浪漫求婚廣告",
 				specialties: false
 			},
 			{
 				_id: "a20",
-				price: 1800,
-				probability: 15,
+				price: lv4_price,
+				probability: lv4_prob,
 				category: "affection",
 				level: 4,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 2,
+				interest: lv4_interest,
 				content: "認養非洲兒童，資助孩子的成長過程",
 				specialties: false
 			}
@@ -1046,281 +1059,281 @@ module.exports = {
 		career: [
 			{
 				_id: "c1",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "career",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "認真寫作，成為網路知名美食部落客",
 				specialties: false
 			},
 			{
 				_id: "c2",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "career",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "創業獲得投資人青睞獲得種子投資",
 				specialties: false
 			},
 			{
 				_id: "c3",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "career",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "成為工作安定、有保障的公務員",
 				specialties: false
 			},
 			{
 				_id: "c4",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "career",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "能力獲得上司肯定，升遷加薪",
 				specialties: false
 			},
 			{
 				_id: "c5",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "career",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "擁有人生中的第一張名片",
 				specialties: false
 			},
 			{
 				_id: "c6",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "career",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "存到人生的第一桶金",
 				specialties: false
 			},
 			{
 				_id: "c7",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "career",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "打零工，過輕鬆寫意的生活",
 				specialties: false
 			},
 			{
 				_id: "c8",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "career",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "學會一項傳統的技能，將老一輩的智慧傳承下去",
 				specialties: false
 			},
 			{
 				_id: "c9",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "career",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "認真拉業績，榮獲年度最佳業務員",
 				specialties: false
 			},
 			{
 				_id: "c10",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "career",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "成為一個小學老師，用生命影響著生命",
 				specialties: false
 			},
 			{
 				_id: "c11",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "career",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "達成小時候夢想，開了一間漫畫書店",
 				specialties: false
 			},
 			{
 				_id: "c12",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "career",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "成為行腳節目主持人，玩遍五大洋七大洲",
 				specialties: false
 			},
 			{
 				_id: "c13",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "career",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "參加世界大賞，成為世界第一的麵包師傅",
 				specialties: false
 			},
 			{
 				_id: "c14",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "career",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "放棄年薪百萬，回家鄉務農種水果",
 				specialties: false
 			},
 			{
 				_id: "c15",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "career",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "如願成為一個偏鄉教師，作為一份志業",
 				specialties: false
 			},
 			{
 				_id: "c16",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "career",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "如願成為一個偏鄉教師，作為一份志業",
 				specialties: false
 			},
 			{
 				_id: "c17",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "career",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "樂團登上跨年音樂會表演",
 				specialties: false
 			},
 			{
 				_id: "c18",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "career",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "回饋資金予母校，建造一棟以自己為名的大樓",
 				specialties: false
 			},
 			{
 				_id: "c19",
-				price: 1800,
-				probability: 15,
+				price: lv4_price,
+				probability: lv4_prob,
 				category: "career",
 				level: 4,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 2,
+				interest: lv4_interest,
 				content: "高價收購自己有興趣的新創公司",
 				specialties: false
 			},
 			{
 				_id: "c20",
-				price: 1800,
-				probability: 15,
+				price: lv4_price,
+				probability: lv4_prob,
 				category: "career",
 				level: 4,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 2,
+				interest: lv4_interest,
 				content: "成功開發新技術，成為業界先驅",
 				specialties: false
 			}
@@ -1328,281 +1341,281 @@ module.exports = {
 		learning: [
 			{
 				_id: "b1",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "learning",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "日文小考100分",
 				specialties: false
 			},
 			{
 				_id: "b2",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "learning",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "被老師要求背完出師表",
 				specialties: false
 			},
 			{
 				_id: "b3",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "learning",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "國中畢業獲得市長獎",
 				specialties: false
 			},
 			{
 				_id: "b4",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "learning",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "全國科展獲優等獎",
 				specialties: false
 			},
 			{
 				_id: "b5",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "learning",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "在補習班擔任輔導老師，為學生解惑",
 				specialties: false
 			},
 			{
 				_id: "b6",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "learning",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "高中獲得全校第一名",
 				specialties: false
 			},
 			{
 				_id: "b7",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "learning",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "大四沒上課還是輕鬆歐趴",
 				specialties: false
 			},
 			{
 				_id: "b8",
-				price: 60,
-				probability: 70,
+				price: lv1_price,
+				probability: lv1_prob,
 				category: "learning",
 				level: 1,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.1,
+				interest: lv1_interest,
 				content: "為了第一志願，閉關重考一年",
 				specialties: false
 			},
 			{
 				_id: "b9",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "learning",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "榮獲傑出青年獎",
 				specialties: false
 			},
 			{
 				_id: "b10",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "learning",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "努力一學期，順利得到書卷獎",
 				specialties: false
 			},
 			{
 				_id: "b11",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "learning",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "活到老學到老，參加社區大學課程",
 				specialties: false
 			},
 			{
 				_id: "b12",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "learning",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "黑客松最佳概念獎",
 				specialties: false
 			},
 			{
 				_id: "b13",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "learning",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "和同學組隊參與旅遊企劃比賽，得到第一名",
 				specialties: false
 			},
 			{
 				_id: "b14",
-				price: 300,
-				probability: 50,
+				price: lv2_price,
+				probability: lv2_prob,
 				category: "learning",
 				level: 2,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.2,
+				interest: lv2_interest,
 				content: "獲得雙修學歷",
 				specialties: false
 			},
 			{
 				_id: "b15",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "learning",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "參加論文比賽，成功申請獎學金",
 				specialties: false
 			},
 			{
 				_id: "b16",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "learning",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "離鄉背井遠赴美國攻取博士學歷",
 				specialties: false
 			},
 			{
 				_id: "b17",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "learning",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "考取專業領域執照",
 				specialties: false
 			},
 			{
 				_id: "b18",
-				price: 900,
-				probability: 30,
+				price: lv3_price,
+				probability: lv3_prob,
 				category: "learning",
 				level: 3,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 0.5,
+				interest: lv3_interest,
 				content: "辛苦的修完一堂獲益良多的好課",
 				specialties: false
 			},
 			{
 				_id: "b19",
-				price: 1800,
-				probability: 15,
+				price: lv4_price,
+				probability: lv4_prob,
 				category: "learning",
 				level: 4,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 2,
+				interest: lv4_interest,
 				content: "獲得諾貝爾獎",
 				specialties: false
 			},
 			{
 				_id: "b20",
-				price: 1800,
-				probability: 15,
+				price: lv4_price,
+				probability: lv4_prob,
 				category: "learning",
 				level: 4,
 				owner: {
 					name: -1,
 					_id: -1
 				},
-				interest: 2,
+				interest: lv4_interest,
 				content: "獲得哈佛榮譽博士",
 				specialties: false
 			}
@@ -1647,7 +1660,7 @@ var a =
 var b = 
 {
 	_id: "A10",
-	price: 60,
+	price: lv1_price,
 	probability: 20,
 	category: "affection",
 	level: 4,

@@ -12,10 +12,10 @@ var landTypes = {
 
 var specialtiesTable = {
 	a: 10,
-	b: 19,
-	c: 16,
-	d: 16,
-	e: 12
+	b: 10,
+	c: 10,
+	d: 10,
+	e: 10
 }
 
 var all_lands = require('./db.js').lands;
@@ -124,6 +124,11 @@ function countProbability(user, land, money, landQuery, landOwned) {
 		probability = 80;
 
 	probability = probability * (money/price) + user.category[landQuery.longType];
+
+	if (probability < 0)
+		return 0;
+	if (probability > 100)
+		return 100;
 	return probability;
 }
 
@@ -393,5 +398,11 @@ module.exports = {
       	if (l.length >= 4)
       	  dead.firstStage.learning = true;
       	return dead;
+	},
+	getProbability: function(user, land, money, landQuery) {
+		// 判斷是否收購
+		var landOwned = isOwned(user, land);
+		var prob = countProbability(user, land, money, landQuery, landOwned);
+		return prob;
 	}
 }
