@@ -357,6 +357,8 @@ app.get('/board/init', function(req, res) {
       for (var i = 0; i < landArr.length; i++) {
         landIDs.push(landArr[i]);
         boardOccupy[index][i] = 0;
+        if (index == 2)
+          boardOccupy[index][i] = 1;
 
         // set land2board dictionary
         var key = landArr[i];
@@ -411,6 +413,22 @@ app.get('/board/occupy', function(req, res) {
 
 
 //////// global data /////////
+
+// init server
+app.get('/init', function(req, res) {
+  var querys = ['https://art-festival.herokuapp.com/board/init?board=all', 'https://art-festival.herokuapp.com/land/init', 'https://art-festival.herokuapp.com/user/init/all']
+  for (var i = 0; i < querys.length; i++) {
+    var pathname = querys[i];
+    request({
+      url: pathname,
+      json: true
+    }, function (error, response, body) {
+      if (!error && response.statusCode === 200) {}
+    });
+  }
+  var result = '<h1 style="color:#6e467c;">Server Init</h1>' + '<h1 style="color:#b23e48;">Succeed!</h1>';
+  res.send(result);
+});
 
 // start counting time
 app.get('/time/sync/:dir', function(req, res) {
