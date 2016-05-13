@@ -64,7 +64,7 @@ app.get('/user/data', function(req, res) {
           timeObj.hours = usertime[user].hours;
           timeObj.mins = usertime[user].mins;
           timeObj.secs = usertime[user].secs;
-          timeObj.milliseconds: 0;
+          timeObj.milliseconds = 0;
           users[user].timeLeft = timeObj;
           USER.child(user).child('timeLeft').set(timeObj);
         }
