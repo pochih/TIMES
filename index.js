@@ -114,6 +114,7 @@ app.get('/user/dead', function(req, res) {
     var user = snapshot.val();
     if (user != null) {
       var dead = parser.parseDead(user);
+      USER.child(req.query.user).child('dead').set(dead);
       res.send(dead);
     }
     else {
