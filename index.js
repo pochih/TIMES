@@ -306,7 +306,7 @@ app.get('/land/stand', function(req, res) {
 
   // user stand on land
   USER.child(user).child('stand').set(req.query.land);
-  console.log(" [!] /land/stand \nuser %s \nland%s", user, req.query.land);
+  console.log(" [!] /land/stand \nuser %s \nland %s", user, req.query.land);
 
   var result = '<h1 style="color:red;">User:</h1>' + user + '<h1 style="color:blue;">stands on land:</h1>' + land.longType + land.num;
   res.send(result);
