@@ -88,8 +88,8 @@ app.get('/user/data', function(req, res) {
           res.send(user);
         }
         else {
-          var db = require('./db.js');
-          res.send(db.defaultUser);
+          //var db = require('./db.js');
+          res.send({message: '此使用者不存在ID'});
         }
       });
     });
