@@ -109,7 +109,7 @@ app.get('/user/time', function(req, res) {
   });
 });
 
-// get dead user's data
+// get dead user's data/
 app.get('/user/dead', function(req, res) {
   USER.child(req.query.user).once("value", function(snapshot) {
     var user = snapshot.val();
