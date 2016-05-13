@@ -306,6 +306,7 @@ app.get('/land/stand', function(req, res) {
 
   // user stand on land
   USER.child(user).child('stand').set(req.query.land);
+  console.log(" [!] /land/stand user%s land %s", user, land);
 
   var result = '<h1 style="color:red;">User:</h1>' + user + '<h1 style="color:blue;">stands on land:</h1>' + land.longType + land.num;
   res.send(result);
@@ -357,7 +358,7 @@ app.get('/board/init', function(req, res) {
       for (var i = 0; i < landArr.length; i++) {
         landIDs.push(landArr[i]);
         boardOccupy[index][i] = 0;
-        if (index == 5)
+        if (index == 2)
           boardOccupy[index][i] = 1;
 
         // set land2board dictionary
