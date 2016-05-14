@@ -350,7 +350,7 @@ app.get('/land/prob', function(req, res) {
         var money = landData.val().price*2;
         var probArr = [];
         var probability_h = parser.getProbability(userData.val(), landData.val(), money, landQuery);
-        var probability_l = parser.getProbability(userData.val(), landData.val(), 0, landQuery);
+        var probability_l = parser.getProbability(userData.val(), landData.val(), 1, landQuery);
         probArr[0] = probability_l;
         probArr[1] = probability_h;
         res.send({probability: probArr});
