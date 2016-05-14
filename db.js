@@ -121,7 +121,7 @@ module.exports = {
 	allUserURL: [
 		'https://art-festival.herokuapp.com/user/init?a=3&p=-2&i=-1&name=Brian Huang&id=0&device=0',
   		'https://art-festival.herokuapp.com/user/init?a=3&p=-3&i=0&name=Barack Obama&id=1&device=1',
-  		'https://art-festival.herokuapp.com/user/init?a=-6&p=3&i=3&name=Angela Merkle&id=2&device=2',
+  		'https://art-festival.herokuapp.com/user/init?a=-4&p=1&i=3&name=Angela Merkle&id=2&device=2',
   		'https://art-festival.herokuapp.com/user/init?a=-4&p=2&i=2&name=VladimirPutin&id=3&device=3',
   		'https://art-festival.herokuapp.com/user/init?a=5&p=-7&i=2&name=Che Guevara&id=4&device=4',
   		'https://art-festival.herokuapp.com/user/init?a=-2&p=-8&i=10&name=Albert Einstein&id=5&device=5',
