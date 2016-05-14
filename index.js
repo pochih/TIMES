@@ -234,17 +234,6 @@ app.get('/land/buy', function(req, res) {
         // user 加利息
         userData.interest = parser.countInterest(userData.lands);
         console.log("   user: %s, interest: %s", userData._id, userData.interest);
-        if (userData.interest >= 5) {
-          var pathname = 'http://art-festival.herokuapp.com/center/speed?speed=3';
-          request({
-            url: pathname,
-            json: true
-          }, function (error, response, body) {
-            if (!error && response.statusCode === 200) {
-              console.log(' [!] Speed increase to 3 !');
-            }
-          });
-        }
 
         USERTIME.child(user).once("value", function(usertimeData) {
           var usertime = usertimeData.val();
