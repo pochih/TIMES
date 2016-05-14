@@ -6,10 +6,10 @@ var lv1_prob = 85;
 var lv2_prob = 70;
 var lv3_prob = 50;
 var lv4_prob = 30;
-var lv1_interest = 0.1;
-var lv2_interest = 0.2;
-var lv3_interest = 0.5;
-var lv4_interest = 2;
+var lv1_interest = 0.2;
+var lv2_interest = 0.5;
+var lv3_interest = 1.5;
+var lv4_interest = 4;
 
 module.exports = {
 	center: {
@@ -125,9 +125,9 @@ module.exports = {
   		'https://art-festival.herokuapp.com/user/init?a=-4&p=2&i=2&name=VladimirPutin&id=3&device=3',
   		'https://art-festival.herokuapp.com/user/init?a=2&p=-4&i=2&name=Che Guevara&id=4&device=4',
   		'https://art-festival.herokuapp.com/user/init?a=0&p=4&i=-4&name=Albert Einstein&id=5&device=5',
-  		'https://art-festival.herokuapp.com/user/init?a=-5&p=5&i=0&name=Donald John Trump&id=6&device=6',
-  		'https://art-festival.herokuapp.com/user/init?a=-1&p=-3&i=4&name=Neil Alden Armstrong&id=7&device=7',
-  		'https://art-festival.herokuapp.com/user/init?a=-2&p=-2&i=4&name=%E5%AD%94%E4%B8%98&id=8&device=8',
+  		'https://art-festival.herokuapp.com/user/init?a=-2&p=2&i=0&name=Donald John Trump&id=6&device=6',
+  		'https://art-festival.herokuapp.com/user/init?a=-1&p=-3&i=4&name=Hello Kitty&id=7&device=7',
+  		'https://art-festival.herokuapp.com/user/init?a=-2&p=-1&i=3&name=%E5%AD%94%E4%B8%98&id=8&device=8',
   		'https://art-festival.herokuapp.com/user/init?a=-2&p=3&i=-1&name=%E5%A7%9A%E6%98%8E&id=9&device=9',
   		'https://art-festival.herokuapp.com/user/init?a=1&p=-3&i=2&name=%E6%9D%91%E4%B8%8A%E6%98%A5%E6%A8%B9&id=10&device=10',
   		'https://art-festival.herokuapp.com/user/init?a=10&p=10&i=10&name=root&id=100001&device=100001',
