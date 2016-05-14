@@ -339,7 +339,6 @@ app.get('/land/stand', function(req, res) {
 app.get('/land/prob', function(req, res) {
   var user = req.query.user;
   var landQuery = parser.parseLandType(req.query.land);
-  var money = req.query.money;
 
   // prevent illegal land
   if (parser.illegalLand(landQuery))
@@ -348,8 +347,13 @@ app.get('/land/prob', function(req, res) {
     // count probability
     USER.child(user).once("value", function(userData) {
       LAND.child(req.query.land).once("value", function(landData) {
-        var probability = parser.getProbability(userData.val(), landData.val(), money, landQuery);
-        res.send({probability: probability});
+        var money = landData.val().price*2;
+        var probArr = [];
+        var probability_h = parser.getProbability(userData.val(), landData.val(), money, landQuery);
+        var probability_l = parser.getProbability(userData.val(), landData.val(), 0, landQuery);
+        probArr[0] = probability_l;
+        probArr[1] = probability_h;
+        res.send({probability: probArr});
       });
     });
   }
