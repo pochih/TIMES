@@ -123,7 +123,7 @@ function countProbability(user, land, money, landQuery, landOwned) {
 	if (user.lands[category].length >= 6)
 		probability = 80;
 
-	probability = probability * (money/price) + user.category[landQuery.longType];
+	probability = probability * (money/price) + user.category[landQuery.longType] * 0.5;
 
 	if (probability < 0)
 		return 0;
