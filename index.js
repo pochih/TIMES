@@ -464,7 +464,7 @@ app.get('/board/occupy', function(req, res) {
 
 // init server
 app.get('/init', function(req, res) {
-  var querys = ['https://art-festival.herokuapp.com/board/init?board=all', 'https://art-festival.herokuapp.com/land/init', 'https://art-festival.herokuapp.com/user/init/all']
+  var querys = ['https://art-festival.herokuapp.com/board/init?board=all', 'https://art-festival.herokuapp.com/land/init', 'https://art-festival.herokuapp.com/user/init/all', 'https://art-festival.herokuapp.com/center/speed?speed=1']
   for (var i = 0; i < querys.length; i++) {
     var pathname = querys[i];
     request({
