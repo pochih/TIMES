@@ -460,7 +460,7 @@ app.get('/board/occupy', function(req, res) {
 
 
 
-//////// global data /////////
+//////// global data ////////
 
 // init server
 app.get('/init', function(req, res) {
