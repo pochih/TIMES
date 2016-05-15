@@ -305,6 +305,116 @@ app.get('/land/buy', function(req, res) {
   // res.send(result);
 });
 
+// user buy a land
+app.get('/v2/land/buy', function(req, res) {
+  var user = req.query.user;
+  var land = parser.parseLandType(parser.landTransfer(req.query.land));
+  var money = parseInt(req.query.money);
+
+  // user buy a land
+
+  USER.child(user).once("value", function(userdata){
+    var userData = userdata.val();
+    LAND.child(req.query.land).once("value", function(landdata) {
+      var landData = landdata.val();
+      var buyMsg = parser.buyLand(userData, landData, money, land);
+      if (buyMsg.success) {
+        // if succeed
+        console.log(" [O] /land/buy?user=" + user + '&target=' + buyMsg.targetID);
+
+        // 土地要新增owner
+        var ownerObj = {
+          _id: userData['_id'],
+          name: userData['name']
+        };
+        LAND.child(req.query.land).child("owner").set(ownerObj);
+
+        // user 下新增土地, 加利息, 扣錢
+        // user 新增土地
+        var userLand = userData.lands[land.longType];
+        var landIDs = [];
+        if (userLand != null)
+          landIDs = userLand;
+        if (landIDs.length == 1 && landIDs[0] == -1)
+          landIDs = [];
+        if (landIDs.indexOf(land.num) < 0)
+          landIDs.push(land.num);
+        userData.lands[land.longType] = landIDs;
+
+        // user 加利息
+        userData.interest = parser.countInterest(userData.lands);
+        console.log("   user: %s, interest: %s", userData._id, userData.interest);
+
+        USERTIME.child(user).once("value", function(usertimeData) {
+          var usertime = usertimeData.val();
+
+          // user 扣錢
+          usertime = parser.countTime(usertime, money);
+          usertime.interest = userData.interest;
+          userData.timeLeft.hours = usertime.hours;
+          userData.timeLeft.mins = usertime.mins;
+          userData.timeLeft.secs = usertime.secs;
+
+          // 更新 Firebase 資料
+          USER.child(user).set(userData);
+          USERTIME.child(user).set(usertime);
+        })
+
+        // 被搶者失去土地, 扣利息
+        if (buyMsg.targetID != null) {
+          var targetRef = USER.child(buyMsg.targetID);
+          targetRef.once("value", function(targetdata){
+            var target = targetdata.val();
+            var tmpLand = target.lands[land.longType];
+            var index = tmpLand.indexOf(land.num);
+            if (index > -1) {
+              tmpLand.splice(index, 1);
+              if (tmpLand.length == 0)
+                tmpLand = [-1];
+            }
+            target.lands[land.longType] = tmpLand;
+            target.interest = parser.countInterest(target.lands);
+            USERTIME.child(buyMsg.targetID).child('interest').set(target.interest);
+            console.log("   target: %s, interest: %s", target._id, target.interest);
+            targetRef.set(target);
+          });
+        }
+
+        // renew BOARD's occupy
+        LAND2BOARD.once("value", function(snapshot) {
+          var board = snapshot.val()[req.query.land].board;
+          var position = snapshot.val()[req.query.land].position;
+          boardOccupy[board][position] = 1;
+          BOARD.child(board).child("occupy").once("value", function(snapshot) {
+            var occupy = snapshot.val();
+            occupy[position] = 1;
+            BOARD.child(board).child("occupy").set(occupy);
+            res.status(200).send(buyMsg);
+          });
+        });
+      }
+      else {
+        // if failed
+
+        // 買失敗 扣錢
+        if (buyMsg.message == '沒拿到成就，怒！ ヽ(`Д´)ﾉ ヽ(`Д´)ﾉ ヽ(`Д´)ﾉ') {
+          // user 扣錢
+          userData.timeLeft = parser.countTime(userData.timeLeft, money);
+          var timeObj = userData.timeLeft;
+          timeObj.interest = userData.interest;
+          USERTIME.child(user).set(timeObj);
+          USER.child(user).set(userData);
+        }
+
+        res.status(400).send(buyMsg);
+      }
+    })
+  })
+
+  // var result = '<h1 style="color:red;">User:</h1>' + user + '<h1 style="color:blue;">buy land:</h1>' + land.longType + land.num;
+  // res.send(result);
+});
+
 // var standings = ['d3', 'd6', 'b6', 'c7', 'd9', 'd8', 'a8', 'c6', 'd5', 'e5', 'e7', 'e8', 'd10', 'e6', 'a7', 'a6', 'c5', 'b11', 'b12', 'c15', 'a9', 'd11', 'a16', 'b9', 'd2', 'c13', 'e11', 'a5', 'a3', 'c4', 'c3', 'b3', 'a4', 'd1', 'b5', 'e4', 'a1', 'b1', 'e1', 'c2', 'e2', 'c1', 'b2', 'e10', 'c10', 'b10', 'e9', 'a10', 'c14', 'c11', 'd12', 'c9', 'b8', 'c8', 'd16', 'd14', 'e12', 'e14', 'a14', 'b13', 'b14', 'e15', 'a13', 'a12', 'b15', 'e16', 'e17', 'c16', 'c17', 'b16', 'e13', 'c19', 'd18', 'd4', 'd7'];
 // var fs = require('fs');
 // for (var i = 0; i < standings.length; i++)
@@ -339,6 +449,29 @@ app.get('/land/stand', function(req, res) {
 app.get('/land/prob', function(req, res) {
   var user = req.query.user;
   var landQuery = parser.parseLandType(req.query.land);
+
+  // prevent illegal land
+  if (parser.illegalLand(landQuery))
+    res.send('這個土地不存在啦 ｡゜(｀Д´)゜｡ ');
+  else {
+    // count probability
+    USER.child(user).once("value", function(userData) {
+      LAND.child(req.query.land).once("value", function(landData) {
+        var money = landData.val().price*2;
+        var probArr = [];
+        var probability_h = parser.getProbability(userData.val(), landData.val(), money, landQuery);
+        var probability_l = parser.getProbability(userData.val(), landData.val(), 1, landQuery);
+        probArr[0] = probability_l;
+        probArr[1] = probability_h;
+        res.send({probability: probArr});
+      });
+    });
+  }
+});
+
+app.get('/v2/land/prob', function(req, res) {
+  var user = req.query.user;
+  var landQuery = parser.parseLandType(parser.landTransfer(req.query.land));
 
   // prevent illegal land
   if (parser.illegalLand(landQuery))

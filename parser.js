@@ -18,6 +18,14 @@ var specialtiesTable = {
 	e: 10
 }
 
+var boards = [
+	'a13', 'e12', 'e13', 'd13', 'c15', 'e14', 'c16', 'e15', 'b13', 'd14', 'd15', 'e16', 'b14', 'b15', 'd16', 'c17', 'b16', 'a14', 'e17', 'a12',
+	'b17', 'd17', 'c18', 'a15', 'a16', 'a17', 'd18', 'a18', 'e19', 'c19', 'e20', 'b18', 'c20', 'd19', 'd20', 'b19', 'b20', 'a19', 'a20', 'e18',
+	'b8', 'b9', 'b10', 'e9', 'a9', 'b11', 'c9', 'd11', 'c10', 'c14', 'e10', 'c12', 'c13', 'a10', 'b12', 'c11', 'a11', 'e11', 'd12', 'c8',
+	'e2', 'c1', 'a1', 'a2', 'c2', 'b1', 'b2', 'a3', 'a4', 'a5', 'e4', 'd2', 'e3', 'd1', 'b3', 'c3', 'b4', 'c4', 'b5', 'e1',
+	'c6', 'a6', 'c7', 'd3', 'd4', 'b6', 'd5', 'd6', 'e5', 'e6', 'a7', 'd7', 'a8', 'd9', 'd8', 'e8', 'e7', 'd10', 'b7', 'c5'
+]
+
 var all_lands = require('./db.js').lands;
 var land_a = all_lands[landTypes.a];
 var land_c = all_lands[landTypes.c];
@@ -127,8 +135,8 @@ function countProbability(user, land, money, landQuery, landOwned) {
 
 	if (probability < 0)
 		return 0;
-	if (probability > 100)
-		return 100;
+	// if (probability > 100)
+	// 	return 100;
 	return probability;
 }
 
@@ -404,5 +412,9 @@ module.exports = {
 		var landOwned = isOwned(user, land);
 		var prob = countProbability(user, land, money, landQuery, landOwned);
 		return prob;
+	},
+	landTransfer: function(number) {
+		var index = boards.indexOf(number);
+		return boards[index];
 	}
 }
