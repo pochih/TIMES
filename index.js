@@ -181,16 +181,25 @@ app.get('/land/data', function(req, res) {
   var land = req.query.land;
   if (land == 'all') {
     LAND.once("value", function(snapshot) {
+      var lands = snapshot.val();
+      for (var i in lands) {
+        var v2_land = parser.landTransferNum(lands[i]._id);
+        lands[i].newId = v2_land;
+      }
       console.log(" [O] /land/data?land=all");
-      res.send(snapshot.val());
+      res.send(lands);
     });
   }
   else {
     LAND.child(req.query.land).once("value", function(snapshot) {
       if (snapshot.val() == null)
         res.send('<h1 style="color:red;">Land:</h1>' + req.query.land + '<h1 style="color:red;">doesn\'t exist!</h1>');
-      else
-        res.send(snapshot.val());
+      else {
+        var data = snapshot.val();
+        var v2_land = parser.landTransferNum(data._id);
+        data.newId = v2_land;
+        res.send(data);
+      }
     });
   }
 });

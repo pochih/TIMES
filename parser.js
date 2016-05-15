@@ -417,5 +417,9 @@ module.exports = {
 		var land = boards[number-1];
 		console.log(land);
 		return land;
+	},
+	landTransferNum: function(land) {
+		var index = boards.indexOf(land);
+		return (index+1);
 	}
 }
