@@ -124,7 +124,7 @@ module.exports = {
   		'https://art-festival.herokuapp.com/user/init?a=-2&p=1&i=1&name=Angela Merkle&id=2&device=2',
   		'https://art-festival.herokuapp.com/user/init?a=-4&p=2&i=2&name=VladimirPutin&id=3&device=3',
   		'https://art-festival.herokuapp.com/user/init?a=2&p=-4&i=2&name=Che Guevara&id=4&device=4',
-  		'https://art-festival.herokuapp.com/user/init?a=0&p=4&i=-4&name=Albert Einstein&id=5&device=5',
+  		'https://art-festival.herokuapp.com/user/init?a=2&p=2&i=-4&name=Albert Einstein&id=5&device=5',
   		'https://art-festival.herokuapp.com/user/init?a=-2&p=2&i=0&name=Donald John Trump&id=6&device=6',
   		'https://art-festival.herokuapp.com/user/init?a=-1&p=-3&i=4&name=Hello Kitty&id=7&device=7',
   		'https://art-festival.herokuapp.com/user/init?a=-2&p=-1&i=3&name=%E5%AD%94%E4%B8%98&id=8&device=8',

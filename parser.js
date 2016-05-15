@@ -135,8 +135,8 @@ function countProbability(user, land, money, landQuery, landOwned) {
 
 	if (probability < 0)
 		return 0;
-	// if (probability > 100)
-	// 	return 100;
+	if (probability > 100)
+		return 100;
 	return probability;
 }
 
@@ -414,7 +414,8 @@ module.exports = {
 		return prob;
 	},
 	landTransfer: function(number) {
-		var index = boards.indexOf(number);
-		return boards[index];
+		var land = boards[number-1];
+		console.log(land);
+		return land;
 	}
 }

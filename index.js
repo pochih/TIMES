@@ -308,14 +308,15 @@ app.get('/land/buy', function(req, res) {
 // user buy a land
 app.get('/v2/land/buy', function(req, res) {
   var user = req.query.user;
-  var land = parser.parseLandType(parser.landTransfer(req.query.land));
+  var v2_land = parser.landTransfer(req.query.land);
+  var land = parser.parseLandType(v2_land);
   var money = parseInt(req.query.money);
 
   // user buy a land
 
   USER.child(user).once("value", function(userdata){
     var userData = userdata.val();
-    LAND.child(req.query.land).once("value", function(landdata) {
+    LAND.child(v2_land).once("value", function(landdata) {
       var landData = landdata.val();
       var buyMsg = parser.buyLand(userData, landData, money, land);
       if (buyMsg.success) {
@@ -327,7 +328,7 @@ app.get('/v2/land/buy', function(req, res) {
           _id: userData['_id'],
           name: userData['name']
         };
-        LAND.child(req.query.land).child("owner").set(ownerObj);
+        LAND.child(v2_land).child("owner").set(ownerObj);
 
         // user 下新增土地, 加利息, 扣錢
         // user 新增土地
@@ -382,8 +383,8 @@ app.get('/v2/land/buy', function(req, res) {
 
         // renew BOARD's occupy
         LAND2BOARD.once("value", function(snapshot) {
-          var board = snapshot.val()[req.query.land].board;
-          var position = snapshot.val()[req.query.land].position;
+          var board = snapshot.val()[v2_land].board;
+          var position = snapshot.val()[v2_land].position;
           boardOccupy[board][position] = 1;
           BOARD.child(board).child("occupy").once("value", function(snapshot) {
             var occupy = snapshot.val();
@@ -457,7 +458,7 @@ app.get('/land/prob', function(req, res) {
     // count probability
     USER.child(user).once("value", function(userData) {
       LAND.child(req.query.land).once("value", function(landData) {
-        var money = landData.val().price*2;
+        var money = landData.val().price;
         var probArr = [];
         var probability_h = parser.getProbability(userData.val(), landData.val(), money, landQuery);
         var probability_l = parser.getProbability(userData.val(), landData.val(), 1, landQuery);
@@ -471,7 +472,8 @@ app.get('/land/prob', function(req, res) {
 
 app.get('/v2/land/prob', function(req, res) {
   var user = req.query.user;
-  var landQuery = parser.parseLandType(parser.landTransfer(req.query.land));
+  var v2_land = parser.landTransfer(req.query.land);
+  var landQuery = parser.parseLandType(v2_land);
 
   // prevent illegal land
   if (parser.illegalLand(landQuery))
@@ -479,8 +481,8 @@ app.get('/v2/land/prob', function(req, res) {
   else {
     // count probability
     USER.child(user).once("value", function(userData) {
-      LAND.child(req.query.land).once("value", function(landData) {
-        var money = landData.val().price*2;
+      LAND.child(v2_land).once("value", function(landData) {
+        var money = landData.val().price;
         var probArr = [];
         var probability_h = parser.getProbability(userData.val(), landData.val(), money, landQuery);
         var probability_l = parser.getProbability(userData.val(), landData.val(), 1, landQuery);
