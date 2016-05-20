@@ -1,6 +1,6 @@
-var ownedParameter = 1.5;
-var threeLandsBonus = 1.5;
-var moneyUpperBound = 2;
+var ownedParameter = 1.5;	// 搶地的難度
+var threeLandsBonus = 1.5;	// 同類型三土地bonus
+var moneyUpperBound = 1;	// 出價上限
 
 var landTypes = {
 	a: "affection",
@@ -366,55 +366,176 @@ module.exports = {
 			return true;
 		return false;
 	},
-	parseDead: function(user) {
-		var dead = user.dead;
-		var a = user.lands.affection;
-      	var c = user.lands.career;
-      	var e = user.lands.entertainment;
-      	var h = user.lands.health;
-      	var l = user.lands.learning;
-      	if (a.length >= 1 && a[0] != -1)
-      	  dead.fourthStage.affection = true;
-      	if (a.length >= 2)
-      	  dead.thirdStage.affection = true;
-      	if (a.length >= 3)
-      	  dead.secondStage.affection = true;
-      	if (a.length >= 4)
-      	  dead.firstStage.affection = true;
-      	if (c.length >= 1 && c[0] != -1)
-      	  dead.fourthStage.career = true;
-      	if (c.length >= 2)
-      	  dead.thirdStage.career = true;
-      	if (c.length >= 3)
-      	  dead.secondStage.career = true;
-      	if (c.length >= 4)
-      	  dead.firstStage.career = true;
-      	if (e.length >= 1 && e[0] != -1)
-      	  dead.fourthStage.entertainment = true;
-      	if (e.length >= 2)
-      	  dead.thirdStage.entertainment = true;
-      	if (e.length >= 3)
-      	  dead.secondStage.entertainment = true;
-      	if (e.length >= 4)
-      	  dead.firstStage.entertainment = true;
-      	if (h.length >= 1 && h[0] != -1)
-      	  dead.fourthStage.health = true;
-      	if (h.length >= 2)
-      	  dead.thirdStage.health = true;
-      	if (h.length >= 3)
-      	  dead.secondStage.health = true;
-      	if (h.length >= 4)
-      	  dead.firstStage.health = true;
-      	if (l.length >= 1 && l[0] != -1)
-      	  dead.fourthStage.learning = true;
-      	if (l.length >= 2)
-      	  dead.thirdStage.learning = true;
-      	if (l.length >= 3)
-      	  dead.secondStage.learning = true;
-      	if (l.length >= 4)
-      	  dead.firstStage.learning = true;
+	parseDead: function(msg) {
+		var lands = [], dead = {
+			firstStage: {
+				affection: false,
+				career: false,
+				entertainment: false,
+				health: false,
+				learning: false
+			},
+			fourthStage: {
+				affection: false,
+				career: false,
+				entertainment: false,
+				health: false,
+				learning: false
+			},
+			secondStage: {
+				affection: false,
+				career: false,
+				entertainment: false,
+				health: false,
+				learning: false
+			},
+			thirdStage: {
+				affection: false,
+				career: false,
+				entertainment: false,
+				health: false,
+				learning: false
+			}
+		};
+		for (var i = 0; i < msg.length; i++) {
+			if (msg[i].type == 'buy' || msg[i].type == 'hunt')
+				lands.push(msg[i].land[0]);
+		}
+		//lands = ['d1', 'a2', 'd3', 'd4', 'd5', 'd11', 'd17', 'd11', 'd13', 'd1', 'd20'];
+
+		// decide stage
+		var stage = [[], [], [], []];
+		if (lands.length < 8) {
+			var quote = Math.floor(lands.length / 2);
+			var remainer = lands.length % 2;
+			var index = 0;
+			for (var i = 0; i < quote; i++) {
+				stage[i].push(lands[index]);
+				index += 1;
+				stage[i].push(lands[index])
+				index += 1;
+			}
+			if (remainer == 1)
+				stage[i].push(lands[index]);
+		}
+		else {
+			var quote = Math.floor(lands.length / 4);
+			var remainer = lands.length % 4;
+			var index = 0;
+			for (var j = 0; j < 4; j++) {
+				for (var i = 0; i < quote; i++) {
+					stage[j].push(lands[index]);
+					index += 1;
+				}
+			}
+			for (var i = 0; i < remainer; i++) {
+				stage[3].push(lands[index]);
+				index += 1;
+			}
+		}
+
+		console.log(stage);
+		// decide dead
+		for (var i = 0; i < stage[0].length; i++) {
+			if (stage[0][i] == 'a')
+				dead.firstStage.affection = true;
+			if (stage[0][i] == 'b')
+				dead.firstStage.learning = true;
+			if (stage[0][i] == 'c')
+				dead.firstStage.career = true;
+			if (stage[0][i] == 'd')
+				dead.firstStage.health = true;
+			if (stage[0][i] == 'e')
+				dead.firstStage.entertainment = true;
+		}
+		for (var i = 0; i < stage[1].length; i++) {
+			if (stage[1][i] == 'a')
+				dead.secondStage.affection = true;
+			if (stage[1][i] == 'b')
+				dead.secondStage.learning = true;
+			if (stage[1][i] == 'c')
+				dead.secondStage.career = true;
+			if (stage[1][i] == 'd')
+				dead.secondStage.health = true;
+			if (stage[1][i] == 'e')
+				dead.secondStage.entertainment = true;
+		}
+		for (var i = 0; i < stage[2].length; i++) {
+			if (stage[2][i] == 'a')
+				dead.thirdStage.affection = true;
+			if (stage[2][i] == 'b')
+				dead.thirdStage.learning = true;
+			if (stage[2][i] == 'c')
+				dead.thirdStage.career = true;
+			if (stage[2][i] == 'd')
+				dead.thirdStage.health = true;
+			if (stage[2][i] == 'e')
+				dead.thirdStage.entertainment = true;
+		}
+		for (var i = 0; i < stage[3].length; i++) {
+			if (stage[3][i] == 'a')
+				dead.fourthStage.affection = true;
+			if (stage[3][i] == 'b')
+				dead.fourthStage.learning = true;
+			if (stage[3][i] == 'c')
+				dead.fourthStage.career = true;
+			if (stage[3][i] == 'd')
+				dead.fourthStage.health = true;
+			if (stage[3][i] == 'e')
+				dead.fourthStage.entertainment = true;
+		}
+
       	return dead;
 	},
+	// parseDead: function(user) {
+	// 	var dead = user.dead;
+	// 	var a = user.lands.affection;
+ //      	var c = user.lands.career;
+ //      	var e = user.lands.entertainment;
+ //      	var h = user.lands.health;
+ //      	var l = user.lands.learning;
+ //      	if (a.length >= 1 && a[0] != -1)
+ //      	  dead.fourthStage.affection = true;
+ //      	if (a.length >= 2)
+ //      	  dead.thirdStage.affection = true;
+ //      	if (a.length >= 3)
+ //      	  dead.secondStage.affection = true;
+ //      	if (a.length >= 4)
+ //      	  dead.firstStage.affection = true;
+ //      	if (c.length >= 1 && c[0] != -1)
+ //      	  dead.fourthStage.career = true;
+ //      	if (c.length >= 2)
+ //      	  dead.thirdStage.career = true;
+ //      	if (c.length >= 3)
+ //      	  dead.secondStage.career = true;
+ //      	if (c.length >= 4)
+ //      	  dead.firstStage.career = true;
+ //      	if (e.length >= 1 && e[0] != -1)
+ //      	  dead.fourthStage.entertainment = true;
+ //      	if (e.length >= 2)
+ //      	  dead.thirdStage.entertainment = true;
+ //      	if (e.length >= 3)
+ //      	  dead.secondStage.entertainment = true;
+ //      	if (e.length >= 4)
+ //      	  dead.firstStage.entertainment = true;
+ //      	if (h.length >= 1 && h[0] != -1)
+ //      	  dead.fourthStage.health = true;
+ //      	if (h.length >= 2)
+ //      	  dead.thirdStage.health = true;
+ //      	if (h.length >= 3)
+ //      	  dead.secondStage.health = true;
+ //      	if (h.length >= 4)
+ //      	  dead.firstStage.health = true;
+ //      	if (l.length >= 1 && l[0] != -1)
+ //      	  dead.fourthStage.learning = true;
+ //      	if (l.length >= 2)
+ //      	  dead.thirdStage.learning = true;
+ //      	if (l.length >= 3)
+ //      	  dead.secondStage.learning = true;
+ //      	if (l.length >= 4)
+ //      	  dead.firstStage.learning = true;
+ //      	return dead;
+	// },
 	getProbability: function(user, land, money, landQuery) {
 		// 判斷是否收購
 		var landOwned = isOwned(user, land);

@@ -132,10 +132,10 @@ app.get('/user/land', function(req, res) {
 
 // get dead user's data
 app.get('/user/dead', function(req, res) {
-  USER.child(req.query.user).once("value", function(snapshot) {
-    var user = snapshot.val();
-    if (user != null) {
-      var dead = parser.parseDead(user);
+  MSG.child(req.query.user).once("value", function(snapshot) {
+    var msg = snapshot.val();
+    if (msg != null) {
+      var dead = parser.parseDead(msg);
       USER.child(req.query.user).child('dead').set(dead);
       res.send(dead);
     }
