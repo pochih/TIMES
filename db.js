@@ -120,9 +120,9 @@ module.exports = {
 	},
 	allUserURL: [
 		'https://art-festival.herokuapp.com/user/init?a=3&p=-2&i=-1&name=Brian Huang&id=0&device=0',
-  		'https://art-festival.herokuapp.com/user/init?a=-1&p=0&i=1&name=Barack Obama&id=1&device=1',
-  		'https://art-festival.herokuapp.com/user/init?a=-1&p=1&i=0&name=Angela Merkle&id=2&device=2',
-  		'https://art-festival.herokuapp.com/user/init?a=-2&p=-2&i=4&name=VladimirPutin&id=3&device=3',
+  		'https://art-festival.herokuapp.com/user/init?a=1&p=1&i=-2&name=Barack Obama&id=1&device=1',
+  		'https://art-festival.herokuapp.com/user/init?a=-2&p=0&i=2&name=Angela Merkle&id=2&device=2',
+  		'https://art-festival.herokuapp.com/user/init?a=1&p=-2&i=1&name=VladimirPutin&id=3&device=3',
   		'https://art-festival.herokuapp.com/user/init?a=4&p=-2&i=-2&name=Che Guevara&id=4&device=4',
   		'https://art-festival.herokuapp.com/user/init?a=2&p=2&i=-4&name=Albert Einstein&id=5&device=5',
   		'https://art-festival.herokuapp.com/user/init?a=1&p=0&i=-1&name=Donald John Trump&id=6&device=6',
