@@ -14,6 +14,7 @@ var Firebase = require("firebase");
 var DB = new Firebase(config.FIREBASE_URL);
 var USER = DB.child("users");
 var USERTIME = DB.child("usertimes");
+var MSG = DB.child("msg");
 var LAND = DB.child("lands");
 var CENTER = DB.child("center");
 var BONUS = DB.child("bonus");
@@ -108,6 +109,19 @@ app.get('/user/time', function(req, res) {
   });
 });
 
+// get dead user's msg
+app.get('/user/msg', function(req, res) {
+  USERTIME.child(req.query.user).once("value", function(snapshot) {
+    var msg = snapshot.val();
+    if (msg != null) {
+      res.send(msg);
+    }
+    else {
+      res.send('<h1 style="color:#12bbf0;">No such User:</h1><h2 style="color:#f87373;">' + req.query.user + '</h2>');
+    }
+  });
+});
+
 // get dead user's data
 app.get('/user/dead', function(req, res) {
   USER.child(req.query.user).once("value", function(snapshot) {
@@ -140,6 +154,10 @@ app.get('/user/init', function(req, res) {
   // if ((req.query.id) == '0')
   //   user.timeLeft.hours = 40000;
   USER.child(user._id).set(user);
+  MSG.child(user._id).set([{
+    type: 'time',
+    speed: center.speed
+  }]);
 
   var tmp = user.timeLeft;
   tmp.interest = user.interest;
@@ -372,8 +390,36 @@ app.get('/v2/land/buy', function(req, res) {
 
         // 被搶者失去土地, 扣利息
         if (buyMsg.targetID != null) {
+
+          // 加入 msg
+          MSG.child(user).once("value", function(hunt) {
+            MSG.child(buyMsg.targetID).once("value", function(hunted) {
+              var hunter = [], prey = [];
+              if (hunt.val() != null)
+                hunter = hunt.val();
+              if (hunted.val() != null)
+                prey = hunted.val();
+              hunter.push({
+                type: 'hunt',
+                hunter: user,
+                prey: buyMsg.targetID,
+                land: v2_land,
+                newId: req.query.land
+              });
+              prey.push({
+                type: 'hunted',
+                hunter: user,
+                prey: buyMsg.targetID,
+                land: v2_land,
+                newId: req.query.land
+              });
+              MSG.child(user).set(hunter);
+              MSG.child(buyMsg.targetID).set(prey);
+            });
+          });
+
           var targetRef = USER.child(buyMsg.targetID);
-          targetRef.once("value", function(targetdata){
+          targetRef.once("value", function(targetdata) {
             var target = targetdata.val();
             var tmpLand = target.lands[land.longType];
             var index = tmpLand.indexOf(land.num);
@@ -387,6 +433,20 @@ app.get('/v2/land/buy', function(req, res) {
             USERTIME.child(buyMsg.targetID).child('interest').set(target.interest);
             console.log("   target: %s, interest: %s", target._id, target.interest);
             targetRef.set(target);
+          });
+        }
+        else {
+          MSG.child(user).once("value", function(buy) {
+            var buyer = [];
+            if (buy.val() != null)
+              buyer = buy.val();
+            buyer.push({
+              type: 'buy',
+              buyer: user,
+              land: v2_land,
+              newId: req.query.land
+            });
+            MSG.child(user).set(buyer);
           });
         }
 
@@ -425,13 +485,6 @@ app.get('/v2/land/buy', function(req, res) {
   // res.send(result);
 });
 
-// var standings = ['d3', 'd6', 'b6', 'c7', 'd9', 'd8', 'a8', 'c6', 'd5', 'e5', 'e7', 'e8', 'd10', 'e6', 'a7', 'a6', 'c5', 'b11', 'b12', 'c15', 'a9', 'd11', 'a16', 'b9', 'd2', 'c13', 'e11', 'a5', 'a3', 'c4', 'c3', 'b3', 'a4', 'd1', 'b5', 'e4', 'a1', 'b1', 'e1', 'c2', 'e2', 'c1', 'b2', 'e10', 'c10', 'b10', 'e9', 'a10', 'c14', 'c11', 'd12', 'c9', 'b8', 'c8', 'd16', 'd14', 'e12', 'e14', 'a14', 'b13', 'b14', 'e15', 'a13', 'a12', 'b15', 'e16', 'e17', 'c16', 'c17', 'b16', 'e13', 'c19', 'd18', 'd4', 'd7'];
-// var fs = require('fs');
-// for (var i = 0; i < standings.length; i++)
-//   fs.appendFile('public/standing.json', "'" + standings[i] + "', ", function (err) {
-
-//   });
-
 // user stand on a land
 app.get('/land/stand', function(req, res) {
   var user = req.query.user;
@@ -440,13 +493,6 @@ app.get('/land/stand', function(req, res) {
   // if illegal land
   if (parser.illegalLand(land))
     res.send('這個土地不存在啦 ｡゜(｀Д´)゜｡ ');
-
-  // if (standings.indexOf(req.query.land) < 0) {
-  //   standings.push(req.query.land);
-  //   fs.appendFile('public/standing.json', "'" + req.query.land + "', ", function (err) {
-
-  //   });
-  // }
 
   // user stand on land
   USER.child(user).child('stand').set(req.query.land);
@@ -608,7 +654,7 @@ app.get('/board/occupy', function(req, res) {
 
 // init server
 app.get('/init', function(req, res) {
-  var querys = ['https://art-festival.herokuapp.com/board/init?board=all', 'https://art-festival.herokuapp.com/land/init', 'https://art-festival.herokuapp.com/user/init/all', 'https://art-festival.herokuapp.com/center/speed?speed=1']
+  var querys = ['https://art-festival.herokuapp.com/board/init?board=all', 'https://art-festival.herokuapp.com/land/init', 'https://art-festival.herokuapp.com/user/init/all', 'https://art-festival.herokuapp.com/center/speed?speed=0.5']
   for (var i = 0; i < querys.length; i++) {
     var pathname = querys[i];
     request({
@@ -743,6 +789,16 @@ app.get('/center/speed', function(req, res) {
   var speed = req.query.speed;
   center.speed = speed;
   CENTER.child('speed').set(speed);
+  MSG.once("value", function(message) {
+    var msg = message.val();
+    for (var i in msg) {
+      msg[i].push({
+        type: 'time',
+        speed: speed-0
+      });
+    }
+    MSG.set(msg);
+  })
   res.send({speed: req.query.speed});
 });
 

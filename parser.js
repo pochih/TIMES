@@ -415,7 +415,6 @@ module.exports = {
 	},
 	landTransfer: function(number) {
 		var land = boards[number-1];
-		console.log(land);
 		return land;
 	},
 	landTransferNum: function(land) {
