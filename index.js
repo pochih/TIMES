@@ -111,7 +111,7 @@ app.get('/user/time', function(req, res) {
 
 // get dead user's msg
 app.get('/user/msg', function(req, res) {
-  USERTIME.child(req.query.user).once("value", function(snapshot) {
+  MSG.child(req.query.user).once("value", function(snapshot) {
     var msg = snapshot.val();
     if (msg != null) {
       res.send(msg);
