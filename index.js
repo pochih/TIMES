@@ -96,7 +96,7 @@ app.get('/user/data', function(req, res) {
   }
 });
 
-// get dead user's time
+// get user's time
 app.get('/user/time', function(req, res) {
   USERTIME.child(req.query.user).once("value", function(snapshot) {
     var time = snapshot.val();
@@ -109,7 +109,7 @@ app.get('/user/time', function(req, res) {
   });
 });
 
-// get dead user's msg
+// get user's msg
 app.get('/user/msg', function(req, res) {
   MSG.child(req.query.user).once("value", function(snapshot) {
     var msg = snapshot.val();
@@ -119,6 +119,14 @@ app.get('/user/msg', function(req, res) {
     else {
       res.send('<h1 style="color:#12bbf0;">No such User:</h1><h2 style="color:#f87373;">' + req.query.user + '</h2>');
     }
+  });
+});
+
+// get user's land
+app.get('/user/land', function(req, res) {
+  USER.child(req.query.user).child("lands").once("value", function(snapshot) {
+    var lands = parser.parseRawLand(snapshot.val());
+    res.send({lands: lands});
   });
 });
 

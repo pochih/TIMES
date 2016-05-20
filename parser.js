@@ -10,6 +10,14 @@ var landTypes = {
 	b: "learning"
 };
 
+var landTypesInverse = {
+	affection: "a",
+	career: "c",
+	entertainment: "e",
+	health: "d",
+	learning: "b"
+}
+
 var specialtiesTable = {
 	a: 10,
 	b: 10,
@@ -420,5 +428,44 @@ module.exports = {
 	landTransferNum: function(land) {
 		var index = boards.indexOf(land);
 		return (index+1);
+	},
+	parseRawLand: function(lands) {
+		var landArr = [];
+		if (lands.affection[0] != -1) {
+			var tmp = landTypesInverse['affection'];
+			for (var i = 0; i < lands.affection.length; i++) {
+				var index = boards.indexOf(tmp + lands.affection[i]);
+				landArr.push(index+1);
+			}
+		}
+		if (lands.career[0] != -1) {
+			var tmp = landTypesInverse['career'];
+			for (var i = 0; i < lands.career.length; i++) {
+				var index = boards.indexOf(tmp + lands.career[i]);
+				landArr.push(index+1);
+			}
+		}
+		if (lands.entertainment[0] != -1) {
+			var tmp = landTypesInverse['entertainment'];
+			for (var i = 0; i < lands.entertainment.length; i++) {
+				var index = boards.indexOf(tmp + lands.entertainment[i]);
+				landArr.push(index+1);
+			}
+		}
+		if (lands.health[0] != -1) {
+			var tmp = landTypesInverse['health'];
+			for (var i = 0; i < lands.health.length; i++) {
+				var index = boards.indexOf(tmp + lands.health[i]);
+				landArr.push(index+1);
+			}
+		}
+		if (lands.learning[0] != -1) {
+			var tmp = landTypesInverse['learning'];
+			for (var i = 0; i < lands.learning.length; i++) {
+				var index = boards.indexOf(tmp + lands.learning[i]);
+				landArr.push(index+1);
+			}
+		}
+		return landArr;
 	}
 }
