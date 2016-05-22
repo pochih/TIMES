@@ -130,6 +130,10 @@ module.exports = {
   		'https://art-festival.herokuapp.com/user/init?a=-2&p=2&i=0&name=%E5%AD%94%E4%B8%98&id=8&device=8',
   		'https://art-festival.herokuapp.com/user/init?a=0&p=-1&i=1&name=%E5%A7%9A%E6%98%8E&id=9&device=9',
   		'https://art-festival.herokuapp.com/user/init?a=4&p=-2&i=-2&name=%E6%9D%91%E4%B8%8A%E6%98%A5%E6%A8%B9&id=10&device=10',
+  		'https://art-festival.herokuapp.com/user/init?a=2&p=-2&i=0&name=Stephen Curry&id=11&device=11',
+  		'https://art-festival.herokuapp.com/user/init?a=0&p=-2&i=2&name=Steve Jobs&id=12&device=12',
+  		'https://art-festival.herokuapp.com/user/init?a=1&p=1&i=-2&name=R2D2&id=13&device=13',
+  		'https://art-festival.herokuapp.com/user/init?a=-2&p=0&i=2&name=King&id=14&device=14',
   		'https://art-festival.herokuapp.com/user/init?a=10&p=10&i=10&name=root&id=100001&device=100001',
   		'https://art-festival.herokuapp.com/user/init?a=2&p=2&i=2&name=How Do You Turn This On&id=100003&device=100003'
 	],
