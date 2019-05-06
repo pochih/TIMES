@@ -1,7 +1,7 @@
 # art-festival
 
 In May, 2016
-I was invited to help with a exhibition in art-festival.
+I was invited to a exhibition in art-festival.
 
 ## HOURS
 This is a Reality Games, named 'HOURS'.
@@ -11,6 +11,17 @@ I wrote the backend of this game.
 在HOURS裡，主宰一切的，就是時間。
 
 時間是我們唯一的資產。我們操控時間、達成目標。
+
+## Intro
+This game is inspired by a movie called 'In Time'. 
+
+The money used in this game is TIME, and the time elapsing rate goes faster and faster during the game. 
+
+When a player runs out of time, the player is eliminated.
+
+A player need to attain some achievements to get 'time interest'.
+
+When time interest is larger than time elapsing rate, the player's time increases.
 
 ## Rules
 
