@@ -20,15 +20,15 @@ module.exports = {
 	bonus: {
 		talentBonus: {
 			position: {
-				affection: 7,
-				health: 7,
-				career: 7,
-				learning: 7,
-				entertainment: 7
+				affection: 8,
+				health: 8,
+				career: 8,
+				learning: 8,
+				entertainment: 8
 			},
 			appearance: {
-				affection: 10,
-				health: 10,
+				affection: 11,
+				health: 9,
 				career: 10,
 				learning: 0,
 				entertainment: 10
@@ -37,8 +37,8 @@ module.exports = {
 				affection: 10,
 				health: 0,
 				career: 10,
-				learning: 10,
-				entertainment: 10
+				learning: 11,
+				entertainment: 9
 			}
 		},
 		levelBonus: {
@@ -133,7 +133,7 @@ module.exports = {
   		'https://art-festival.herokuapp.com/user/init?a=2&p=-2&i=0&name=Stephen Curry&id=11&device=11',
   		'https://art-festival.herokuapp.com/user/init?a=0&p=-2&i=2&name=Steve Jobs&id=12&device=12',
   		'https://art-festival.herokuapp.com/user/init?a=1&p=1&i=-2&name=R2D2&id=13&device=13',
-  		'https://art-festival.herokuapp.com/user/init?a=-2&p=0&i=2&name=King&id=14&device=14',
+  		'https://art-festival.herokuapp.com/user/init?a=-2&p=0&i=2&name=GoodGame&id=14&device=14',
   		'https://art-festival.herokuapp.com/user/init?a=10&p=10&i=10&name=root&id=100001&device=100001',
   		'https://art-festival.herokuapp.com/user/init?a=2&p=2&i=2&name=How Do You Turn This On&id=100003&device=100003'
 	],

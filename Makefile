@@ -6,5 +6,5 @@ all:
 
 file:
 	curl http://192.168.1.194:8888/readFile?user=${u}
-	curl http://192.168.1.41:8888/readFile?user=${u}
+	curl http://192.168.1.42:8888/readFile?user=${u}
 
